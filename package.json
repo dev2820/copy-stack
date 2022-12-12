@@ -4,9 +4,6 @@
   "version": "0.0.0",
   "type": "module",
   "main": "dist/my-element.es.js",
-  "exports": {
-    ".": "./dist/my-element.es.js"
-  },
   "types": "types/my-element.d.ts",
   "files": [
     "dist",
@@ -14,12 +11,15 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build"
+    "prebuild": "tsc",
+    "build": "vite build"
   },
   "dependencies": {
     "lit": "^2.4.1"
   },
   "devDependencies": {
+    "@crxjs/vite-plugin": "^2.0.0-beta.9",
+    "path": "^0.12.7",
     "typescript": "^4.9.3",
     "vite": "^4.0.0"
   }
