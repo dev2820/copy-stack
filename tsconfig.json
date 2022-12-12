@@ -11,7 +11,7 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "Node",
-    "isolatedModules": true,
+    "isolatedModules": false, // 이 부분 수정
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
