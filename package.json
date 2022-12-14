@@ -7,8 +7,8 @@
     "dev": "vite",
     "prebuild": "tsc",
     "build": "vite build",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "story": "start-storybook -p 6006",
+    "build-story": "build-storybook"
   },
   "dependencies": {
     "lit": "^2.4.1"
