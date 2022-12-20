@@ -4,6 +4,7 @@
   "version": "0.3.0",
   "type": "module",
   "scripts": {
+    "prepare": "husky install",
     "dev": "vite",
     "prebuild": "tsc",
     "build": "vite build",
@@ -23,6 +24,7 @@
     "@storybook/addon-links": "^6.5.14",
     "@storybook/web-components": "^6.1.21",
     "babel-loader": "^8.3.0",
+    "husky": "^8.0.2",
     "jest": "^27.3.1",
     "jest-chrome": "^0.8.0",
     "lit-html": "^2.5.0",
