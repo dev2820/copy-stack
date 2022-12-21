@@ -1,4 +1,7 @@
-export default async function getIDB(name: string): Promise<IDBDatabase> {
+export default async function getIDB(
+  name: string,
+  onupgradedneeded?: (evt: IDBVersionChangeEvent) => void
+): Promise<IDBDatabase> {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open(name);
     request.onsuccess = () => {
@@ -7,5 +10,8 @@ export default async function getIDB(name: string): Promise<IDBDatabase> {
     request.onerror = () => {
       reject(null);
     };
+    if (onupgradedneeded) {
+      request.onupgradeneeded = onupgradedneeded;
+    }
   });
 }
