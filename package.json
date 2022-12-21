@@ -42,7 +42,7 @@
   "readme": "ERROR: No README data found!",
   "_id": "copy-stack@0.3.0",
   "lint-staged": {
-    "{src,test}/**/*.js": [
+    "{src,test}/**/*.{ts,js}": [
       "node --experimental-vm-modules node_modules/jest/bin/jest.js --findRelatedTests --passWithNoTests",
       "git add"
     ],
