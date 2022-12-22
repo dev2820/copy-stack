@@ -51,3 +51,13 @@ test("create entity", async () => {
   const entityList = await testStore?.readAll();
   expect(entityList).toHaveLength(1);
 });
+
+test("read entity", async () => {
+  await testStore?.create(entity1);
+
+  const entity = await testStore?.read(1);
+  expect(entity).toStrictEqual({
+    id: 1,
+    ...entity1,
+  });
+});
