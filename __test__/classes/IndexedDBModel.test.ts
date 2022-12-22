@@ -1,7 +1,7 @@
 import "fake-indexeddb/auto";
 import { test, expect, beforeAll } from "@jest/globals";
 import getIDB from "@/utils/getIDB";
-import IndexedDBModel from "@/classes/IndexedDBModel";
+import IndexedDBModel from "@/classes/Model/IndexedDBModel";
 /**
  * data type (not stored)
  */
