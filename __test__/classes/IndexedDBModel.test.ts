@@ -2,7 +2,6 @@ import "fake-indexeddb/auto";
 import { test, expect, beforeAll } from "@jest/globals";
 import getIDB from "@/utils/getIDB";
 import IndexedDBStore from "@/classes/IndexedDBStore";
-
 /**
  * data type (not stored)
  */
@@ -10,10 +9,6 @@ type Data = {
   message: string;
   date: Date;
 };
-/**
- * entity type
- */
-type Entity = Data & { id: number };
 
 /**
  * create entity
@@ -28,7 +23,7 @@ let testStore: IndexedDBStore<Data> | null = null;
 beforeAll(async () => {
   await getIDB("testDB", (evt) => {
     const _db = (evt.target as IDBOpenDBRequest).result;
-    testStore = new IndexedDBStore<Entity>(_db, "testStore", {
+    testStore = new IndexedDBStore<Data>(_db, "testStore", {
       keyPath: "id",
       autoIncrement: true,
     });
@@ -75,6 +70,31 @@ test("read entity", async () => {
 });
 
 test("update entity", async () => {
-  const originEntity = await testStore?.read(1);
-  const id = originEntity.id;
+  expect(testStore).not.toBe(null);
+  if (!testStore) return;
+  const originEntity = await testStore.read(1);
+
+  expect(originEntity).not.toEqual(undefined);
+  if (!originEntity) return;
+  /**
+   * change message property
+   */
+  const changedEntity = {
+    ...originEntity,
+  };
+  changedEntity.message = "hi";
+  /**
+   * update entity
+   * parameter is not data but entity
+   */
+  const isSuccess = await testStore.update(changedEntity);
+  expect(isSuccess).toBe(true);
+
+  const entity = await testStore.read(changedEntity.id);
+  expect(entity).toStrictEqual({
+    ...changedEntity,
+  });
+  expect(entity).not.toStrictEqual({
+    ...originEntity,
+  });
 });

@@ -53,8 +53,18 @@ export default class IndexedDBStore<Data> implements CRUDable<Data> {
       };
     });
   }
-  update(id: number, data: Data): Promise<Boolean> {
-    throw new Error("Method not implemented.");
+  update(entity: Entity<Data>): Promise<Boolean> {
+    const store = this.#getStore();
+    const request = store.put(entity);
+
+    return new Promise((resolve, reject) => {
+      request.onsuccess = () => {
+        resolve(true);
+      };
+      request.onerror = () => {
+        reject(false);
+      };
+    });
   }
   delete(id: number): Promise<Boolean> {
     throw new Error("Method not implemented.");
