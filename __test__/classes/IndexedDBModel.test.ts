@@ -11,6 +11,14 @@ type Entity = {
   date: Date;
 };
 
+/**
+ * create entity
+ */
+const entity1: Entity = {
+  message: "hello",
+  date: new Date(),
+};
+
 let testStore: IndexedDBStore<Entity> | null = null;
 
 beforeEach(async () => {
@@ -22,24 +30,26 @@ beforeEach(async () => {
     });
   });
 });
-test("create entity", async () => {
-  /**
-   * create entity
-   */
-  const entity1: Entity = {
-    message: "hello",
-    date: new Date(),
-  };
 
+test("create entity", async () => {
   if (testStore === null) return;
 
-  const result = await testStore.create(entity1);
-  expect(result).toBeInstanceOf(Array); // result must be Array<Entity>
-  expect(result).toHaveLength(1); // there is only one entity now
-
-  const entity = result.at(0);
-  expect(entity).toStrictEqual({
-    ...entity1,
-    id: 1,
-  });
+  /**
+   * create method return isSuccess condition
+   */
+  const isSuccess = await testStore.create(entity1);
+  // expect(result).toBeInstanceOf(Array); // result must be Array<Entity>
+  // expect(result).toHaveLength(1); // there is only one entity now
+  expect(isSuccess).toBe(true);
 });
+// test("read entity", async () => {
+//   if (testStore === null) return;
+
+//   await testStore.create(entity1);
+
+//   const entity = await testStore.read(1);
+//   expect(entity).toStrictEqual({
+//     id: 1,
+//     ...entity1,
+//   });
+// });
