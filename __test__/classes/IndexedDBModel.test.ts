@@ -6,6 +6,7 @@ import IndexedDBModel from "@/classes/IndexedDBModel";
  * data type (not stored)
  */
 type Data = {
+  id?: number;
   message: string;
   date: Date;
 };
