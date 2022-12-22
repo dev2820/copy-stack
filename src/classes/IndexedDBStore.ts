@@ -53,7 +53,7 @@ export default class IndexedDBStore<Data> implements CRUDable<Data> {
       };
     });
   }
-  update(entity: Entity<Data>): Promise<Boolean> {
+  async update(entity: Entity<Data>): Promise<Boolean> {
     const store = this.#getStore();
     const request = store.put(entity);
 
@@ -66,7 +66,7 @@ export default class IndexedDBStore<Data> implements CRUDable<Data> {
       };
     });
   }
-  delete(id: number): Promise<Boolean> {
+  async delete(id: number): Promise<Boolean> {
     const store = this.#getStore();
     const request = store.delete(id);
 
