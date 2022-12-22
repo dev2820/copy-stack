@@ -11,7 +11,7 @@ type Data = {
 };
 
 /**
- * create entity
+ * example entity
  */
 const data: Data = {
   message: "hello",
