@@ -1,7 +1,7 @@
 import CRUDable from "@/interfaces/CRUDable";
 import type Entity from "@/types/Entity";
 
-export default abstract class BaseModel<Data> implements CRUDable<Data> {
+export default abstract class BaseRepo<Data> implements CRUDable<Data> {
   public abstract create(data: Data): boolean | Promise<boolean>;
   public abstract read(
     id: number

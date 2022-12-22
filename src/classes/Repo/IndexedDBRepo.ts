@@ -1,7 +1,7 @@
 import DB_MODE from "@/constants/DB_MODE";
 import type Entity from "@/types/Entity";
-import BaseModel from "@/classes/Model/BaseModel";
-export default class IndexedDBModel<Data> extends BaseModel<Data> {
+import BaseRepo from "@/classes/Repo/BaseRepo";
+export default class IndexedDBRepo<Data> extends BaseRepo<Data> {
   #db: IDBDatabase;
   #storeName: string;
 
