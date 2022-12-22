@@ -67,7 +67,17 @@ export default class IndexedDBStore<Data> implements CRUDable<Data> {
     });
   }
   delete(id: number): Promise<Boolean> {
-    throw new Error("Method not implemented.");
+    const store = this.#getStore();
+    const request = store.delete(id);
+
+    return new Promise((resolve, reject) => {
+      request.onsuccess = () => {
+        resolve(true);
+      };
+      request.onerror = () => {
+        reject(false);
+      };
+    });
   }
   #getStore(): IDBObjectStore {
     const transaction = this.#db.transaction([this.#storeName], DB_MODE.RW);

@@ -98,3 +98,29 @@ test("update entity", async () => {
     ...originEntity,
   });
 });
+
+test("delete entity", async () => {
+  expect(testStore).not.toBe(null);
+  if (!testStore) return;
+
+  /**
+   * originEntityList has two entites
+   */
+  const originEntityList = await testStore.readAll();
+  expect(originEntityList).toHaveLength(2);
+
+  const entity = originEntityList.at(0);
+
+  if (!entity) return;
+  /**
+   * delete one of them
+   */
+  const isSuccess = await testStore.delete(entity.id);
+  expect(isSuccess).toBe(true);
+
+  /**
+   * now there is only one entity
+   */
+  const changedEntityList = await testStore.readAll();
+  expect(changedEntityList).toHaveLength(1);
+});
