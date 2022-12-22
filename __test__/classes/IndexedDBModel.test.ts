@@ -30,24 +30,24 @@ beforeEach(async () => {
     });
   });
 });
+test("readAll entity", async () => {
+  /**
+   * there is no entity now
+   */
+  const entityList = await testStore?.readAll();
+  expect(entityList).toHaveLength(0);
+});
 
 test("create entity", async () => {
   /**
    * create method return isSuccess condition
    */
   const isSuccess = await testStore?.create(entity1);
-  // expect(result).toBeInstanceOf(Array); // result must be Array<Entity>
-  // expect(result).toHaveLength(1); // there is only one entity now
   expect(isSuccess).toBe(true);
+
+  /**
+   * there is one entity now
+   */
+  const entityList = await testStore?.readAll();
+  expect(entityList).toHaveLength(1);
 });
-// test("read entity", async () => {
-//   if (testStore === null) return;
-
-//   await testStore.create(entity1);
-
-//   const entity = await testStore.read(1);
-//   expect(entity).toStrictEqual({
-//     id: 1,
-//     ...entity1,
-//   });
-// });

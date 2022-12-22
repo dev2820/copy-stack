@@ -26,6 +26,19 @@ export default class IndexedDBStore<E> implements CRUDable<E> {
       };
     });
   }
+  async readAll(): Promise<E[]> {
+    return new Promise((resolve, reject) => {
+      const store = this.#getStore();
+      const request = store.getAll();
+
+      request.onsuccess = () => {
+        resolve(request.result);
+      };
+      request.onerror = () => {
+        reject([]);
+      };
+    });
+  }
   async read(id: number): Promise<E | undefined> {
     throw new Error("Method not implemented.");
     // const store = this.#getStore();
@@ -49,18 +62,5 @@ export default class IndexedDBStore<E> implements CRUDable<E> {
   #getStore(): IDBObjectStore {
     const transaction = this.#db.transaction([this.#storeName], DB_MODE.RW);
     return transaction.objectStore(this.#storeName);
-  }
-  async #getAll(): Promise<E[]> {
-    return new Promise((resolve, reject) => {
-      const store = this.#getStore();
-      const request = store.getAll();
-
-      request.onsuccess = () => {
-        resolve(request.result);
-      };
-      request.onerror = () => {
-        reject([]);
-      };
-    });
   }
 }
