@@ -1,7 +1,7 @@
-import CRUDable from "@/interfaces/CRUDable";
 import DB_MODE from "@/constants/DB_MODE";
 import type Entity from "@/types/Entity";
-export default class IndexedDBStore<Data> implements CRUDable<Data> {
+import BaseModel from "@/classes/BaseModel";
+export default class IndexedDBModel<Data> extends BaseModel<Data> {
   #db: IDBDatabase;
   #storeName: string;
 
@@ -10,6 +10,8 @@ export default class IndexedDBStore<Data> implements CRUDable<Data> {
     storeName: string,
     option?: IDBObjectStoreParameters
   ) {
+    super();
+
     this.#db = db;
     this.#storeName = storeName;
     db.createObjectStore(storeName, option);

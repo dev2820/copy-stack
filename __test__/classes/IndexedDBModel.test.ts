@@ -1,7 +1,7 @@
 import "fake-indexeddb/auto";
 import { test, expect, beforeAll } from "@jest/globals";
 import getIDB from "@/utils/getIDB";
-import IndexedDBStore from "@/classes/IndexedDBStore";
+import IndexedDBModel from "@/classes/IndexedDBModel";
 /**
  * data type (not stored)
  */
@@ -18,12 +18,12 @@ const data: Data = {
   date: new Date(),
 };
 
-let testStore: IndexedDBStore<Data> | null = null;
+let testStore: IndexedDBModel<Data> | null = null;
 
 beforeAll(async () => {
   await getIDB("testDB", (evt) => {
     const _db = (evt.target as IDBOpenDBRequest).result;
-    testStore = new IndexedDBStore<Data>(_db, "testStore", {
+    testStore = new IndexedDBModel<Data>(_db, "testStore", {
       keyPath: "id",
       autoIncrement: true,
     });
