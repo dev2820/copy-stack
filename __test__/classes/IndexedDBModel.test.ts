@@ -55,6 +55,10 @@ test("create entity", async () => {
 test("read entity", async () => {
   await testStore?.create(entity1);
 
+  /**
+   * read one entity
+   * entity has id property because of autoIncrement option
+   */
   const entity = await testStore?.read(1);
   expect(entity).toStrictEqual({
     id: 1,
