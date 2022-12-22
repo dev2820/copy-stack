@@ -4,22 +4,26 @@ import getIDB from "@/utils/getIDB";
 import IndexedDBStore from "@/classes/IndexedDBStore";
 
 /**
- * entity type
+ * data type (not stored)
  */
-type Entity = {
+type Data = {
   message: string;
   date: Date;
 };
+/**
+ * entity type
+ */
+type Entity = Data & { id: number };
 
 /**
  * create entity
  */
-const entity1: Entity = {
+const data: Data = {
   message: "hello",
   date: new Date(),
 };
 
-let testStore: IndexedDBStore<Entity> | null = null;
+let testStore: IndexedDBStore<Data> | null = null;
 
 beforeAll(async () => {
   await getIDB("testDB", (evt) => {
@@ -30,7 +34,7 @@ beforeAll(async () => {
     });
   });
 
-  await testStore?.create(entity1);
+  await testStore?.create(data);
 });
 test("readAll entity", async () => {
   /**
@@ -41,14 +45,14 @@ test("readAll entity", async () => {
 });
 
 test("create entity", async () => {
-  const newEntity = {
+  const newData = {
     message: "i'm new",
     date: new Date(),
   };
   /**
    * create method return isSuccess condition
    */
-  const isSuccess = await testStore?.create(newEntity);
+  const isSuccess = await testStore?.create(newData);
   expect(isSuccess).toBe(true);
 
   /**
@@ -66,6 +70,11 @@ test("read entity", async () => {
   const entity = await testStore?.read(1);
   expect(entity).toStrictEqual({
     id: 1,
-    ...entity1,
+    ...data,
   });
+});
+
+test("update entity", async () => {
+  const originEntity = await testStore?.read(1);
+  const id = originEntity.id;
 });

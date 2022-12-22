@@ -1,6 +1,7 @@
 import CRUDable from "@/interfaces/CRUDable";
 import DB_MODE from "@/constants/DB_MODE";
-export default class IndexedDBStore<E> implements CRUDable<E> {
+import type Entity from "@/types/Entity";
+export default class IndexedDBStore<Data> implements CRUDable<Data> {
   #db: IDBDatabase;
   #storeName: string;
 
@@ -13,9 +14,9 @@ export default class IndexedDBStore<E> implements CRUDable<E> {
     this.#storeName = storeName;
     db.createObjectStore(storeName, option);
   }
-  async create(entity: E): Promise<Boolean> {
+  async create(data: Data): Promise<Boolean> {
     const store = this.#getStore();
-    const request = store.add(entity);
+    const request = store.add(data);
 
     return new Promise((resolve, reject) => {
       request.onsuccess = () => {
@@ -26,7 +27,7 @@ export default class IndexedDBStore<E> implements CRUDable<E> {
       };
     });
   }
-  async readAll(): Promise<E[]> {
+  async readAll(): Promise<Entity<Data>[]> {
     return new Promise((resolve, reject) => {
       const store = this.#getStore();
       const request = store.getAll();
@@ -39,7 +40,7 @@ export default class IndexedDBStore<E> implements CRUDable<E> {
       };
     });
   }
-  async read(id: number): Promise<E | undefined> {
+  async read(id: number): Promise<Entity<Data> | undefined> {
     const store = this.#getStore();
     const request = store.get(id);
 
@@ -52,7 +53,7 @@ export default class IndexedDBStore<E> implements CRUDable<E> {
       };
     });
   }
-  update(id: number, entity: E): Promise<Boolean> {
+  update(id: number, data: Data): Promise<Boolean> {
     throw new Error("Method not implemented.");
   }
   delete(id: number): Promise<Boolean> {
