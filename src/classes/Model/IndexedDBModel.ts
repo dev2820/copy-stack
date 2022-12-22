@@ -16,7 +16,7 @@ export default class IndexedDBModel<Data> extends BaseModel<Data> {
     this.#storeName = storeName;
     db.createObjectStore(storeName, option);
   }
-  async create(data: Data): Promise<Boolean> {
+  async create(data: Data): Promise<boolean> {
     const store = this.#getStore();
     const request = store.add(data);
 
@@ -55,7 +55,7 @@ export default class IndexedDBModel<Data> extends BaseModel<Data> {
       };
     });
   }
-  async update(entity: Entity<Data>): Promise<Boolean> {
+  async update(entity: Entity<Data>): Promise<boolean> {
     const store = this.#getStore();
     const request = store.put(entity);
 
@@ -68,7 +68,7 @@ export default class IndexedDBModel<Data> extends BaseModel<Data> {
       };
     });
   }
-  async delete(id: number): Promise<Boolean> {
+  async delete(id: number): Promise<boolean> {
     const store = this.#getStore();
     const request = store.delete(id);
 
