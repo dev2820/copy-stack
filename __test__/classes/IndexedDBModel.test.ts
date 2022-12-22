@@ -18,28 +18,31 @@ const data: Data = {
   date: new Date(),
 };
 
-let testStore: IndexedDBModel<Data> | null = null;
+let testModel: IndexedDBModel<Data> | null = null;
 
 beforeAll(async () => {
   await getIDB("testDB", (evt) => {
     const _db = (evt.target as IDBOpenDBRequest).result;
-    testStore = new IndexedDBModel<Data>(_db, "testStore", {
+    testModel = new IndexedDBModel<Data>(_db, "testModel", {
       keyPath: "id",
       autoIncrement: true,
     });
   });
 
-  await testStore?.create(data);
+  await testModel?.create(data);
 });
 test("readAll entity", async () => {
   /**
    * there is only one entity now
    */
-  const entityList = await testStore?.readAll();
+  const entityList = await testModel?.readAll();
   expect(entityList).toHaveLength(1);
 });
 
 test("create entity", async () => {
+  expect(testModel).not.toBe(null);
+  if (!testModel) return;
+
   const newData = {
     message: "i'm new",
     date: new Date(),
@@ -47,22 +50,24 @@ test("create entity", async () => {
   /**
    * create method return isSuccess condition
    */
-  const isSuccess = await testStore?.create(newData);
+  const isSuccess = await testModel?.create(newData);
   expect(isSuccess).toBe(true);
 
   /**
    * there is two entity now
    */
-  const entityList = await testStore?.readAll();
+  const entityList = await testModel?.readAll();
   expect(entityList).toHaveLength(2);
 });
 
 test("read entity", async () => {
+  expect(testModel).not.toBe(null);
+  if (!testModel) return;
   /**
    * read one entity
    * entity has id property because of autoIncrement option
    */
-  const entity = await testStore?.read(1);
+  const entity = await testModel.read(1);
   expect(entity).toStrictEqual({
     id: 1,
     ...data,
@@ -70,9 +75,9 @@ test("read entity", async () => {
 });
 
 test("update entity", async () => {
-  expect(testStore).not.toBe(null);
-  if (!testStore) return;
-  const originEntity = await testStore.read(1);
+  expect(testModel).not.toBe(null);
+  if (!testModel) return;
+  const originEntity = await testModel.read(1);
 
   expect(originEntity).not.toEqual(undefined);
   if (!originEntity) return;
@@ -87,10 +92,10 @@ test("update entity", async () => {
    * update entity
    * parameter is not data but entity
    */
-  const isSuccess = await testStore.update(changedEntity);
+  const isSuccess = await testModel.update(changedEntity);
   expect(isSuccess).toBe(true);
 
-  const entity = await testStore.read(changedEntity.id);
+  const entity = await testModel.read(changedEntity.id);
   expect(entity).toStrictEqual({
     ...changedEntity,
   });
@@ -100,13 +105,13 @@ test("update entity", async () => {
 });
 
 test("delete entity", async () => {
-  expect(testStore).not.toBe(null);
-  if (!testStore) return;
+  expect(testModel).not.toBe(null);
+  if (!testModel) return;
 
   /**
    * originEntityList has two entites
    */
-  const originEntityList = await testStore.readAll();
+  const originEntityList = await testModel.readAll();
   expect(originEntityList).toHaveLength(2);
 
   const entity = originEntityList.at(0);
@@ -115,12 +120,12 @@ test("delete entity", async () => {
   /**
    * delete one of them
    */
-  const isSuccess = await testStore.delete(entity.id);
+  const isSuccess = await testModel.delete(entity.id);
   expect(isSuccess).toBe(true);
 
   /**
    * now there is only one entity
    */
-  const changedEntityList = await testStore.readAll();
+  const changedEntityList = await testModel.readAll();
   expect(changedEntityList).toHaveLength(1);
 });
