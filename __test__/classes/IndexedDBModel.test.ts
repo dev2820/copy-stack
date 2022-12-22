@@ -32,12 +32,10 @@ beforeEach(async () => {
 });
 
 test("create entity", async () => {
-  if (testStore === null) return;
-
   /**
    * create method return isSuccess condition
    */
-  const isSuccess = await testStore.create(entity1);
+  const isSuccess = await testStore?.create(entity1);
   // expect(result).toBeInstanceOf(Array); // result must be Array<Entity>
   // expect(result).toHaveLength(1); // there is only one entity now
   expect(isSuccess).toBe(true);
