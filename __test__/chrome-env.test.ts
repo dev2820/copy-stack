@@ -1,4 +1,4 @@
-import { describe, test, expect, jest } from "@jest/globals";
+import { test, expect, jest } from "@jest/globals";
 import { chrome } from "jest-chrome";
 
 /**
