@@ -1,3 +1,3 @@
 import createStore from "./createStore";
-
-export { createStore };
+import Postbox from "./Postbox";
+export { createStore, Postbox };
