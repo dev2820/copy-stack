@@ -9,8 +9,6 @@ type State = {
 };
 /**
  * make fake BroadcastChannel because BroadcastChannel is not exist in jest
- *
- * we just check the format of functions
  */
 const mockBroadcastChannel = {
   onmessage: (message: any) => {
