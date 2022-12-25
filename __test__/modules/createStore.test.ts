@@ -1,6 +1,9 @@
 import { test, expect, describe } from "@jest/globals";
 import createStore from "@/modules/createStore";
 
+/**
+ * creating store using createStore
+ */
 const countStore = createStore("counter", {
   state: {
     count: 0,
@@ -21,13 +24,13 @@ test("read state in store", () => {
 
 test("rise a action", () => {
   /**
-   * rise 'increase' action
+   * rising 'increase' action
    */
   countStore.increase();
   expect(countStore.count).toBe(1);
 
   /**
-   * rise action which needs parameters
+   * rising action which needs parameters
    */
   countStore.setCount(5);
   expect(countStore.count).toBe(5);
