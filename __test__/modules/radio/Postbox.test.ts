@@ -1,7 +1,5 @@
-import { test, expect, describe, jest } from "@jest/globals";
+import { test, expect, jest } from "@jest/globals";
 import { Postbox } from "@/modules/radio";
-
-jest.mock("broadcast-channel");
 
 /**
  * because BroadcastChannel is not exist in jest,
@@ -12,7 +10,9 @@ jest.mock("broadcast-channel");
  */
 
 const channel = {
-  onmessage: (message: any) => {},
+  onmessage: (message: any) => {
+    return message;
+  },
   name: "example",
   onmessageerror: () => {},
   close: () => {},
