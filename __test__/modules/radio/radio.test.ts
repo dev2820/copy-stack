@@ -1,12 +1,32 @@
 import { test, expect, describe, jest } from "@jest/globals";
 import { createStore } from "@/modules/radio";
-import { BroadcastChannel } from "broadcast-channel";
-
-jest.mock("broadcast-channel");
 
 /**
  * creating store using createStore
  */
+type State = {
+  count: number;
+};
+/**
+ * make fake BroadcastChannel because BroadcastChannel is not exist in jest
+ *
+ * we just check the format of functions
+ */
+const mockBroadcastChannel = {
+  onmessage: (message: any) => {
+    return message;
+  },
+  name: "example",
+  onmessageerror: () => {},
+  close: () => {},
+  postMessage: (message: any) => {
+    mockBroadcastChannel.onmessage(message);
+  },
+  addEventListener: () => {},
+  removeEventListener: () => {},
+  dispatchEvent: () => false,
+};
+
 const countStore = createStore("counter", {
   state: {
     count: 0,
@@ -19,7 +39,7 @@ const countStore = createStore("counter", {
       this.count = newCount;
     },
   },
-  channel: new BroadcastChannel("counter-channel"),
+  channel: mockBroadcastChannel,
 });
 
 test("read state in store", () => {
@@ -53,4 +73,27 @@ describe("some properties can't be changed", () => {
      */
     expect(countStore.$name).toBe("counter");
   });
+});
+
+test("how subscribe works", () => {
+  const view = {
+    listener: (state: State) => {
+      expect(state.count).toBe(6);
+    },
+  };
+  expect(countStore.count).toBe(5);
+  const consumer = countStore.$getPostbox();
+
+  const spyListener = jest.spyOn(view, "listener");
+
+  consumer.addListener(spyListener);
+  /**
+   * rising an action
+   */
+  countStore.increase();
+
+  /**
+   * because action is occured, listener is worked
+   */
+  expect(spyListener).toBeCalledTimes(1);
 });
