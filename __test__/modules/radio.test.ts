@@ -1,10 +1,10 @@
 import { test, expect, describe } from "@jest/globals";
-import createStore from "@/modules/createStore";
+import Radio from "@/modules/radio";
 
 /**
  * creating store using createStore
  */
-const countStore = createStore("counter", {
+const countStore = Radio.createStore("counter", {
   state: {
     count: 0,
   },
