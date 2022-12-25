@@ -60,7 +60,7 @@ test("rise a action", () => {
   expect(countStore.count).toBe(5);
 });
 
-describe("some properties can't be changed", () => {
+describe("properties start with '$' can't be changed", () => {
   test("$name property can't be changed", () => {
     expect(countStore.$name).toBe("counter");
 
