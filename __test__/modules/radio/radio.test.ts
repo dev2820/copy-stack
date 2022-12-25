@@ -82,11 +82,11 @@ test("how subscribe works", () => {
     },
   };
   expect(countStore.count).toBe(5);
-  const consumer = countStore.$getPostbox();
+  const postbox = countStore.$getPostbox();
 
   const spyListener = jest.spyOn(view, "listener");
 
-  consumer.addListener(spyListener);
+  postbox.addListener(spyListener);
   /**
    * rising an action
    */
