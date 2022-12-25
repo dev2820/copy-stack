@@ -4,10 +4,10 @@ export default function createStore(
   storeOption: {
     state: { [key: string]: any };
     actions: { [key: string]: Function };
+    channel?: any;
   }
 ): { [key: string]: any } {
-  const _name_ = storeName;
-  const { state, actions } = storeOption;
+  const { state, actions, channel } = storeOption;
 
   let _isChanged_ = false;
   const store: { [key: string]: any } = {
@@ -39,15 +39,14 @@ export default function createStore(
     };
   });
 
-  Object.defineProperty(store, "_name_", {
+  Object.defineProperty(store, "$channel", {
     get: () => {
-      return _name_;
+      return channel ?? new BroadcastChannel(storeName);
     },
   });
-
-  Object.defineProperty(store, "_isChanged_", {
+  Object.defineProperty(store, "$name", {
     get: () => {
-      return _isChanged_;
+      return storeName;
     },
   });
 

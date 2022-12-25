@@ -1,5 +1,8 @@
-import { test, expect, describe } from "@jest/globals";
+import { test, expect, describe, jest } from "@jest/globals";
 import { createStore } from "@/modules/radio";
+import { BroadcastChannel } from "broadcast-channel";
+
+jest.mock("broadcast-channel");
 
 /**
  * creating store using createStore
@@ -16,6 +19,7 @@ const countStore = createStore("counter", {
       this.count = newCount;
     },
   },
+  channel: new BroadcastChannel("counter-channel"),
 });
 
 test("read state in store", () => {
@@ -37,24 +41,16 @@ test("rise a action", () => {
 });
 
 describe("some properties can't be changed", () => {
-  test("_name_ property can't be changed", () => {
-    expect(countStore._name_).toBe("counter");
+  test("$name property can't be changed", () => {
+    expect(countStore.$name).toBe("counter");
 
     expect(() => {
-      countStore._name_ = "counter2";
+      countStore.$name = "counter2";
     }).toThrow();
 
     /**
-     * still countStore._name_ is 'counter'
+     * still countStore.$name is 'counter'
      */
-    expect(countStore._name_).toBe("counter");
-  });
-
-  test("_isChanged_ property can't be changed", () => {
-    expect(countStore._isChanged_).toBe(false);
-
-    expect(() => {
-      countStore._isChanged_ = true;
-    }).toThrow();
+    expect(countStore.$name).toBe("counter");
   });
 });
