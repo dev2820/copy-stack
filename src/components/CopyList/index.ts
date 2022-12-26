@@ -1,6 +1,5 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import style from "@/components/CopyList/style";
 
 @customElement("copy-list")
 export default class CopyList extends LitElement {
@@ -18,5 +17,17 @@ export default class CopyList extends LitElement {
     `;
   }
 
-  static styles = style;
+  static styles = css`
+    :host {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    ul {
+      list-style: none;
+      padding: none;
+    }
+  `;
 }
