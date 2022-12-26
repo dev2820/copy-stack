@@ -10,13 +10,13 @@ module.exports = {
   ],
   framework: "@storybook/web-components",
   core: {
-    builder: "storybook-builder-vite",
+    builder: "@storybook/builder-vite",
   },
   async viteFinal(config) {
     return mergeConfig(config, {
       resolve: {
         alias: {
-          "@": resolve(__dirname, "src"),
+          "@": resolve(__dirname, "../src"),
         },
       },
     });
