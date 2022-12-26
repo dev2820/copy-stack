@@ -11,5 +11,10 @@ export const parameters = {
 };
 
 export const decorators = [
-  (story) => html`<div class="theme" style="${globalStyle}">${story()}</div>`,
+  (story) =>
+    html`<div class="theme-provider">
+      <style>
+        ${globalStyle}</style
+      >${story()}
+    </div>`,
 ];
