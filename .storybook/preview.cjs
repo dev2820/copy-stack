@@ -14,7 +14,8 @@ export const decorators = [
   (story) =>
     html`<div class="theme-provider">
       <style>
-        ${globalStyle}</style
-      >${story()}
+        ${globalStyle}
+      </style>
+      ${story()}
     </div>`,
 ];
