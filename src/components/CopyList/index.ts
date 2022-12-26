@@ -4,7 +4,7 @@ import { customElement, property } from "lit/decorators.js";
 @customElement("copy-list")
 export default class CopyList extends LitElement {
   @property()
-  copyList = ["a", "b", "c"];
+  copyList = ["Website Title A", "Website Title B", "Website Title C"];
 
   @property({ type: Number })
   count = 0;
@@ -12,7 +12,10 @@ export default class CopyList extends LitElement {
   render() {
     return html`
       <ul class="copy-list">
-        ${this.copyList.map((copy) => html`<li class="card">${copy}</li>`)}
+        ${this.copyList.map(
+          (copy) =>
+            html`<li><filled-card class="card">${copy}</filled-card></li>`
+        )}
       </ul>
     `;
   }
@@ -27,7 +30,10 @@ export default class CopyList extends LitElement {
 
     ul {
       list-style: none;
-      padding: none;
+      padding: 0;
+    }
+    ul > li {
+      margin-bottom: 0.5rem;
     }
   `;
 }
