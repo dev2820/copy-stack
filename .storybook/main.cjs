@@ -16,6 +16,9 @@ module.exports = {
     return mergeConfig(config, {
       resolve: {
         alias: {
+          "@/classes/Messenger": require.resolve(
+            "../__mocks__/classes/Messenger.ts"
+          ),
           "@": resolve(__dirname, "../src"),
         },
       },
