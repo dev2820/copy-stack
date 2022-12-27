@@ -1,5 +1,7 @@
+import type Copy from "@/types/Copy";
+
 type CopyState = {
-  copyList: [];
+  copyList: Copy[];
 };
 
 export default CopyState;

@@ -3,6 +3,7 @@ import { customElement, state } from "lit/decorators.js";
 import Messenger from "@/classes/Messenger";
 import Channel from "@/classes/Channel";
 import type CopyState from "@/types/CopyState";
+import type Copy from "@/types/Copy";
 
 @customElement("copy-list")
 export default class CopyList extends LitElement {
@@ -10,7 +11,7 @@ export default class CopyList extends LitElement {
   copyChannel!: Channel<CopyState>;
 
   @state()
-  copyList = [];
+  copyList: Copy[] = [];
 
   constructor() {
     super();
