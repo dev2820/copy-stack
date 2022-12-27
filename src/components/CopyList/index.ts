@@ -5,6 +5,7 @@ import Channel from "@/classes/Channel";
 import type CopyState from "@/types/CopyState";
 import type Copy from "@/types/Copy";
 import type BaseStationInfo from "@/types/BaseStationInfo";
+import "@/components/FilledCard";
 
 @customElement("copy-list")
 export default class CopyList extends LitElement {
@@ -16,7 +17,7 @@ export default class CopyList extends LitElement {
 
   constructor() {
     super();
-    this.created();
+    this.#created();
   }
   render() {
     return html`
@@ -37,7 +38,7 @@ export default class CopyList extends LitElement {
     `;
   }
 
-  async created() {
+  async #created() {
     const { name, initialState }: BaseStationInfo<CopyState> =
       (await Messenger.sendMessage(
         "getBaseStationInfo"
