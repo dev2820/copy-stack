@@ -21,6 +21,7 @@ export default class CopyList extends LitElement {
   }
   render() {
     return html`
+      <button @click=${() => this.#addCopy()}>add copy</button>
       <ul class="copy-list">
         ${this.copyList.map(
           (copy) =>
@@ -48,6 +49,10 @@ export default class CopyList extends LitElement {
       this.copyList = [...state.copyList];
     });
     this.copyList = [...this.copyChannel.$state.copyList];
+  }
+
+  #addCopy() {
+    Messenger.sendMessage("addCopy");
   }
 
   static styles = css`
