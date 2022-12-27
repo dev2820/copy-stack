@@ -1,21 +1,26 @@
 export default class Channel<State> {
-  private channel: BroadcastChannel;
-  private listeners: Function[] = [];
-  public $state: State;
+  #channel: BroadcastChannel;
+  #listeners: Function[] = [];
+  $state: State;
 
   constructor(channelName: string, initialState: State) {
-    this.channel = new BroadcastChannel(channelName);
+    this.#channel = new BroadcastChannel(channelName);
     this.$state = initialState;
-    this.channel.onmessage = (evt: MessageEvent) => {
+    this.#channel.onmessage = (evt: MessageEvent) => {
       this.$state = evt.data.payload;
+      this.#runListeners(this.$state);
     };
   }
 
+  #runListeners(newState: State) {
+    this.#listeners.forEach((l) => l(newState));
+  }
+
   $subscribe(listener: Function) {
-    this.listeners.push(listener);
+    this.#listeners.push(listener);
 
     return () => {
-      this.listeners.filter((l) => l !== listener);
+      this.#listeners.filter((l) => l !== listener);
     };
   }
 }
