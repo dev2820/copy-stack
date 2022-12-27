@@ -15,7 +15,8 @@
     "baseUrl": ".", // set base url
     "paths": {
       // set alias
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@mock/*": ["__mocks__/*"]
     },
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,

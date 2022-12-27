@@ -19,6 +19,7 @@ module.exports = {
           "@/classes/Messenger": require.resolve(
             "../__mocks__/classes/Messenger.ts"
           ),
+          "@mock": resolve(__dirname, "../__mocks__"),
           "@": resolve(__dirname, "../src"),
         },
       },

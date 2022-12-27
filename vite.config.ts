@@ -7,6 +7,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": resolve(__dirname, "src"),
+      "@mock": resolve(__dirname, "__mocks__"),
     },
   },
   plugins: [crx({ manifest })],
