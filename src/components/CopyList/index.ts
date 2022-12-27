@@ -4,6 +4,7 @@ import Messenger from "@/classes/Messenger";
 import Channel from "@/classes/Channel";
 import type CopyState from "@/types/CopyState";
 import type Copy from "@/types/Copy";
+import type BaseStationInfo from "@/types/BaseStationInfo";
 
 @customElement("copy-list")
 export default class CopyList extends LitElement {
@@ -37,7 +38,14 @@ export default class CopyList extends LitElement {
   }
 
   async created() {
-    this.copyChannel = await Messenger.sendMessage("getChannel");
+    const { name, initialState }: BaseStationInfo<CopyState> =
+      (await Messenger.sendMessage(
+        "getBaseStationInfo"
+      )) as BaseStationInfo<CopyState>;
+    this.copyChannel = new Channel(name, initialState);
+    this.copyChannel.$subscribe((state: CopyState) => {
+      this.copyList = [...state.copyList];
+    });
     this.copyList = [...this.copyChannel.$state.copyList];
   }
 

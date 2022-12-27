@@ -1,11 +1,14 @@
-import Channel from "./Channel";
-
 let data: any = null;
 
 export default class Messenger {
   static async sendMessage(message) {
-    if (message === "getChannel") {
-      return new Channel(data);
+    if (message === "getBaseStationInfo") {
+      return {
+        name: "COPY-CHANNEL",
+        initialState: {
+          ...data,
+        },
+      };
     }
     data = null;
   }

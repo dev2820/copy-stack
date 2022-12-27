@@ -1,9 +1,19 @@
+import type Copy from "../../src/types/Copy";
+
 export default class Channel {
-  $state = {};
+  $state: {
+    copyList: Copy[];
+  } = {
+    copyList: [],
+  };
   #listeners: Function[] = [];
 
-  constructor(initialState) {
+  constructor(_, initialState) {
     this.$state = initialState;
+  }
+
+  update(newState) {
+    this.#listeners.forEach((listener) => listener(newState));
   }
 
   $subscribe(listener: Function) {

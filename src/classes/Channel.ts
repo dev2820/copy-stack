@@ -3,10 +3,9 @@ export default class Channel<State> {
   private listeners: Function[] = [];
   public $state: State;
 
-  constructor(channel: BroadcastChannel, initialState: State) {
+  constructor(channelName: string, initialState: State) {
+    this.channel = new BroadcastChannel(channelName);
     this.$state = initialState;
-    this.channel = channel;
-
     this.channel.onmessage = (evt: MessageEvent) => {
       this.$state = evt.data.payload;
     };
