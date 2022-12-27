@@ -1,14 +1,21 @@
 import { LitElement, css, html } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, state } from "lit/decorators.js";
+import Messenger from "@/classes/Messenger";
+import Channel from "@/classes/Channel";
+import type CopyState from "@/types/CopyState";
 
 @customElement("copy-list")
 export default class CopyList extends LitElement {
-  @property()
-  copyList = ["Website Title A", "Website Title B", "Website Title C"];
+  @state()
+  copyChannel!: Channel<CopyState>;
 
-  @property({ type: Number })
-  count = 0;
+  @state()
+  copyList = [];
 
+  constructor() {
+    super();
+    this.created();
+  }
   render() {
     return html`
       <ul class="copy-list">
@@ -18,6 +25,11 @@ export default class CopyList extends LitElement {
         )}
       </ul>
     `;
+  }
+
+  async created() {
+    this.copyChannel = await Messenger.sendMessage("getChannel");
+    this.copyList = [...this.copyChannel.$state.copyList];
   }
 
   static styles = css`
