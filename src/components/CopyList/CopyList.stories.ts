@@ -1,12 +1,19 @@
-import { Meta } from "@storybook/web-components";
+import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
+import copyList from "@mocks/copyList";
+
 import "@/components/CopyList";
 
 export default {
   title: "CopyList",
 } as Meta;
 
-const Template = ({ copies }) => html`<copy-list>Hello World!!!!</copy-list>`;
+type Args = {
+  parameters: { design: Record<string, string>; store: Record<string, object> };
+};
+
+const Template: Story<Args> = () =>
+  html`<copy-list>Hello World!!!!</copy-list>`;
 
 export const Default = Template.bind({});
 Default.parameters = {
@@ -16,7 +23,7 @@ Default.parameters = {
   },
   store: {
     data: {
-      copyList: ["a", "b", "c"],
+      copyList,
     },
   },
 };

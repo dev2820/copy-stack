@@ -1,5 +1,5 @@
-import { Meta } from "@storybook/web-components";
-import { html } from "lit-html";
+import { Story, Meta } from "@storybook/web-components";
+import { html, TemplateResult } from "lit-html";
 import "@/components/FilledCard";
 
 const noImageUrl = new URL("@/assets/images/no-image.png", import.meta.url)
@@ -14,7 +14,13 @@ export default {
   },
 } as Meta;
 
-const Template = ({ content }) => html`<filled-card>${content}</filled-card>`;
+type Args = {
+  content: string | TemplateResult<1>;
+};
+
+const Template: Story<Args> = (args: Args) =>
+  html`<filled-card>${args.content}</filled-card>`;
+
 export const Empty = Template.bind({});
 Empty.args = {
   content: "",
