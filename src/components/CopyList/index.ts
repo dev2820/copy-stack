@@ -22,7 +22,15 @@ export default class CopyList extends LitElement {
       <ul class="copy-list">
         ${this.copyList.map(
           (copy) =>
-            html`<li><filled-card class="card">${copy}</filled-card></li>`
+            html` <li>
+              <filled-card class="card">
+                <div>
+                  <p>${copy.content}</p>
+                  <p>${copy.created}</p>
+                  <p>${copy.source}</p>
+                </div>
+              </filled-card>
+            </li>`
         )}
       </ul>
     `;
