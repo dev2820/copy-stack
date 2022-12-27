@@ -7,7 +7,7 @@ export default class Channel<State> {
     this.#channel = new BroadcastChannel(channelName);
     this.$state = initialState;
     this.#channel.onmessage = (evt: MessageEvent) => {
-      this.$state = evt.data.payload;
+      this.$state = evt.data;
       this.#runListeners(this.$state);
     };
   }

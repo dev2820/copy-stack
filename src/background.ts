@@ -37,8 +37,7 @@ chrome.runtime.onMessage.addListener((message, _, sendResponse) => {
         source: "www.naver.com",
       };
       channel.postMessage({
-        ...copyList,
-        newCopy,
+        copyList: [...copyList, newCopy],
       });
     }
   }
