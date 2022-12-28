@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "target": "es2017",
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "declaration": true,
@@ -15,6 +16,7 @@
     "baseUrl": ".", // set base url
     "paths": {
       // set alias
+      "@mocks/*": ["__mocks__/*"],
       "@/*": ["src/*"]
     },
     "allowSyntheticDefaultImports": true,
@@ -24,6 +26,5 @@
     "skipLibCheck": true
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["src/**/*.stories.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
