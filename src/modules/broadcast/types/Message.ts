@@ -15,6 +15,9 @@ export type StructuredClonable =
   | Array<StructuredClonable>
   | ArrayBuffer
   | Boolean
+  | boolean
+  | Number
+  | number
   | DataView
   | Date
   | Error
@@ -23,8 +26,9 @@ export type StructuredClonable =
   | RegExp
   | Set<StructuredClonable>
   | String
+  | string
   | TypedArray;
 
-export type Message = Record<string, StructuredClonable>;
+export type Message = StructuredClonable[] | StructuredClonable;
 
 export default Message;
