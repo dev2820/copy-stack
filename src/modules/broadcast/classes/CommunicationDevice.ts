@@ -1,7 +1,7 @@
 import Broadcastable from "../interfaces/Broadcastable";
 import MessageAddress from "../types/MessageAddress";
 import Messagable from "../interfaces/Messagable";
-export default abstract class CommunicationDevice implements Broadcastable {
+export default class CommunicationDevice implements Broadcastable {
   #sender: BroadcastChannel;
   #receiver: BroadcastChannel;
   #listeners: Function[] = [];
