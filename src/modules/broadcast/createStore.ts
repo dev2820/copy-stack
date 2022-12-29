@@ -2,7 +2,7 @@ import Action from "./classes/Action";
 
 export default function createStore(storeOption: {
   state: Record<string, any>;
-  actions: Record<string, Function>;
+  actions: Record<string, any>;
 }): Record<string, any> {
   const { state, actions } = storeOption;
 
@@ -15,6 +15,8 @@ export default function createStore(storeOption: {
   }, new Map<string, any>());
 
   const actionMap = Object.keys(actions).reduce((map, key: string) => {
+    if (typeof actions[key] !== "function") return map;
+
     return map.set(key, function () {
       _isChanged_ = false;
       const action = actions[key].bind(store);
