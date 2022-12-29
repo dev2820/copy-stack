@@ -1,4 +1,4 @@
-type TypedArray =
+export type TypedArray =
   | Int8Array
   | Uint8Array
   | Uint8ClampedArray
@@ -11,7 +11,7 @@ type TypedArray =
   | BigInt64Array
   | BigUint64Array;
 
-type StructuredClonable =
+export type StructuredClonable =
   | Array<StructuredClonable>
   | ArrayBuffer
   | Boolean
@@ -25,6 +25,6 @@ type StructuredClonable =
   | String
   | TypedArray;
 
-export default interface Messagable {
-  [state: string]: StructuredClonable;
-}
+export type Messagable = Record<string, StructuredClonable>;
+
+export default Messagable;
