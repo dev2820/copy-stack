@@ -1,5 +1,5 @@
 type ChannelAddress = {
-  sender: string;
-  receiver: string;
+  readonly sender: string;
+  readonly receiver: string;
 };
 export default ChannelAddress;
