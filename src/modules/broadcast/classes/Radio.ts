@@ -20,7 +20,7 @@ export default class Radio extends CommunicationDevice {
   }
 
   protected handleMessage(evt: MessageEvent<any>): void {
-    const data = evt.data;
-    this.listeners.forEach((l) => l(data));
+    const newState = evt.data;
+    this.listeners.forEach((l) => l(newState));
   }
 }
