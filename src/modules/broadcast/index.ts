@@ -1,3 +1,6 @@
 import createStore from "./createStore";
-import Postbox from "./Postbox";
-export { createStore, Postbox };
+import Action from "./classes/Action";
+import BroadcastingStation from "./classes/BroadcastingStation";
+import Radio from "./classes/Radio";
+
+export { createStore, Action, BroadcastingStation, Radio };
