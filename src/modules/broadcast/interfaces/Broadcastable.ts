@@ -5,8 +5,6 @@ import Messagable from "@/modules/broadcast/interfaces/Messagable";
  * send message using sender and receive message using Receiver.
  */
 export default interface Broadcastable {
-  sender: BroadcastChannel;
-  receiver: BroadcastChannel;
   /**
    * @description Broadcastable can send message which have Messagable interface, if sending is success, then return true
    * @param {Messagable} Message Broadcastable can only send messagable Messages
