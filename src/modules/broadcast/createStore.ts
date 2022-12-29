@@ -1,48 +1,28 @@
-import Postbox from "./Postbox";
+import Action from "./classes/Action";
 
-export default function createStore(
-  storeName: string,
-  storeOption: {
-    state: { [key: string]: any };
-    actions: { [key: string]: Function };
-    channel?: BroadcastChannel;
-  }
-): { [key: string]: any } {
-  const { state, actions, channel } = storeOption;
-  const initialState = state;
-  const _channel_ = channel ?? new BroadcastChannel(storeName);
-  const _name_ = storeName;
+export default function createStore(storeOption: {
+  state: Record<string, any>;
+  actions: Record<string, Function>;
+}): Record<string, any> {
+  const { state, actions } = storeOption;
 
   let _isChanged_ = false;
-  // 반환할 state를 만들 때 map을 써서 nlogn만에 state들을 찾도록 만듦
 
-  const store: { [key: string]: any } = {};
+  const store: Record<string, any> = {};
 
-  const stateMap = Object.keys(initialState).reduce(
-    (map: Map<string, any>, key: string) => {
-      map.set(key, initialState[key]);
+  const stateMap = Object.keys(state).reduce((map, key: string) => {
+    return map.set(key, state[key]);
+  }, new Map<string, any>());
 
-      return map;
-    },
-    new Map()
-  );
+  const actionMap = Object.keys(actions).reduce((map, key: string) => {
+    return map.set(key, function () {
+      _isChanged_ = false;
+      const action = actions[key].bind(store);
+      action(...arguments);
 
-  const actionMap = Object.keys(actions).reduce(
-    (map: Map<string, Function>, key: string) => {
-      map.set(key, function () {
-        _isChanged_ = false;
-        const action = actions[key].bind(store);
-        const result = action(...arguments);
-        if (_isChanged_) {
-          _channel_.postMessage(Object.fromEntries(stateMap));
-        }
-        return result;
-      });
-
-      return map;
-    },
-    new Map()
-  );
+      return _isChanged_;
+    });
+  }, new Map<string, Function>());
 
   const stateKeys = [...stateMap.keys()];
   stateKeys.forEach((key: string) => {
@@ -68,21 +48,14 @@ export default function createStore(
     });
   });
 
-  Object.defineProperty(store, "$channel", {
-    get: () => {
-      return _channel_;
-    },
-  });
-  Object.defineProperty(store, "$name", {
-    get: () => {
-      return _name_;
-    },
-  });
-  Object.defineProperty(store, "$getPostbox", {
-    value: () => {
-      return new Postbox(store.$channel);
-    },
-  });
+  store.$dispatch = (action: Action) => {
+    if (!actionMap.has(action.type)) return;
+
+    const act = actionMap.get(action.type);
+    const isChanged = act ? act(action.payload) : false;
+
+    return isChanged;
+  };
 
   return store;
 }
