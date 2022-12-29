@@ -1,7 +1,7 @@
 import CommunicationDevice from "./CommunicationDevice";
 import createUniqueChannelAddress from "../utils/createUniqueChannelAddress";
 import ChannelAddress from "../types/ChannelAddress";
-import Messagable from "../interfaces/Messagable";
+import Message from "../types/Message";
 import Action from "./Action";
 
 export default class BroadcastingStation extends CommunicationDevice {
@@ -27,7 +27,7 @@ export default class BroadcastingStation extends CommunicationDevice {
     const isChanged = this.#store.dispatch(action);
     if (!isChanged) return;
 
-    const newState: Messagable = this.#store.$state;
+    const newState: Message = this.#store.$state;
     this.broadcast(newState);
   }
 }

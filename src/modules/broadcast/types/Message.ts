@@ -25,6 +25,6 @@ export type StructuredClonable =
   | String
   | TypedArray;
 
-export type Messagable = Record<string, StructuredClonable>;
+export type Message = Record<string, StructuredClonable>;
 
-export default Messagable;
+export default Message;

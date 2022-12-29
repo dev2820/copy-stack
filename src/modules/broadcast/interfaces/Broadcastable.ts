@@ -1,4 +1,4 @@
-import type Messageable from "./Messagable";
+import type Message from "../types/Message";
 
 export default interface Broadcastable {
   /**
@@ -6,5 +6,5 @@ export default interface Broadcastable {
    * @param {Message} message Broadcastable can only dispatch message
    * @returns {boolean} if dispatch is success, then return true
    */
-  broadcast(message: Messageable): boolean;
+  broadcast(message: Message): boolean;
 }

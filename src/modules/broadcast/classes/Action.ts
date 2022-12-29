@@ -1,7 +1,7 @@
-import Messagable from "../interfaces/Messagable";
+import Message from "../types/Message";
 
 export default class Action {
-  static create(type: string, payload?: Messagable): Messagable {
+  static create(type: string, payload?: Message): Message {
     if (payload !== undefined) return { type, payload };
     return { type };
   }

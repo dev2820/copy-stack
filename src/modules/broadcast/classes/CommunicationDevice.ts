@@ -1,6 +1,6 @@
 import Broadcastable from "../interfaces/Broadcastable";
 import ChannelAddress from "../types/ChannelAddress";
-import Messagable from "../interfaces/Messagable";
+import Message from "../types/Message";
 
 export default abstract class CommunicationDevice implements Broadcastable {
   #sender: BroadcastChannel;
@@ -12,7 +12,7 @@ export default abstract class CommunicationDevice implements Broadcastable {
     this.#receiver.onmessage = this.handleMessage;
   }
 
-  broadcast(message: Messagable): boolean {
+  broadcast(message: Message): boolean {
     try {
       this.#sender.postMessage(message);
       return true;
