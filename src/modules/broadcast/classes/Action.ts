@@ -1,9 +1,11 @@
 import Message from "../types/Message";
 
 export default class Action {
-  static create(type: string, payload?: Message): Message {
-    if (payload !== undefined) return { type, payload };
-    return { type };
+  type: string;
+  payload?: Message;
+  constructor(type: string, payload?: Message) {
+    this.type = type;
+    this.payload = payload;
   }
   static isAction(target: any) {
     if (typeof target.type !== "string") return false;

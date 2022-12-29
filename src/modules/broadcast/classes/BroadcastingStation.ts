@@ -22,7 +22,7 @@ export default class BroadcastingStation extends CommunicationDevice {
 
   protected handleMessage(evt: MessageEvent<any>): void {
     const action: Action = evt.data;
-    if (!Action.isAction(action)) return;
+    if (!(action instanceof Action)) return;
 
     const isChanged = this.#store.dispatch(action);
     if (!isChanged) return;
