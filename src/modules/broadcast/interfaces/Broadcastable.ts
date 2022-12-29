@@ -1,4 +1,4 @@
-import Messagable from "@/interfaces/Messagable";
+import Messagable from "@/modules/broadcast/interfaces/Messagable";
 
 /**
  * @description

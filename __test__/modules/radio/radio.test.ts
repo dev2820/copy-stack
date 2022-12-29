@@ -1,5 +1,5 @@
 import { test, expect, describe, jest } from "@jest/globals";
-import { createStore } from "@/modules/radio";
+import { createStore } from "@/modules/broadcast";
 
 /**
  * creating store using createStore

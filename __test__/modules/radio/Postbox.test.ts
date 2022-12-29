@@ -1,5 +1,5 @@
 import { test, expect, jest } from "@jest/globals";
-import { Postbox } from "@/modules/radio";
+import { Postbox } from "@/modules/broadcast";
 
 /**
  * because BroadcastChannel is not exist in jest,
