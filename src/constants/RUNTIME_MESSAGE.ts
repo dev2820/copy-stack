@@ -1,0 +1,3 @@
+export default {
+  GET_CHANNEL_ADDRESS: "GET_CHANNEL_ADDRESS",
+};
