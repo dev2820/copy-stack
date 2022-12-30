@@ -3,6 +3,8 @@ import createUniqueChannelAddress from "../utils/createUniqueChannelAddress";
 import ChannelAddress from "../types/ChannelAddress";
 import Message from "../types/Message";
 import Action from "./Action";
+import Packet from "./Packet";
+import * as PACKET_TYPE from "../constants/PACKET_TYPES";
 
 export default class BroadcastingStation extends CommunicationDevice {
   #store: Record<string, any>;
@@ -21,13 +23,27 @@ export default class BroadcastingStation extends CommunicationDevice {
   }
 
   protected handleMessage(evt: MessageEvent<any>): void {
-    const action: Action = evt.data;
-    if (!(action instanceof Action)) return;
+    const packet = evt.data;
+    if (!(packet instanceof Packet)) return;
 
-    const isChanged = this.#store.dispatch(action);
-    if (!isChanged) return;
-
-    const newState: Message = this.#store.$state;
-    this.broadcast(newState);
+    this.#handlePacket(packet);
   }
+
+  #handlePacket(packet: Packet) {
+    switch (packet.header.type) {
+      case PACKET_TYPE.DISCOVER: {
+        this.#handleDiscover();
+        return;
+      }
+      default: {
+        if (!(packet.payload instanceof Action)) return;
+
+        this.#handleAction(packet.payload);
+        return;
+      }
+    }
+  }
+
+  #handleDiscover() {}
+  #handleAction(action: Action) {}
 }
