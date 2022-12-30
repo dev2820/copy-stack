@@ -1,7 +1,7 @@
 import Broadcastable from "../interfaces/Broadcastable";
 import ChannelAddress from "../types/ChannelAddress";
 import Packet from "./Packet";
-import * as PACKET_TYPE from "../constants/PACKET_TYPES";
+
 export default abstract class CommunicationDevice implements Broadcastable {
   #sender: BroadcastChannel;
   #receiver: BroadcastChannel;
