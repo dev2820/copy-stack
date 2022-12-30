@@ -45,5 +45,14 @@ export default class BroadcastingStation extends CommunicationDevice {
   }
 
   #handleDiscover() {}
-  #handleAction(action: Action) {}
+  #handleAction(action: Action) {
+    if (!action) return;
+
+    const isChanged = this.#store.dispatch(action);
+    if (!isChanged) return;
+
+    const newState: Message = this.#store.$state;
+    const response = new Packet({ type: PACKET_TYPE.NEW_STATE }, newState);
+    this.broadcast(response);
+  }
 }
