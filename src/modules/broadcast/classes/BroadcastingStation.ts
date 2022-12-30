@@ -29,9 +29,9 @@ export default class BroadcastingStation extends CommunicationDevice {
         return;
       }
       default: {
-        if (!(packet.payload instanceof Action)) return;
+        if (!Action.isAction(packet.payload)) return;
 
-        this.#handleAction(packet.payload);
+        this.#handleAction(packet.payload as Action);
         return;
       }
     }
@@ -45,7 +45,7 @@ export default class BroadcastingStation extends CommunicationDevice {
   #handleAction(action: Action) {
     if (!action) return;
 
-    const isChanged = this.#store.dispatch(action);
+    const isChanged = this.#store.$dispatch(action);
     if (!isChanged) return;
 
     const newState: Message = this.#store.$state;
