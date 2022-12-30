@@ -1,19 +1,20 @@
 import { createStore } from "@/modules/broadcast";
-import copyList from "@mocks/copyList";
+import Copy from "@/types/Copy";
 
 export default createStore({
   state: {
-    count: 0,
+    copyList: [
+      {
+        content:
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+        created: new Date("2022-12-27T08:00:00"),
+        source: "https://www.lipsum.com/",
+      },
+    ],
   },
   actions: {
-    increase() {
-      this.count++;
-    },
-    decrease() {
-      this.count--;
-    },
-    setCount(num: number) {
-      this.count = num;
+    addCopy(copy: Copy) {
+      this.copyList = [...this.copyList, copy];
     },
   },
 });

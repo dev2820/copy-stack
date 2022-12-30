@@ -1,16 +1,16 @@
 import { LitElement, css, html } from "lit";
 import { customElement, state } from "lit/decorators.js";
 import Messenger from "@/classes/Messenger";
-import Channel from "@/classes/Channel";
-import type CopyState from "@/types/CopyState";
 import type Copy from "@/types/Copy";
-import type BaseStationInfo from "@/types/BaseStationInfo";
+import RUNTIME_MESSAGE from "@/constants/RUNTIME_MESSAGE";
+import { type ChannelAddress, Radio, Action } from "@/modules/broadcast";
+
 import "@/components/FilledCard";
 
 @customElement("copy-list")
 export default class CopyList extends LitElement {
   @state()
-  copyChannel!: Channel<CopyState>;
+  copyRadio!: Radio;
 
   @state()
   copyList: Copy[] = [];
@@ -40,19 +40,31 @@ export default class CopyList extends LitElement {
   }
 
   async #created() {
-    const { name, initialState }: BaseStationInfo<CopyState> =
-      (await Messenger.sendMessage(
-        "getBaseStationInfo"
-      )) as BaseStationInfo<CopyState>;
-    this.copyChannel = new Channel(name, initialState);
-    this.copyChannel.$subscribe((state: CopyState) => {
-      this.copyList = [...state.copyList];
+    const channelAddress = (await Messenger.sendMessage(
+      RUNTIME_MESSAGE.GET_CHANNEL_ADDRESS
+    )) as ChannelAddress;
+
+    this.copyRadio = new Radio(
+      {sender:channelAddress.receiver,receiver:channelAddress.sender},
+      (initialState: Record<string, any>) => {
+        this.copyList = initialState.copyList;
+      }
+    );
+    this.copyRadio.$subscribe((newState: Record<string, any>) => {
+      this.copyList = newState.copyList;
+      // this.copyList = [...state.copyList];
     });
-    this.copyList = [...this.copyChannel.$state.copyList];
+
   }
 
   #addCopy() {
-    Messenger.sendMessage("addCopy");
+    const newCopy:Copy = {
+      content:this.copyList.length+'',
+      created:new Date(),
+      source:'localhost'
+    }
+    const addCopyAction = new Action('addCopy',newCopy);
+    this.copyRadio.broadcastAction(addCopyAction)
   }
 
   static styles = css`
