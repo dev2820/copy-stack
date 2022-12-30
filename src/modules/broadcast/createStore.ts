@@ -50,14 +50,23 @@ export default function createStore(storeOption: {
     });
   });
 
-  store.$dispatch = (action: Action) => {
-    if (!actionMap.has(action.type)) return;
+  Object.defineProperty(store, "$dispatch", {
+    get: () => {
+      return (action: Action) => {
+        if (!actionMap.has(action.type)) return;
 
-    const act = actionMap.get(action.type);
-    const isChanged = act ? act(action.payload) : false;
+        const act = actionMap.get(action.type);
+        const isChanged = act ? act(action.payload) : false;
 
-    return isChanged;
-  };
+        return isChanged;
+      };
+    },
+  });
+  Object.defineProperty(store, "$state", {
+    get: () => {
+      return Object.fromEntries(stateMap);
+    },
+  });
 
   return store;
 }
