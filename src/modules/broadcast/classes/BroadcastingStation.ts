@@ -37,7 +37,11 @@ export default class BroadcastingStation extends CommunicationDevice {
     }
   }
 
-  #handleDiscover() {}
+  #handleDiscover() {
+    const currentState: Message = this.#store.$state;
+    const response = new Packet({ type: PACKET_TYPE.OFFER }, currentState);
+    this.broadcast(response);
+  }
   #handleAction(action: Action) {
     if (!action) return;
 
