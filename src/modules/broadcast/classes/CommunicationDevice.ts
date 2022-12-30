@@ -9,7 +9,7 @@ export default abstract class CommunicationDevice implements Broadcastable {
   constructor(address: ChannelAddress) {
     this.#sender = new BroadcastChannel(address.sender);
     this.#receiver = new BroadcastChannel(address.receiver);
-    this.#receiver.onmessage = this.#handleMessage;
+    this.#receiver.onmessage = this.#handleMessage.bind(this);
   }
   broadcast(packet: Packet): boolean {
     try {
