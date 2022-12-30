@@ -17,7 +17,7 @@ export default class Radio extends CommunicationDevice {
    * @param {Function} listener listener to respond to messages received
    * @returns {Function} addListener return function that can remove listener
    */
-  addListener(listener: Function): Function {
+  $subscribe(listener: Function): Function {
     this.listeners.push(listener);
 
     return () => {
@@ -32,18 +32,18 @@ export default class Radio extends CommunicationDevice {
 
   protected handlePacket(packet: Packet): void {
     if (packet.header.type === PACKET_TYPE.OFFER) {
-      this.initState(packet.payload as Record<string, any>);
+      this.#initState(packet.payload as Record<string, any>);
     }
     if (packet.header.type === PACKET_TYPE.NEW_STATE) {
-      this.updateState(packet.payload as Record<string, any>);
+      this.#updateState(packet.payload as Record<string, any>);
     }
   }
 
-  initState(state: Record<string, any>) {
+  #initState(state: Record<string, any>) {
     this.$state = state;
   }
 
-  updateState(newState: Record<string, any>) {
+  #updateState(newState: Record<string, any>) {
     this.$state = newState;
     this.listeners.forEach((l) => l(this.$state));
   }
