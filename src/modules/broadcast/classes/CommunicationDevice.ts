@@ -21,7 +21,8 @@ export default abstract class CommunicationDevice implements Broadcastable {
   }
   #handleMessage(evt: MessageEvent) {
     const packet = evt.data;
-    if (!(packet instanceof Packet)) return;
+
+    if (!Packet.isPacket(packet)) return;
 
     this.handlePacket(packet);
   }
