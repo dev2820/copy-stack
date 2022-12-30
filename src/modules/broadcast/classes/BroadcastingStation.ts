@@ -22,14 +22,7 @@ export default class BroadcastingStation extends CommunicationDevice {
     return this.#channelAddress;
   }
 
-  protected handleMessage(evt: MessageEvent<any>): void {
-    const packet = evt.data;
-    if (!(packet instanceof Packet)) return;
-
-    this.#handlePacket(packet);
-  }
-
-  #handlePacket(packet: Packet) {
+  protected handlePacket(packet: Packet) {
     switch (packet.header.type) {
       case PACKET_TYPE.DISCOVER: {
         this.#handleDiscover();

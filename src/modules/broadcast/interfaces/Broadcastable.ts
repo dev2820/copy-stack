@@ -1,10 +1,10 @@
-import type Message from "../types/Message";
+import Packet from "../classes/Packet";
 
 export default interface Broadcastable {
   /**
-   * @description Broadcastable can dispatch action, if sending is success, then return true
-   * @param {Message} message Broadcastable can only dispatch message
+   * @description Broadcastable can dispatch packet, if sending is success, then return true
+   * @param {Packet} packet Broadcastable can only dispatch packet
    * @returns {boolean} if dispatch is success, then return true
    */
-  broadcast(message: Message): boolean;
+  broadcast(packet: Packet): void;
 }
