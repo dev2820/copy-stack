@@ -10,5 +10,11 @@ export default class Packet {
     this.payload = payload;
   }
 
+  static isPacket(target: any) {
+    if (!target.header) return false;
+    if (typeof target.header.type !== "number") return false;
+
+    return true;
+  }
   static DISCOVER = new Packet({ type: PACKET_TYPE.DISCOVER });
 }
