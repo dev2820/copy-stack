@@ -6,10 +6,12 @@ import * as PACKET_TYPE from "../constants/PACKET_TYPES";
 
 export default class Radio extends CommunicationDevice {
   protected listeners: Function[] = [];
+  protected initializer: Function;
   $state: Record<string, any> = {};
 
-  constructor(address: MessageAddress) {
+  constructor(address: MessageAddress, initializer: Function) {
     super(address);
+    this.initializer = initializer;
     this.broadcast(Packet.DISCOVER);
   }
   /**
@@ -39,8 +41,9 @@ export default class Radio extends CommunicationDevice {
     }
   }
 
-  #initState(state: Record<string, any>) {
-    this.$state = state;
+  #initState(initialState: Record<string, any>) {
+    this.$state = initialState;
+    this.initializer(this.$state);
   }
 
   #updateState(newState: Record<string, any>) {
