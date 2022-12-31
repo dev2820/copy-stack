@@ -24,6 +24,15 @@ test("read data", () => {
   expect(count).toBe(0);
 });
 
+test("read $state", () => {
+  /**
+   * all states can be referenced by $state property
+   */
+  expect(countStore.$state).toStrictEqual({
+    count: 0,
+  });
+});
+
 test("use actions", () => {
   /**
    * increase count

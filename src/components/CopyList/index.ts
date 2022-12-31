@@ -51,8 +51,7 @@ export default class CopyList extends LitElement {
       }
     );
     this.copyRadio.$subscribe((newState: Record<string, any>) => {
-      this.copyList = newState.copyList;
-      // this.copyList = [...state.copyList];
+      this.copyList = [...newState.copyList];
     });
 
   }
