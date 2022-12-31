@@ -11,13 +11,8 @@ export default abstract class CommunicationDevice implements Broadcastable {
     this.#receiver = new BroadcastChannel(address.receiver);
     this.#receiver.onmessage = this.#handleMessage.bind(this);
   }
-  broadcast(packet: Packet): boolean {
-    try {
-      this.#sender.postMessage(packet);
-      return true;
-    } catch (err) {
-      return false;
-    }
+  broadcast(packet: Packet): void {
+    this.#sender.postMessage(packet);
   }
   #handleMessage(evt: MessageEvent) {
     const packet = evt.data;

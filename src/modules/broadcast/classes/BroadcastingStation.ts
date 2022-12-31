@@ -43,8 +43,6 @@ export default class BroadcastingStation extends CommunicationDevice {
     this.broadcast(response);
   }
   #handleAction(action: Action) {
-    if (!action) return;
-
     const isChanged = this.#store.$dispatch(action);
     if (!isChanged) return;
 

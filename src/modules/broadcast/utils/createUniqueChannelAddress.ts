@@ -1,4 +1,4 @@
-import CHANNEL_ADDRESS_PREFIX from "../constants/CHANNEL_ADDRESS_PREFIX";
+import CHANNEL_ADDRESS_POSTFIX from "../constants/CHANNEL_ADDRESS_POSTFIX";
 import ChannelAddress from "../types/ChannelAddress";
 
 export default function createUniqueChannelAddress(
@@ -6,7 +6,7 @@ export default function createUniqueChannelAddress(
 ): ChannelAddress {
   const timestamp = Date.now();
   return {
-    sender: key + timestamp + CHANNEL_ADDRESS_PREFIX.SENDER,
-    receiver: key + timestamp + CHANNEL_ADDRESS_PREFIX.RECIVER,
+    sender: key + timestamp + CHANNEL_ADDRESS_POSTFIX.SENDER,
+    receiver: key + timestamp + CHANNEL_ADDRESS_POSTFIX.RECIVER,
   };
 }
