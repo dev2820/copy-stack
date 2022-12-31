@@ -1,14 +1,15 @@
 import Action from "./classes/Action";
+import Store from "./interfaces/Store";
 
 export default function createStore(storeOption: {
   state: Record<string, any>;
   actions: Record<string, any>;
-}): Record<string, any> {
+}): Store {
   const { state, actions } = storeOption;
 
   let _isChanged_ = false;
 
-  const store: Record<string, any> = {};
+  const store = {};
 
   const stateMap = Object.keys(state).reduce((map, key: string) => {
     return map.set(key, state[key]);
@@ -68,5 +69,5 @@ export default function createStore(storeOption: {
     },
   });
 
-  return store;
+  return store as Store;
 }
