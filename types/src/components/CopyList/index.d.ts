@@ -1,11 +1,10 @@
 import { LitElement } from "lit";
-import Channel from "@/classes/Channel";
-import type CopyState from "@/types/CopyState";
 import type Copy from "@/types/Copy";
+import { Radio } from "@/modules/broadcast";
 import "@/components/FilledCard";
 export default class CopyList extends LitElement {
     #private;
-    copyChannel: Channel<CopyState>;
+    copyRadio: Radio;
     copyList: Copy[];
     constructor();
     render(): import("lit-html").TemplateResult<1>;

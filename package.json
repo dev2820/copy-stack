@@ -27,9 +27,11 @@
     "@storybook/web-components": "^6.1.21",
     "babel-loader": "^8.3.0",
     "chromatic": "^6.14.0",
+    "fake-indexeddb": "^4.0.1",
     "husky": "^8.0.2",
     "jest": "^27.3.1",
     "jest-chrome": "^0.8.0",
+    "lint-staged": "^13.1.0",
     "lit-html": "^2.5.0",
     "path": "^0.12.7",
     "storybook-addon-designs": "^6.3.1",
@@ -38,5 +40,20 @@
     "vite": "^4.0.0"
   },
   "readme": "ERROR: No README data found!",
-  "_id": "copy-stack@0.3.0"
+  "_id": "copy-stack@0.3.0",
+  "lint-staged": {
+    "{src,test}/**/*.{ts,js}": [
+      "node --experimental-vm-modules node_modules/jest/bin/jest.js --findRelatedTests --passWithNoTests",
+      "git add"
+    ],
+    "src/**/*.{css,html}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
 }
