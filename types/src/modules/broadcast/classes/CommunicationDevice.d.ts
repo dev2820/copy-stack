@@ -4,6 +4,6 @@ import Packet from "./Packet";
 export default abstract class CommunicationDevice implements Broadcastable {
     #private;
     constructor(address: ChannelAddress);
-    broadcast(packet: Packet): boolean;
+    broadcast(packet: Packet): void;
     protected abstract handlePacket(packet: Packet): void;
 }
