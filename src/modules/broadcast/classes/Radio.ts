@@ -1,4 +1,4 @@
-import MessageAddress from "../types/ChannelAddress";
+import ChannelAddress from "../types/ChannelAddress";
 import CommunicationDevice from "./CommunicationDevice";
 import Action from "./Action";
 import Packet from "./Packet";
@@ -9,7 +9,7 @@ export default class Radio extends CommunicationDevice {
   protected initializer: Function;
   $state: Record<string, any> = {};
 
-  constructor(address: MessageAddress, initializer: Function) {
+  constructor(address: ChannelAddress, initializer: Function) {
     super(address);
     this.initializer = initializer;
     this.broadcast(Packet.DISCOVER);
