@@ -14,11 +14,6 @@ export default class Radio extends CommunicationDevice {
     this.initializer = initializer;
     this.broadcast(Packet.DISCOVER);
   }
-  /**
-   * @description Radio can add listeners for respond to message from other CommunicationDevices
-   * @param {Function} listener listener to respond to messages received
-   * @returns {Function} addListener return function that can remove listener
-   */
   $subscribe(listener: Function): Function {
     this.listeners.push(listener);
 
