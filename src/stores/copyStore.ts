@@ -1,5 +1,5 @@
 import { createStore } from "@/modules/broadcast";
-import Copy from "@/types/Copy";
+import type Copy from "@/types/Copy";
 
 export default createStore({
   state: {
