@@ -1,6 +1,7 @@
+import type Text from "@/types/Text";
 type Copy = {
-    content: string | Blob;
-    created: Date;
+    content: Text | Blob;
+    created: Date | string;
     source: string;
 };
 export default Copy;
