@@ -27,9 +27,7 @@ export default class Radio extends CommunicationDevice {
   }
 
   broadcastAction(action: Action) {
-    console.log("call in Radio");
     const packet = new Packet({ type: PACKET_TYPE.ACTION }, action);
-    console.log("packet", packet);
     this.broadcast(packet);
   }
 
