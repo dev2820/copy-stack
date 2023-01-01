@@ -6,12 +6,16 @@ import * as PACKET_TYPE from "../constants/PACKET_TYPES";
 
 export default class Radio extends CommunicationDevice {
   protected listeners: Function[] = [];
-  protected initializer: Function;
+  protected initializer?: Function;
   $state: Record<string, any> = {};
 
-  constructor(address: ChannelAddress, initializer: Function) {
+  constructor(address: ChannelAddress, initializer?: Function) {
     super(address);
-    this.initializer = initializer;
+
+    if (initializer) {
+      this.initializer = initializer;
+    }
+
     this.broadcast(Packet.DISCOVER);
   }
   $subscribe(listener: Function): Function {
@@ -23,7 +27,9 @@ export default class Radio extends CommunicationDevice {
   }
 
   broadcastAction(action: Action) {
+    console.log("call in Radio");
     const packet = new Packet({ type: PACKET_TYPE.ACTION }, action);
+    console.log("packet", packet);
     this.broadcast(packet);
   }
 
@@ -38,6 +44,9 @@ export default class Radio extends CommunicationDevice {
 
   #initState(initialState: Record<string, any>) {
     this.$state = initialState;
+
+    if (!this.initializer) return;
+
     this.initializer(this.$state);
   }
 
