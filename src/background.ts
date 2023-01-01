@@ -11,6 +11,10 @@ chrome.runtime.onMessage.addListener((message, _, sendResponse) => {
 
       return false;
     }
+    case RUNTIME_MESSAGE.NEW_TEXT_COPY: {
+      const textCopy = message.payload;
+      copyStore.addCopy(textCopy);
+    }
   }
 
   return true;

@@ -1,3 +1,4 @@
 export default {
   GET_CHANNEL_ADDRESS: "GET_CHANNEL_ADDRESS",
+  NEW_TEXT_COPY: "NEW_TEXT_COPY",
 };
