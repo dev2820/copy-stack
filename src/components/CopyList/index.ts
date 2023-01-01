@@ -40,9 +40,9 @@ export default class CopyList extends LitElement {
   }
 
   async #created() {
-    const channelAddress = (await Messenger.sendMessage(
-      RUNTIME_MESSAGE.GET_CHANNEL_ADDRESS
-    )) as ChannelAddress;
+    const channelAddress = (await Messenger.sendMessage({
+      type:RUNTIME_MESSAGE.GET_CHANNEL_ADDRESS
+    })) as ChannelAddress;
 
     this.copyRadio = new Radio(
       {sender:channelAddress.receiver,receiver:channelAddress.sender},
