@@ -17,6 +17,7 @@
     "service_worker": "src/background.ts",
     "type": "module"
   },
+  "permissions": ["contextMenus"],
   "icons": {
     "16": "images/16.png",
     "48": "images/48.png",
