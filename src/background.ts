@@ -6,7 +6,11 @@ import CONTEXT_MENUS from "@/constants/CONTEXT_MENUS";
 
 const broadcastingStation = new BroadcastingStation("copy", copyStore);
 
-chrome.runtime.onMessage.addListener((message, _, sendResponse) => {
+const handleRuntimeMessage = (
+  message: any,
+  _: chrome.runtime.MessageSender,
+  sendResponse: (response?: any) => void
+) => {
   switch (message.type) {
     case RUNTIME_MESSAGE.GET_CHANNEL_ADDRESS: {
       const channelAddress = broadcastingStation.channelAddress;
@@ -21,17 +25,17 @@ chrome.runtime.onMessage.addListener((message, _, sendResponse) => {
   }
 
   return true;
-});
+};
 
-chrome.runtime.onInstalled.addListener(() => {
+const createMenus = () => {
   chrome.contextMenus.create({
     id: CONTEXT_MENUS.STORE_TO_COPY_STACK.ID,
     title: CONTEXT_MENUS.STORE_TO_COPY_STACK.TITLE,
     contexts: CONTEXT_MENUS.STORE_TO_COPY_STACK.CONTEXTS,
   });
-});
+};
 
-chrome.contextMenus.onClicked.addListener(async (info) => {
+const contextMenuHandler = async (info: chrome.contextMenus.OnClickData) => {
   if (info.menuItemId !== CONTEXT_MENUS.STORE_TO_COPY_STACK.ID) return false;
 
   if (info.selectionText) {
@@ -46,4 +50,8 @@ chrome.contextMenus.onClicked.addListener(async (info) => {
   }
 
   return false;
-});
+};
+
+chrome.runtime.onMessage.addListener(handleRuntimeMessage);
+chrome.runtime.onInstalled.addListener(createMenus);
+chrome.contextMenus.onClicked.addListener(contextMenuHandler);
