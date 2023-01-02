@@ -1,5 +1,6 @@
 import createCopy from "@/utils/createCopy";
 import copyStore from "@/stores/copyStore";
+import url2Blob from "@/utils/url2Blob";
 import { BroadcastingStation } from "@/modules/broadcast";
 import RUNTIME_MESSAGE from "@/constants/RUNTIME_MESSAGE";
 import CONTEXT_MENUS from "@/constants/CONTEXT_MENUS";
@@ -35,18 +36,29 @@ const createMenus = () => {
   });
 };
 
+const imageCopyHandler = async (info: chrome.contextMenus.OnClickData) => {
+  if (!info.srcUrl) return;
+
+  const blob = await url2Blob(info.srcUrl);
+
+  const copy = createCopy(blob, new Date(), info.pageUrl);
+  copyStore.addCopy(copy);
+};
+
+const textCopyHandler = (info: chrome.contextMenus.OnClickData) => {
+  if (!info.selectionText) return;
+
+  const copy = createCopy(info.selectionText, new Date(), info.pageUrl);
+  copyStore.addCopy(copy);
+};
+
 const contextMenuHandler = async (info: chrome.contextMenus.OnClickData) => {
   if (info.menuItemId !== CONTEXT_MENUS.STORE_TO_COPY_STACK.ID) return false;
 
   if (info.selectionText) {
-    const copy = createCopy(info.selectionText, new Date(), info.pageUrl);
-    copyStore.addCopy(copy);
-  } else if (info.mediaType === "image" && info.srcUrl) {
-    const image = await fetch(info.srcUrl);
-    const blob = await image.blob();
-
-    const copy = createCopy(blob, new Date(), info.pageUrl);
-    copyStore.addCopy(copy);
+    textCopyHandler(info);
+  } else if (info.mediaType === "image") {
+    imageCopyHandler(info);
   }
 
   return false;
