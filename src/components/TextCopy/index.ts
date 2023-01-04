@@ -3,6 +3,7 @@ import { customElement, property } from "lit/decorators.js";
 import type Copy from "@/types/Copy";
 import clipboardSystem from "@/modules/clipboardSystem";
 import "@/components/FilledCard";
+import "@/components/FilledButton";
 
 @customElement("text-copy")
 export default class TextCopy extends LitElement {
@@ -22,7 +23,9 @@ export default class TextCopy extends LitElement {
         <p>${this.copy.content}</p>
       </article>
       <menu type="list">
-        <button class="primary" @click=${() => this.#handleCopy()}>copy</button>
+        <filled-button theme="primary" @click=${() => this.#handleCopy()}>
+          copy
+        </filled-button>
       </menu>
     `;
   }
@@ -47,13 +50,6 @@ export default class TextCopy extends LitElement {
       margin: 0;
       display: flex;
       flex-direction: row-reverse;
-    }
-    menu[type="list"] > button.primary {
-      border: none;
-      background: var(--primary-color);
-      padding: 0.5rem 1rem;
-      border-radius: 9999px;
-      cursor: pointer;
     }
   `;
 }
