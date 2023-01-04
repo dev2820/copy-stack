@@ -1,23 +1,12 @@
-let data: any = null;
+import RUNTIME_MESSAGE from "../../src/constants/RUNTIME_MESSAGE";
 
 export default class Messenger {
   static async sendMessage(message) {
-    if (message === "getBaseStationInfo") {
+    if (message.type === RUNTIME_MESSAGE.GET_CHANNEL_ADDRESS) {
       return {
-        name: "COPY-CHANNEL",
-        initialState: {
-          ...data,
-        },
+        sender: "COPY-CHANNEL-SENDER",
+        receiver: "COPY-CHANNEL-RECEIVER",
       };
     }
-    data = null;
   }
-}
-
-export function decorator(story, { parameters }) {
-  if (parameters && parameters.store) {
-    data = parameters.store.data;
-  }
-
-  return story();
 }
