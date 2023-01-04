@@ -15,7 +15,8 @@ export default class FilledCard extends LitElement {
     div.card {
       background: var(--surface-color, white);
       border-radius: 0.75rem;
-      padding: 0.5rem;
+      padding: 1rem;
+      height: content-fit;
     }
   `;
 }
