@@ -8,23 +8,23 @@ async function convertUrl2Blob(url: string) {
 }
 const mockBlob = await convertUrl2Blob(mockImageUrl);
 
-export default [
-  {
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-    created: new Date("2022-12-27T08:00:00"),
-    source: "https://www.lipsum.com/",
-  },
-  {
-    content: mockBlob,
-    created: new Date("2022-12-27T13:00:00"),
-    source: "https://www.lipsum.com/banners/",
-  },
-  {
-    content:
-      "The Date() constructor can create a Date instance or return a string representing the current time.",
-    created: new Date("2022-12-31T13:00:00"),
-    source:
-      "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date",
-  },
-];
+export const textCopyMock = {
+  content:
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+  created: new Date("2022-12-27T08:00:00"),
+  source: "https://www.lipsum.com/",
+};
+export const textCopyMock2 = {
+  content:
+    "The Date() constructor can create a Date instance or return a string representing the current time.",
+  created: new Date("2022-12-31T13:00:00"),
+  source:
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date",
+};
+export const imageCopyMock = {
+  content: mockBlob,
+  created: new Date("2022-12-27T13:00:00"),
+  source: "https://www.lipsum.com/banners/",
+};
+
+export default [textCopyMock, imageCopyMock, textCopyMock2];
