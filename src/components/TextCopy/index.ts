@@ -22,7 +22,7 @@ export default class TextCopy extends LitElement {
         <p>${this.copy.content}</p>
       </article>
       <menu type="list">
-        <button class="copy" @click=${() => this.#handleCopy()}>copy</button>
+        <button class="primary" @click=${() => this.#handleCopy()}>copy</button>
       </menu>
     `;
   }
@@ -31,5 +31,29 @@ export default class TextCopy extends LitElement {
     clipboardSystem.toClipboard(this.copy.content);
   }
 
-  static styles = css``;
+  static styles = css`
+    :host {
+    }
+    header {
+    }
+    header > h4.title {
+      margin: 0;
+    }
+    header > small.created {
+      color: var(--placeholder-color);
+    }
+    menu[type="list"] {
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: row-reverse;
+    }
+    menu[type="list"] > button.primary {
+      border: none;
+      background: var(--primary-color);
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      cursor: pointer;
+    }
+  `;
 }
