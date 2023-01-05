@@ -3,9 +3,9 @@ import { customElement, state } from "lit/decorators.js";
 import Messenger from "@/classes/Messenger";
 import type Copy from "@/types/Copy";
 import type DeleteCopyEvent from "@/types/DeleteCopyEvent";
+import { type ChannelAddress, Radio, Action } from "@/modules/broadcast";
 import EVENT from "@/constants/EVENT";
 import RUNTIME_MESSAGE from "@/constants/RUNTIME_MESSAGE";
-import { type ChannelAddress, Radio, Action } from "@/modules/broadcast";
 
 import "@/components/FilledCard";
 import "@/components/CopiedItem";
