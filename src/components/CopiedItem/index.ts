@@ -1,8 +1,9 @@
-import EVENT from "@/constants/EVENT";
 import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import type Copy from "@/types/Copy";
 import clipboardSystem from "@/modules/clipboardSystem";
+import createDeleteCopyEvent from "@/utils/event/createDeleteCopyEvent";
+
 import "@/components/FilledCard";
 import "@/components/FilledButton";
 
@@ -43,13 +44,11 @@ export default class CopiedItem extends LitElement {
     clipboardSystem.toClipboard(this.copy.content);
   }
   #deleteCopy() {
-    if (!this.dataset["index"]) return;
+    const indexStr = this.dataset["index"];
+    if (!indexStr) return;
 
-    const index = parseInt(this.dataset["index"], 10);
-    const deleteCopyEvent = new CustomEvent(EVENT.DELETE_COPY, {
-      detail: { index },
-      composed: true,
-    });
+    const index = parseInt(indexStr, 10);
+    const deleteCopyEvent = createDeleteCopyEvent(index);
     this.dispatchEvent(deleteCopyEvent);
   }
 
