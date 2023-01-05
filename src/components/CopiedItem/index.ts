@@ -5,8 +5,8 @@ import clipboardSystem from "@/modules/clipboardSystem";
 import "@/components/FilledCard";
 import "@/components/FilledButton";
 
-@customElement("text-copy")
-export default class TextCopy extends LitElement {
+@customElement("copied-item")
+export default class CopiedItem extends LitElement {
   @property({ type: Object, reflect: true })
   copy!: Copy;
 
@@ -20,7 +20,9 @@ export default class TextCopy extends LitElement {
         <small class="created">${this.copy.created}</small>
       </header>
       <article>
-        <p>${this.copy.content}</p>
+        ${typeof this.copy.content === "string"
+          ? html`<p>${this.copy.content}</p>`
+          : html`<img src="${this.#blob2url(this.copy.content)}" />`}
       </article>
       <menu type="list">
         <filled-button theme="primary" @click=${() => this.#handleCopy()}>
@@ -30,6 +32,11 @@ export default class TextCopy extends LitElement {
     `;
   }
 
+  #blob2url(input: Blob | string) {
+    if (typeof input === "string") return "";
+
+    return URL.createObjectURL(input);
+  }
   #handleCopy() {
     clipboardSystem.toClipboard(this.copy.content);
   }

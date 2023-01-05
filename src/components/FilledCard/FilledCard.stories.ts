@@ -1,8 +1,7 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html, TemplateResult } from "lit-html";
 import copyList from "@mocks/copyList";
-import "@/components/TextCopy";
-import "@/components/ImageCopy";
+import "@/components/CopiedItem";
 import "@/components/FilledCard";
 
 const noImageUrl = new URL("@/assets/images/no-image.png", import.meta.url)
@@ -43,9 +42,9 @@ Image.args = {
 };
 export const TextCopy = Template.bind({});
 TextCopy.args = {
-  content: html`<text-copy .copy=${textCopyMock}></text-copy>`,
+  content: html`<copied-item .copy=${textCopyMock}></copied-item>`,
 };
 export const ImageCopy = Template.bind({});
 ImageCopy.args = {
-  content: html`<image-copy .copy=${ImageCopyMock}></image-copy>`,
+  content: html`<copied-item .copy=${ImageCopyMock}></copied-item>`,
 };
