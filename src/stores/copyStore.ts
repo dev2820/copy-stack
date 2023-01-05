@@ -1,4 +1,4 @@
-import { createStore } from "@/modules/broadcast";
+import { createStore } from "broadcasting";
 import type Copy from "@/types/Copy";
 
 export default createStore({

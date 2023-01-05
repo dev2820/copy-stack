@@ -1,7 +1,7 @@
 import createCopy from "@/utils/createCopy";
 import copyStore from "@/stores/copyStore";
 import url2Blob from "@/utils/url2Blob";
-import { BroadcastingStation } from "@/modules/broadcast";
+import { BroadcastingStation } from "broadcasting";
 import RUNTIME_MESSAGE from "@/constants/RUNTIME_MESSAGE";
 import CONTEXT_MENUS from "@/constants/CONTEXT_MENUS";
 
