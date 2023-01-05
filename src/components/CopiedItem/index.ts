@@ -3,6 +3,7 @@ import { customElement, property } from "lit/decorators.js";
 import type Copy from "@/types/Copy";
 import clipboardSystem from "@/modules/clipboardSystem";
 import createDeleteCopyEvent from "@/utils/event/createDeleteCopyEvent";
+import COPIED_ITEM from "@/constants/COPIED_ITEM";
 
 import "@/components/FilledCard";
 import "@/components/FilledButton";
@@ -44,7 +45,7 @@ export default class CopiedItem extends LitElement {
     clipboardSystem.toClipboard(this.copy.content);
   }
   #deleteCopy() {
-    const indexStr = this.dataset["index"];
+    const indexStr = this.dataset[COPIED_ITEM.DATASET.INDEX];
     if (!indexStr) return;
 
     const index = parseInt(indexStr, 10);
