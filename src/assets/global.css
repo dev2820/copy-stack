@@ -14,7 +14,11 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
+  word-wrap: break-word;
+
   --surface-color: #eee;
+  --placeholder-color: #aaa;
+  --primary-color: #54ccff;
 }
 
 a {

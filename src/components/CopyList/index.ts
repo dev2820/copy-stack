@@ -6,6 +6,7 @@ import RUNTIME_MESSAGE from "@/constants/RUNTIME_MESSAGE";
 import { type ChannelAddress, Radio, Action } from "@/modules/broadcast";
 
 import "@/components/FilledCard";
+import "@/components/CopiedItem";
 
 @customElement("copy-list")
 export default class CopyList extends LitElement {
@@ -27,11 +28,7 @@ export default class CopyList extends LitElement {
           (copy) =>
             html` <li>
               <filled-card class="card">
-                <div>
-                  <p>${copy.content}</p>
-                  <p>${copy.created}</p>
-                  <p>${copy.source}</p>
-                </div>
+                <copied-item .copy=${copy}></copied-item>
               </filled-card>
             </li>`
         )}
