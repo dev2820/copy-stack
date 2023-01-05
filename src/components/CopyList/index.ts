@@ -6,7 +6,7 @@ import type DeleteCopyEvent from "@/types/DeleteCopyEvent";
 import { type ChannelAddress, Radio, Action } from "@/modules/broadcast";
 import EVENT from "@/constants/EVENT";
 import RUNTIME_MESSAGE from "@/constants/RUNTIME_MESSAGE";
-
+import COPY from "@/constants/stores/COPY";
 import "@/components/FilledCard";
 import "@/components/CopiedItem";
 
@@ -63,7 +63,7 @@ export default class CopyList extends LitElement {
       created:new Date(),
       source:'localhost'
     }
-    const addCopyAction = new Action('addCopy',newCopy);
+    const addCopyAction = new Action(COPY.ACTION_TYPES.ADD_COPY,newCopy);
     this.copyRadio.broadcastAction(addCopyAction)
   }
 
@@ -75,7 +75,7 @@ export default class CopyList extends LitElement {
   }
 
   #deleteCopy(index:number) {
-    const addCopyAction = new Action('deleteCopy',index);
+    const addCopyAction = new Action(COPY.ACTION_TYPES.DELETE_COPY,index);
     this.copyRadio.broadcastAction(addCopyAction)
   }
 
