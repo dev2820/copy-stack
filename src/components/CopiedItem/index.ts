@@ -2,6 +2,9 @@ import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import type Copy from "@/types/Copy";
 import clipboardSystem from "@/modules/clipboardSystem";
+import createDeleteCopyEvent from "@/utils/event/createDeleteCopyEvent";
+import COPIED_ITEM from "@/constants/COPIED_ITEM";
+
 import "@/components/FilledCard";
 import "@/components/FilledButton";
 
@@ -28,6 +31,7 @@ export default class CopiedItem extends LitElement {
         <filled-button theme="primary" @click=${() => this.#handleCopy()}>
           copy
         </filled-button>
+        <button @click=${() => this.#deleteCopy()}>delete</button>
       </menu>
     `;
   }
@@ -39,6 +43,14 @@ export default class CopiedItem extends LitElement {
   }
   #handleCopy() {
     clipboardSystem.toClipboard(this.copy.content);
+  }
+  #deleteCopy() {
+    const indexStr = this.dataset[COPIED_ITEM.DATASET.INDEX];
+    if (!indexStr) return;
+
+    const index = parseInt(indexStr, 10);
+    const deleteCopyEvent = createDeleteCopyEvent(index);
+    this.dispatchEvent(deleteCopyEvent);
   }
 
   static styles = css`
