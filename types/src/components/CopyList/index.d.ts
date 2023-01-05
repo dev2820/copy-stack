@@ -1,6 +1,6 @@
 import { LitElement } from "lit";
 import type Copy from "@/types/Copy";
-import { Radio } from "@/modules/broadcast";
+import { Radio } from "broadcasting";
 import "@/components/FilledCard";
 import "@/components/CopiedItem";
 export default class CopyList extends LitElement {

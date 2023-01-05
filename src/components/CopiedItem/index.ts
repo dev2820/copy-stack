@@ -7,6 +7,7 @@ import COPIED_ITEM from "@/constants/COPIED_ITEM";
 
 import "@/components/FilledCard";
 import "@/components/FilledButton";
+import "@/components/TextButton";
 
 @customElement("copied-item")
 export default class CopiedItem extends LitElement {
@@ -31,7 +32,9 @@ export default class CopiedItem extends LitElement {
         <filled-button theme="primary" @click=${() => this.#handleCopy()}>
           copy
         </filled-button>
-        <button @click=${() => this.#deleteCopy()}>delete</button>
+        <text-button theme="alert" @click=${() => this.#deleteCopy()}>
+          delete
+        </text-button>
       </menu>
     `;
   }
