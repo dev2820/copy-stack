@@ -2,6 +2,8 @@ import { LitElement, css, html } from "lit";
 import { customElement, state } from "lit/decorators.js";
 import Messenger from "@/classes/Messenger";
 import type Copy from "@/types/Copy";
+import type DeleteCopyEvent from "@/types/DeleteCopyEvent";
+import EVENT from "@/constants/EVENT";
 import RUNTIME_MESSAGE from "@/constants/RUNTIME_MESSAGE";
 import { type ChannelAddress, Radio, Action } from "@/modules/broadcast";
 
@@ -25,10 +27,10 @@ export default class CopyList extends LitElement {
       <button @click=${() => this.#addCopy()}>add copy</button>
       <ul class="copy-list">
         ${this.copyList.map(
-          (copy) =>
+          (copy,idx) =>
             html` <li>
               <filled-card class="card">
-                <copied-item .copy=${copy}></copied-item>
+                <copied-item .copy=${copy} data-index="${idx}"></copied-item>
               </filled-card>
             </li>`
         )}
@@ -37,6 +39,8 @@ export default class CopyList extends LitElement {
   }
 
   async #created() {
+    this.#initEvents();
+
     const channelAddress = (await Messenger.sendMessage({
       type:RUNTIME_MESSAGE.GET_CHANNEL_ADDRESS
     })) as ChannelAddress;
@@ -60,6 +64,18 @@ export default class CopyList extends LitElement {
       source:'localhost'
     }
     const addCopyAction = new Action('addCopy',newCopy);
+    this.copyRadio.broadcastAction(addCopyAction)
+  }
+
+  #initEvents() {
+    this.addEventListener(EVENT.DELETE_COPY,(evt:DeleteCopyEvent)=>{
+      if(!evt.detail) return;
+      this.#deleteCopy(evt.detail.index)
+    })
+  }
+
+  #deleteCopy(index:number) {
+    const addCopyAction = new Action('deleteCopy',index);
     this.copyRadio.broadcastAction(addCopyAction)
   }
 

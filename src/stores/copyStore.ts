@@ -23,5 +23,10 @@ export default createStore({
     addCopy(copy: Copy) {
       this.copyList = [...this.copyList, copy];
     },
+    deleteCopy(index: number) {
+      this.copyList = this.copyList.filter(
+        (_: Copy, idx: number) => idx !== index
+      );
+    },
   },
 });
