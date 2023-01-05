@@ -43,14 +43,31 @@ export default class CopiedItem extends LitElement {
 
   static styles = css`
     :host {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
     }
     header {
+      text-align: left;
     }
     header > h4.title {
       margin: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
     header > small.created {
       color: var(--placeholder-color);
+    }
+    article {
+      display: flex;
+      flex-direction: column;
+    }
+    article > p {
+      text-align: left;
+    }
+    article > img {
+      margin: 0 auto;
     }
     menu[type="list"] {
       padding: 0;
