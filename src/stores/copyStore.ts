@@ -43,10 +43,21 @@ export default createStore({
         this.copyList = await copyRepo.readAll();
       }
     },
-    deleteCopy(index: number) {
-      this.copyList = this.copyList.filter(
-        (_: Copy, idx: number) => idx !== index
-      );
+    async deleteCopy(index: number) {
+      if (!copyRepo) {
+        const db = await getIDB(COPY_DB, (evt) => {
+          const db = (evt.target as IDBOpenDBRequest).result;
+          db.createObjectStore(COPY_STORE, {
+            keyPath: "id",
+            autoIncrement: true,
+          });
+        });
+        copyRepo = new IndexedDBRepo<Copy>(db, COPY_STORE);
+      }
+      const isSuccess = await copyRepo.delete(index);
+      if (isSuccess) {
+        this.copyList = await copyRepo.readAll();
+      }
     },
   },
 });

@@ -1,5 +1,5 @@
 export default {
   DATASET: {
-    INDEX: "index",
+    ID: "id",
   },
 };

@@ -2,11 +2,13 @@ import { LitElement, css, html } from "lit";
 import { customElement, state } from "lit/decorators.js";
 import Messenger from "@/classes/Messenger";
 import type Copy from "@/types/Copy";
+import type Entity from "@/types/Entity";
 import type DeleteCopyEvent from "@/types/DeleteCopyEvent";
 import { type ChannelAddress, Radio, Action } from "broadcasting";
 import EVENT from "@/constants/EVENT";
 import RUNTIME_MESSAGE from "@/constants/RUNTIME_MESSAGE";
 import COPY from "@/constants/stores/COPY";
+
 import "@/components/FilledCard";
 import "@/components/CopiedItem";
 
@@ -16,7 +18,7 @@ export default class CopyList extends LitElement {
   copyRadio!: Radio;
 
   @state()
-  copyList: Copy[] = [];
+  copyList: Entity<Copy>[] = [];
 
   constructor() {
     super();
@@ -27,10 +29,10 @@ export default class CopyList extends LitElement {
       <button @click=${() => this.#addCopy()}>add copy</button>
       <ul class="copy-list">
         ${this.copyList.map(
-          (copy,idx) =>
+          (copy) =>
             html` <li>
               <filled-card class="card">
-                <copied-item .copy=${copy} data-index="${idx}"></copied-item>
+                <copied-item .copy=${copy} data-id="${copy.id}"></copied-item>
               </filled-card>
             </li>`
         )}
