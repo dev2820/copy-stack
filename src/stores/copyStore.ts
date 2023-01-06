@@ -1,12 +1,6 @@
 import { createStore } from "broadcasting";
 import type Copy from "@/types/Copy";
-import IndexedDBRepo from "@/classes/Repo/IndexedDBRepo";
-import getIDB from "@/utils/getIDB";
-
-const COPY_DB = "COPY_DB";
-const COPY_STORE = "copyStore";
-
-let copyRepo: null | IndexedDBRepo<Copy> = null;
+import copyRepo from "@/modules/copyRepo";
 
 export default createStore({
   state: {
@@ -28,32 +22,12 @@ export default createStore({
   },
   actions: {
     async addCopy(copy: Copy) {
-      if (!copyRepo) {
-        const db = await getIDB(COPY_DB, (evt) => {
-          const db = (evt.target as IDBOpenDBRequest).result;
-          db.createObjectStore(COPY_STORE, {
-            keyPath: "id",
-            autoIncrement: true,
-          });
-        });
-        copyRepo = new IndexedDBRepo<Copy>(db, COPY_STORE);
-      }
       const isSuccess = await copyRepo.create(copy);
       if (isSuccess) {
         this.copyList = await copyRepo.readAll();
       }
     },
     async deleteCopy(index: number) {
-      if (!copyRepo) {
-        const db = await getIDB(COPY_DB, (evt) => {
-          const db = (evt.target as IDBOpenDBRequest).result;
-          db.createObjectStore(COPY_STORE, {
-            keyPath: "id",
-            autoIncrement: true,
-          });
-        });
-        copyRepo = new IndexedDBRepo<Copy>(db, COPY_STORE);
-      }
       const isSuccess = await copyRepo.delete(index);
       if (isSuccess) {
         this.copyList = await copyRepo.readAll();
