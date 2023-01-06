@@ -24,10 +24,11 @@ let testRepo: IndexedDBRepo<Data> | null = null;
 beforeAll(async () => {
   await getIDB("testDB", (evt) => {
     const _db = (evt.target as IDBOpenDBRequest).result;
-    testRepo = new IndexedDBRepo<Data>(_db, "testRepo", {
+    _db.createObjectStore("testRepo", {
       keyPath: "id",
       autoIncrement: true,
     });
+    testRepo = new IndexedDBRepo<Data>(_db, "testRepo");
   });
 
   await testRepo?.create(data);

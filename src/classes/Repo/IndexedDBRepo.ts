@@ -5,16 +5,11 @@ export default class IndexedDBRepo<Data> extends BaseRepo<Data> {
   #db: IDBDatabase;
   #storeName: string;
 
-  constructor(
-    db: IDBDatabase,
-    storeName: string,
-    option?: IDBObjectStoreParameters
-  ) {
+  constructor(db: IDBDatabase, storeName: string) {
     super();
 
     this.#db = db;
     this.#storeName = storeName;
-    db.createObjectStore(storeName, option);
   }
   async create(data: Data): Promise<boolean> {
     const store = this.#getStore();

@@ -67,3 +67,10 @@ const contextMenuHandler = async (info: chrome.contextMenus.OnClickData) => {
 chrome.runtime.onMessage.addListener(handleRuntimeMessage);
 chrome.runtime.onInstalled.addListener(createMenus);
 chrome.contextMenus.onClicked.addListener(contextMenuHandler);
+
+const init = async () => {
+  await copyStore.init();
+  broadcastingStation.forceUpdate();
+};
+
+init();

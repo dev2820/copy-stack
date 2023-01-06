@@ -48,11 +48,11 @@ export default class CopiedItem extends LitElement {
     clipboardSystem.toClipboard(this.copy.content);
   }
   #deleteCopy() {
-    const indexStr = this.dataset[COPIED_ITEM.DATASET.INDEX];
-    if (!indexStr) return;
+    const idStr = this.dataset[COPIED_ITEM.DATASET.ID];
+    if (!idStr) return;
 
-    const index = parseInt(indexStr, 10);
-    const deleteCopyEvent = createDeleteCopyEvent(index);
+    const id = parseInt(idStr, 10);
+    const deleteCopyEvent = createDeleteCopyEvent(id);
     this.dispatchEvent(deleteCopyEvent);
   }
 

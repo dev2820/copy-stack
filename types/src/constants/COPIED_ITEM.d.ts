@@ -1,6 +1,6 @@
 declare const _default: {
     DATASET: {
-        INDEX: string;
+        ID: string;
     };
 };
 export default _default;
