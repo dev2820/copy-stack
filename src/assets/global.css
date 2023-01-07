@@ -20,7 +20,8 @@
   --placeholder-color: #aaa;
   --primary-color: #54ccff;
   --alert-color: #ff5757;
-  --screen-width: 400px;
+  --screen-width: 360px;
+  --screen-height: 500px;
 }
 
 a {
@@ -36,8 +37,8 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
-  min-height: 500px;
+  width: var(--screen-width);
+  height: var(----screen-height);
 }
 
 @media (prefers-color-scheme: light) {
