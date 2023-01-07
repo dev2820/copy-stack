@@ -9,3 +9,4 @@ type Args = {
     };
 };
 export declare const Default: Story<Args>;
+export declare const Empty: Story<Args>;
