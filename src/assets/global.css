@@ -22,6 +22,7 @@
   --alert-color: #ff5757;
   --screen-width: 360px;
   --screen-height: 500px;
+  --card-radius: 12px;
 }
 
 a {
@@ -37,8 +38,6 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  width: var(--screen-width);
-  height: var(----screen-height);
 }
 
 @media (prefers-color-scheme: light) {
