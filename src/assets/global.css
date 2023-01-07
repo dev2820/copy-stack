@@ -20,6 +20,7 @@
   --placeholder-color: #aaa;
   --primary-color: #54ccff;
   --alert-color: #ff5757;
+  --screen-width: 400px;
 }
 
 a {

@@ -83,6 +83,9 @@ export default class CopiedItem extends LitElement {
     }
     article > img {
       margin: 0 auto;
+      width: 100%;
+      max-width: 300px;
+      max-height: 300px;
     }
     menu[type="list"] {
       padding: 0;

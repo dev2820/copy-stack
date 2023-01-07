@@ -26,16 +26,24 @@ export default class CopyList extends LitElement {
   }
   render() {
     return html`
-      <ul class="copy-list">
-        ${this.copyList.map(
-          (copy) =>
-            html` <li>
-              <filled-card class="card">
-                <copied-item .copy=${copy} data-id="${copy.id}"></copied-item>
-              </filled-card>
-            </li>`
-        )}
-      </ul>
+    ${
+      this.copyList.length > 0 ?
+      html`<ul class="copy-list">
+      ${this.copyList.map(
+        (copy) =>
+          html` <li>
+            <filled-card class="card">
+              <copied-item .copy=${copy} data-id="${copy.id}"></copied-item>
+            </filled-card>
+          </li>`
+      )}
+    </ul>`
+    : html`
+      <p>Copy List Empty </p>
+      <p>Make a copy using <kbd>Ctrl</kbd> + <kbd>C</kbd> or the context menu</p>
+    `
+    }
+
     `;
   }
 
@@ -81,6 +89,7 @@ export default class CopyList extends LitElement {
     ul {
       list-style: none;
       padding: 0;
+      width: var(--screen-width);
     }
     ul > li {
       margin-bottom: 0.5rem;
