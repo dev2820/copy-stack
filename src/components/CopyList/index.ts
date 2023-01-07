@@ -11,6 +11,7 @@ import COPY from "@/constants/stores/COPY";
 
 import "@/components/FilledCard";
 import "@/components/CopiedItem";
+import "@/components/CopyListEmpty"
 
 @customElement("copy-list")
 export default class CopyList extends LitElement {
@@ -39,8 +40,7 @@ export default class CopyList extends LitElement {
       )}
     </ul>`
     : html`
-      <p>Copy List Empty </p>
-      <p>Make a copy using <kbd>Ctrl</kbd> + <kbd>C</kbd> or the context menu</p>
+      <copy-list-empty></copy-list-empty>
     `
     }`;
   }
