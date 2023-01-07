@@ -42,9 +42,7 @@ export default class CopyList extends LitElement {
       <p>Copy List Empty </p>
       <p>Make a copy using <kbd>Ctrl</kbd> + <kbd>C</kbd> or the context menu</p>
     `
-    }
-
-    `;
+    }`;
   }
 
   async #created() {
