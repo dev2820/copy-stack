@@ -29,7 +29,7 @@ export default class CopyList extends LitElement {
     return html`
     ${
       this.copyList.length > 0 ?
-      html`<ul class="copy-list">
+      html`<ul class="copy-list" reversed>
       ${this.copyList.map(
         (copy) =>
           html` <li>
@@ -92,6 +92,8 @@ export default class CopyList extends LitElement {
       list-style: none;
       padding: 0;
       width: 100%;
+      display:flex;
+      flex-direction:column-reverse;
     }
     ul > li {
       margin-bottom: 0.5rem;
