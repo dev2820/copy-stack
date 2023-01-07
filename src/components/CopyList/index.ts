@@ -78,7 +78,11 @@ export default class CopyList extends LitElement {
 
   static styles = css`
     :host {
-      max-width: 1280px;
+      width:var(--screen-width);
+      height:var(--screen-width);
+      overflow-y:scroll;
+      overflow-x:hidden;
+      box-sizing: border-box;
       margin: 0 auto;
       padding: 2rem;
       text-align: center;
@@ -87,7 +91,7 @@ export default class CopyList extends LitElement {
     ul {
       list-style: none;
       padding: 0;
-      width: var(--screen-width);
+      width: 100%;
     }
     ul > li {
       margin-bottom: 0.5rem;
