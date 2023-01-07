@@ -22,8 +22,8 @@ module.exports = {
           "@/classes/Channel": require.resolve(
             "../__mocks__/classes/Channel.ts"
           ),
-          "@/modules/broadcast": require.resolve(
-            "../__mocks__/modules/broadcast/index.ts"
+          broadcasting: require.resolve(
+            "../__mocks__/modules/broadcasting/index.ts"
           ),
           "@mocks": resolve(__dirname, "../__mocks__"),
           "@": resolve(__dirname, "../src"),
