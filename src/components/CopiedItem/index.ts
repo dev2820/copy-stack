@@ -4,6 +4,7 @@ import type Copy from "@/types/Copy";
 import clipboardSystem from "@/modules/clipboardSystem";
 import createDeleteCopyEvent from "@/utils/event/createDeleteCopyEvent";
 import COPIED_ITEM from "@/constants/COPIED_ITEM";
+import PREVIEW from "@/constants/PREVIEW";
 
 import "@/components/FilledCard";
 import "@/components/FilledButton";
@@ -20,12 +21,12 @@ export default class CopiedItem extends LitElement {
   render() {
     return html`
       <header>
-        <h4 class="title">${this.copy.source}</h4>
+        <h4 class="title overflow-ellipsis">${this.copy.source}</h4>
         <small class="created">${this.copy.created}</small>
       </header>
       <article>
         ${typeof this.copy.content === "string"
-          ? html`<p>${this.copy.content}</p>`
+          ? html`<p>${this.#summary(this.copy.content)}</p>`
           : html`<img src="${this.#blob2url(this.copy.content)}" />`}
       </article>
       <menu type="list">
@@ -55,6 +56,12 @@ export default class CopiedItem extends LitElement {
     const deleteCopyEvent = createDeleteCopyEvent(id);
     this.dispatchEvent(deleteCopyEvent);
   }
+  #summary(str: string) {
+    if (str.length > PREVIEW.MAX_TEXT_LENGTH) {
+      return str.slice(PREVIEW.MAX_TEXT_LENGTH) + "...";
+    }
+    return str;
+  }
 
   static styles = css`
     :host {
@@ -62,14 +69,16 @@ export default class CopiedItem extends LitElement {
       flex-direction: column;
       gap: 0.5rem;
     }
+    .overflow-ellipsis {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
     header {
       text-align: left;
     }
     header > h4.title {
       margin: 0;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
     }
     header > small.created {
       color: var(--placeholder-color);
@@ -83,6 +92,12 @@ export default class CopiedItem extends LitElement {
     }
     article > img {
       margin: 0 auto;
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      border-radius: var(--card-radius);
     }
     menu[type="list"] {
       padding: 0;

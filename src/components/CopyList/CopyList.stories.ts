@@ -27,3 +27,16 @@ Default.parameters = {
     },
   },
 };
+
+export const Empty = Template.bind({});
+Empty.parameters = {
+  design: {
+    type: "figma",
+    url: "https://www.figma.com/file/Llbx0pdb3UJZe8khrDHrEQ/Design?node-id=30%3A604&t=Q3Rvtrc69Xc3Cc8f-1",
+  },
+  store: {
+    data: {
+      copyList: [],
+    },
+  },
+};

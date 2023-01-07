@@ -20,6 +20,9 @@
   --placeholder-color: #aaa;
   --primary-color: #54ccff;
   --alert-color: #ff5757;
+  --screen-width: 360px;
+  --screen-height: 500px;
+  --card-radius: 12px;
 }
 
 a {
@@ -35,8 +38,6 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
-  min-height: 500px;
 }
 
 @media (prefers-color-scheme: light) {

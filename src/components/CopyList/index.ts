@@ -11,6 +11,7 @@ import COPY from "@/constants/stores/COPY";
 
 import "@/components/FilledCard";
 import "@/components/CopiedItem";
+import "@/components/CopyListEmpty"
 
 @customElement("copy-list")
 export default class CopyList extends LitElement {
@@ -26,18 +27,22 @@ export default class CopyList extends LitElement {
   }
   render() {
     return html`
-      <button @click=${() => this.#addCopy()}>add copy</button>
-      <ul class="copy-list">
-        ${this.copyList.map(
-          (copy) =>
-            html` <li>
-              <filled-card class="card">
-                <copied-item .copy=${copy} data-id="${copy.id}"></copied-item>
-              </filled-card>
-            </li>`
-        )}
-      </ul>
-    `;
+    ${
+      this.copyList.length > 0 ?
+      html`<ul class="copy-list" reversed>
+      ${this.copyList.map(
+        (copy) =>
+          html` <li>
+            <filled-card class="card">
+              <copied-item .copy=${copy} data-id="${copy.id}"></copied-item>
+            </filled-card>
+          </li>`
+      )}
+    </ul>`
+    : html`
+      <copy-list-empty></copy-list-empty>
+    `
+    }`;
   }
 
   async #created() {
@@ -59,16 +64,6 @@ export default class CopyList extends LitElement {
 
   }
 
-  #addCopy() {
-    const newCopy:Copy = {
-      content:this.copyList.length+'',
-      created:new Date(),
-      source:'localhost'
-    }
-    const addCopyAction = new Action(COPY.ACTION_TYPES.ADD_COPY,newCopy);
-    this.copyRadio.broadcastAction(addCopyAction)
-  }
-
   #initEvents() {
     this.addEventListener(EVENT.DELETE_COPY,(evt:DeleteCopyEvent)=>{
       if(!evt.detail) return;
@@ -83,7 +78,11 @@ export default class CopyList extends LitElement {
 
   static styles = css`
     :host {
-      max-width: 1280px;
+      width:var(--screen-width);
+      height:var(--screen-height);
+      overflow-y:scroll;
+      overflow-x:hidden;
+      box-sizing: border-box;
       margin: 0 auto;
       padding: 2rem;
       text-align: center;
@@ -92,6 +91,9 @@ export default class CopyList extends LitElement {
     ul {
       list-style: none;
       padding: 0;
+      width: 100%;
+      display:flex;
+      flex-direction:column-reverse;
     }
     ul > li {
       margin-bottom: 0.5rem;
