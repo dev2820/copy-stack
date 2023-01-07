@@ -39,8 +39,12 @@ async function toClipboardImage(data: Blob) {
   ]);
 }
 
-function toClipboardText(data: Text) {
-  window.navigator.clipboard.writeText(data);
+async function toClipboardText(data: Text) {
+  try {
+    await window.navigator.clipboard.writeText(data);
+  } catch (err) {
+    console.error("Failed to copy:", err);
+  }
 }
 
 export default async function toClipboard(data: Text | Blob) {
