@@ -26,7 +26,6 @@ export default class CopyList extends LitElement {
   }
   render() {
     return html`
-      <button @click=${() => this.#addCopy()}>add copy</button>
       <ul class="copy-list">
         ${this.copyList.map(
           (copy) =>
@@ -57,16 +56,6 @@ export default class CopyList extends LitElement {
       this.copyList = [...newState.copyList];
     });
 
-  }
-
-  #addCopy() {
-    const newCopy:Copy = {
-      content:this.copyList.length+'',
-      created:new Date(),
-      source:'localhost'
-    }
-    const addCopyAction = new Action(COPY.ACTION_TYPES.ADD_COPY,newCopy);
-    this.copyRadio.broadcastAction(addCopyAction)
   }
 
   #initEvents() {
