@@ -1,7 +1,6 @@
-import copyList from "../../copyList";
 import {type ChannelAddress} from "broadcasting";
 
-let data = {copyList:copyList};
+let data = {};
 
 export default class Radio {
   constructor(address: ChannelAddress, initializer: Function) {
