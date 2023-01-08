@@ -1,4 +1,4 @@
-import Messenger from "@/classes/Messenger";
+import Messenger from "@/modules/Messenger";
 import RUNTIME_MESSAGE from "@/constants/RUNTIME_MESSAGE";
 import createCopy from "@/utils/createCopy";
 
