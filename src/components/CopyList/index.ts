@@ -1,6 +1,6 @@
 import { LitElement, css, html } from "lit";
 import { customElement, state } from "lit/decorators.js";
-import Messenger from "@/classes/Messenger";
+import Messenger from "@/modules/Messenger";
 import type Copy from "@/types/Copy";
 import type Entity from "@/types/Entity";
 import type DeleteCopyEvent from "@/types/DeleteCopyEvent";
