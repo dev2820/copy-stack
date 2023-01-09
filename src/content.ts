@@ -4,7 +4,7 @@ import createCopy from "@/utils/createCopy";
 
 document.addEventListener("copy", async () => {
   const content = await navigator.clipboard.readText();
-  const created = new Date();
+  const created = new Date().getTime();
   const source = window.location.toString();
 
   Messenger.sendMessage({
