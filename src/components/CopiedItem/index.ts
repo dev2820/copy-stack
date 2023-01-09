@@ -22,7 +22,9 @@ export default class CopiedItem extends LitElement {
     return html`
       <header>
         <h4 class="title overflow-ellipsis">${this.copy.source}</h4>
-        <small class="created">${this.copy.created}</small>
+        <small class="created">
+          ${this.#timeStringFormater(new Date(this.copy.created))}
+        </small>
       </header>
       <article>
         ${typeof this.copy.content === "string"
@@ -61,6 +63,15 @@ export default class CopiedItem extends LitElement {
       return str.slice(PREVIEW.MAX_TEXT_LENGTH) + "...";
     }
     return str;
+  }
+  #timeStringFormater(date: Date) {
+    const language = window.navigator.language;
+    const format = new Intl.DateTimeFormat(language, {
+      dateStyle: "full",
+      timeStyle: "short",
+    }).format(date);
+
+    return format;
   }
 
   static styles = css`
