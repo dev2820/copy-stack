@@ -2,9 +2,9 @@ import type Copy from "@/types/Copy";
 import type Text from "@/types/Text";
 /**
  *
- * @param content
- * @param created
- * @param source
+ * @param content Image or Text data which is copied
+ * @param created created date
+ * @param source source link
  * @returns Copy
  */
-export default function createCopy(content: Text | Blob, created: Date | string, source: string): Copy;
+export default function createCopy(content: Text | Blob, created: number, source: string): Copy;

@@ -2,7 +2,7 @@ import type Text from "@/types/Text";
 
 type Copy = {
   content: Text | Blob;
-  created: Date | string;
+  created: number;
   source: string;
 };
 
