@@ -21,7 +21,9 @@ export default class CopiedItem extends LitElement {
   render() {
     return html`
       <header>
-        <h4 class="title overflow-ellipsis">${this.copy.source}</h4>
+        <h4 class="title overflow-ellipsis" title="${this.copy.source}">
+          ${this.copy.source}
+        </h4>
         <small class="created">
           ${this.#timeStringFormater(new Date(this.copy.created))}
         </small>
