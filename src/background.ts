@@ -4,7 +4,7 @@ import url2Blob from "@/utils/url2Blob";
 import { BroadcastingStation } from "broadcasting";
 import RUNTIME_MESSAGE from "@/constants/RUNTIME_MESSAGE";
 import CONTEXT_MENUS from "@/constants/CONTEXT_MENUS";
-
+import * as COPY_TYPE from "@/constants/COPY_TYPE";
 const broadcastingStation = new BroadcastingStation("copy", copyStore);
 
 const handleRuntimeMessage = (
@@ -41,7 +41,12 @@ const imageCopyHandler = async (info: chrome.contextMenus.OnClickData) => {
 
   const blob = await url2Blob(info.srcUrl);
 
-  const copy = createCopy("Image", blob, new Date().getTime(), info.pageUrl);
+  const copy = createCopy(
+    COPY_TYPE.IMAGE,
+    blob,
+    new Date().getTime(),
+    info.pageUrl
+  );
   copyStore.addCopy(copy);
 };
 
@@ -49,7 +54,7 @@ const textCopyHandler = (info: chrome.contextMenus.OnClickData) => {
   if (!info.selectionText) return;
 
   const copy = createCopy(
-    "Text",
+    COPY_TYPE.TEXT,
     info.selectionText,
     new Date().getTime(),
     info.pageUrl
