@@ -10,12 +10,14 @@ async function convertUrl2Blob(url: string) {
 const mockBlob = await convertUrl2Blob(mockImageUrl);
 
 export const textCopyMock: Copy = {
+  type: "Text",
   content:
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
   created: 1672095600000,
   source: "https://www.lipsum.com/",
 };
 export const textCopyMock2: Copy = {
+  type: "Text",
   content:
     "The Date() constructor can create a Date instance or return a string representing the current time.",
   created: 1672459200000,
@@ -23,6 +25,7 @@ export const textCopyMock2: Copy = {
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date",
 };
 export const imageCopyMock: Copy = {
+  type: "Image",
   content: mockBlob,
   created: 1672113600000,
   source: "https://www.lipsum.com/banners/",
