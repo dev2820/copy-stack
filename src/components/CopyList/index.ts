@@ -1,5 +1,5 @@
 import { LitElement, css, html } from "lit";
-import { customElement, state } from "lit/decorators.js";
+import { customElement, state, property } from "lit/decorators.js";
 import Messenger from "@/modules/Messenger";
 import type Copy from "@/types/Copy";
 import type Entity from "@/types/Entity";
@@ -21,6 +21,9 @@ export default class CopyList extends LitElement {
   @state()
   copyList: Entity<Copy>[] = [];
 
+  @property({type: Array})
+  filter: string[] = [];
+
   constructor() {
     super();
     this.#created();
@@ -30,7 +33,7 @@ export default class CopyList extends LitElement {
     ${
       this.copyList.length > 0 ?
       html`<ul class="copy-list" reversed>
-      ${this.copyList.map(
+      ${this.copyList.filter(c=>this.filter.includes(c.type)).map(
         (copy) =>
           html` <li>
             <filled-card class="card">
@@ -61,7 +64,6 @@ export default class CopyList extends LitElement {
     this.copyRadio.$subscribe((newState: Record<string, any>) => {
       this.copyList = [...newState.copyList];
     });
-
   }
 
   #initEvents() {

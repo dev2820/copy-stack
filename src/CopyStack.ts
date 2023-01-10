@@ -1,10 +1,15 @@
 import { LitElement, css, html } from "lit";
-import { customElement } from "lit/decorators.js";
-
+import { customElement, state } from "lit/decorators.js";
+import type FilterChangeEvent from "@/types/FilterChangeEvent";
+import FILTER_OPTIONS from "@/constants/FILTER_OPTIONS";
 import "@/components/CopyList";
+import "@/components/CopyFilter";
 
 @customElement("copy-stack")
 export default class CopyList extends LitElement {
+  @state()
+  filters: string[] = [];
+
   constructor() {
     super();
     this.#created();
@@ -13,14 +18,31 @@ export default class CopyList extends LitElement {
     return html`
       <header>
         <h1 id="title">Copy Stack</h1>
+        <copy-filter .options=${FILTER_OPTIONS}></copy-filter>
       </header>
       <section>
-        <copy-list></copy-list>
+        <copy-list .filter=${this.filters}></copy-list>
       </section>
     `;
   }
 
-  async #created() {}
+  async #created() {
+    this.#initEvent();
+    this.#initValues();
+  }
+
+  #initEvent() {
+    this.addEventListener("filterchange", (evt: FilterChangeEvent) => {
+      if (!evt.detail) return;
+      this.filters = evt.detail.filters;
+    });
+  }
+
+  #initValues() {
+    this.filters = FILTER_OPTIONS.filter((f) => f.checked).map(
+      (filter) => filter.name
+    );
+  }
 
   static styles = css`
     :host {
