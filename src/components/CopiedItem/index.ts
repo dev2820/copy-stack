@@ -29,9 +29,9 @@ export default class CopiedItem extends LitElement {
         </small>
       </header>
       <article>
-        ${typeof this.copy.content === "string"
-          ? html`<p>${this.#summary(this.copy.content)}</p>`
-          : html`<img src="${this.#blob2url(this.copy.content)}" />`}
+        ${this.copy.type === "Text"
+          ? html`<p>${this.#summary(this.copy.content as string)}</p>`
+          : html`<img src="${this.#blob2url(this.copy.content as Blob)}" />`}
       </article>
       <menu type="list">
         <filled-button theme="primary" @click=${() => this.#handleCopy()}>
@@ -44,9 +44,7 @@ export default class CopiedItem extends LitElement {
     `;
   }
 
-  #blob2url(input: Blob | string) {
-    if (typeof input === "string") return "";
-
+  #blob2url(input: Blob) {
     return URL.createObjectURL(input);
   }
   #handleCopy() {
