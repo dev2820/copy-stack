@@ -13,7 +13,7 @@ type Args = {
 };
 
 const Template: Story<Args> = () => html`
-  <div style="width:360px; height:500px; overflow-y:scroll;">
+  <div style="width:360px; height:500px; overflow:hidden;">
     <copy-stack></copy-stack>
   </div>
 `;

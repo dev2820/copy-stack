@@ -10,10 +10,29 @@ export default class CopyList extends LitElement {
     this.#created();
   }
   render() {
-    return html`<copy-list></copy-list>`;
+    return html`
+      <header>
+        <h1 id="title">Copy Stack</h1>
+      </header>
+      <section>
+        <copy-list></copy-list>
+      </section>
+    `;
   }
 
   async #created() {}
 
-  static styles = css``;
+  static styles = css`
+    :host {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    #title {
+      margin: 1rem 0;
+    }
+    section {
+      overflow: scroll;
+    }
+  `;
 }
