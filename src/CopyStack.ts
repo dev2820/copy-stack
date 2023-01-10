@@ -1,6 +1,7 @@
 import { LitElement, css, html } from "lit";
 import { customElement, state } from "lit/decorators.js";
 import type FilterChangeEvent from "@/types/FilterChangeEvent";
+import type Filter from "@/types/Filter";
 import FILTER_OPTIONS from "@/constants/FILTER_OPTIONS";
 import "@/components/CopyList";
 import "@/components/CopyFilter";
@@ -8,7 +9,7 @@ import "@/components/CopyFilter";
 @customElement("copy-stack")
 export default class CopyList extends LitElement {
   @state()
-  filters: string[] = [];
+  filter: Filter = [];
 
   constructor() {
     super();
@@ -21,7 +22,7 @@ export default class CopyList extends LitElement {
         <copy-filter .options=${FILTER_OPTIONS}></copy-filter>
       </header>
       <section>
-        <copy-list .filter=${this.filters}></copy-list>
+        <copy-list .filter=${this.filter}></copy-list>
       </section>
     `;
   }
@@ -34,12 +35,12 @@ export default class CopyList extends LitElement {
   #initEvent() {
     this.addEventListener("filterchange", (evt: FilterChangeEvent) => {
       if (!evt.detail) return;
-      this.filters = evt.detail.filters;
+      this.filter = evt.detail.filters;
     });
   }
 
   #initValues() {
-    this.filters = FILTER_OPTIONS.filter((f) => f.checked).map(
+    this.filter = FILTER_OPTIONS.filter((f) => f.checked).map(
       (filter) => filter.name
     );
   }

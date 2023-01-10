@@ -1,5 +1,7 @@
+import type Filter from "@/types/Filter";
+
 type FilterChangeDetail = {
-  filters: string[];
+  filters: Filter;
 };
 
 type FilterChangeEvent = CustomEventInit<FilterChangeDetail>;

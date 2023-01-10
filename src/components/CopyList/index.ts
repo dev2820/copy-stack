@@ -8,6 +8,7 @@ import { type ChannelAddress, Radio, Action } from "broadcasting";
 import EVENT from "@/constants/EVENT";
 import RUNTIME_MESSAGE from "@/constants/RUNTIME_MESSAGE";
 import COPY from "@/constants/stores/COPY";
+import type Filter from "@/types/Filter";
 
 import "@/components/FilledCard";
 import "@/components/CopiedItem";
@@ -22,7 +23,7 @@ export default class CopyList extends LitElement {
   copyList: Entity<Copy>[] = [];
 
   @property({type: Array})
-  filter: string[] = [];
+  filter: Filter = [];
 
   constructor() {
     super();
@@ -33,7 +34,7 @@ export default class CopyList extends LitElement {
     ${
       this.copyList.length > 0 ?
       html`<ul class="copy-list" reversed>
-      ${this.copyList.filter(c=>this.filter.includes(c.type)).map(
+      ${this.#filterCopy(this.copyList).map(
         (copy) =>
           html` <li>
             <filled-card class="card">
@@ -79,6 +80,10 @@ export default class CopyList extends LitElement {
   #deleteCopy(index:number) {
     const addCopyAction = new Action(COPY.ACTION_TYPES.DELETE_COPY,index);
     this.copyRadio.broadcastAction(addCopyAction)
+  }
+
+  #filterCopy(copyList:Entity<Copy>[]):Entity<Copy>[] {
+    return copyList.filter(c=>this.filter.includes(c.type))
   }
 
   static styles = css`
