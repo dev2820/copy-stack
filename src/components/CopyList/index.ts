@@ -84,13 +84,13 @@ export default class CopyList extends LitElement {
       overflow-x:hidden;
       box-sizing: border-box;
       margin: 0 auto;
-      padding: 2rem;
       text-align: center;
     }
 
     ul {
       list-style: none;
       padding: 0;
+      margin:0;
       width: 100%;
       display:flex;
       flex-direction:column-reverse;

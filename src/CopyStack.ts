@@ -28,10 +28,18 @@ export default class CopyList extends LitElement {
       flex-direction: column;
       height: 100%;
     }
-    #title {
-      margin: 1rem 0;
+    header {
+      padding: 1rem 0.5rem;
+      border-bottom: 2px solid var(--boundary-color);
+      z-index: 10;
+    }
+    header > #title {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: bold;
     }
     section {
+      padding: 0.5rem;
       overflow: scroll;
     }
   `;

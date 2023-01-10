@@ -17,6 +17,7 @@
   word-wrap: break-word;
 
   --surface-color: #eee;
+  --boundary-color: #eee;
   --placeholder-color: #aaa;
   --primary-color: #54ccff;
   --alert-color: #ff5757;
