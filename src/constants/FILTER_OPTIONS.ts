@@ -1,10 +1,10 @@
 export default [
   {
-    name: "a",
+    name: "Text",
     checked: true,
   },
   {
-    name: "b",
+    name: "Image",
     checked: true,
   },
 ];
