@@ -50,7 +50,17 @@ export default class CopyList extends LitElement {
 
   async #created() {
     this.#initEvents();
+    this.#initValues();
+  }
 
+  #initEvents() {
+    this.addEventListener(EVENT.DELETE_COPY,(evt:DeleteCopyEvent)=>{
+      if(!evt.detail) return;
+      this.#deleteCopy(evt.detail.index)
+    })
+  }
+
+  async #initValues() {
     const channelAddress = (await Messenger.sendMessage({
       type:RUNTIME_MESSAGE.GET_CHANNEL_ADDRESS
     })) as ChannelAddress;
@@ -64,13 +74,6 @@ export default class CopyList extends LitElement {
     this.copyRadio.$subscribe((newState: Record<string, any>) => {
       this.copyList = [...newState.copyList];
     });
-  }
-
-  #initEvents() {
-    this.addEventListener(EVENT.DELETE_COPY,(evt:DeleteCopyEvent)=>{
-      if(!evt.detail) return;
-      this.#deleteCopy(evt.detail.index)
-    })
   }
 
   #deleteCopy(index:number) {
