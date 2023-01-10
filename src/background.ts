@@ -41,7 +41,7 @@ const imageCopyHandler = async (info: chrome.contextMenus.OnClickData) => {
 
   const blob = await url2Blob(info.srcUrl);
 
-  const copy = createCopy(blob, new Date().getTime(), info.pageUrl);
+  const copy = createCopy("Image", blob, new Date().getTime(), info.pageUrl);
   copyStore.addCopy(copy);
 };
 
@@ -49,6 +49,7 @@ const textCopyHandler = (info: chrome.contextMenus.OnClickData) => {
   if (!info.selectionText) return;
 
   const copy = createCopy(
+    "Text",
     info.selectionText,
     new Date().getTime(),
     info.pageUrl

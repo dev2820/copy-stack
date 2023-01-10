@@ -9,6 +9,6 @@ document.addEventListener("copy", async () => {
 
   Messenger.sendMessage({
     type: RUNTIME_MESSAGE.NEW_TEXT_COPY,
-    payload: createCopy(content, created, source),
+    payload: createCopy("Text", content, created, source),
   });
 });
