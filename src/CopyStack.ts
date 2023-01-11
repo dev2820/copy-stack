@@ -28,11 +28,11 @@ export default class CopyList extends LitElement {
   }
 
   async #created() {
-    this.#initEvent();
+    this.#initEvents();
     this.#initValues();
   }
 
-  #initEvent() {
+  #initEvents() {
     this.addEventListener("filterchange", (evt: FilterChangeEvent) => {
       if (!evt.detail) return;
       this.filter = evt.detail.filters;
