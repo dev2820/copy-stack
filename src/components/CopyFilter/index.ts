@@ -16,7 +16,7 @@ export default class CopiedItem extends LitElement {
 
   render() {
     return html`
-      <menus @change=${this.#filterHandler}>
+      <menus @change=${this.#filterChangeHandler}>
         ${this.options.map((filter: any, index: number) => {
           return html`
           <input 
@@ -29,7 +29,7 @@ export default class CopiedItem extends LitElement {
     `;
   }
 
-  #filterHandler(evt: Event) {
+  #filterChangeHandler(evt: Event) {
     const $filter = evt.target as HTMLInputElement;
     if (!$filter || !$filter.dataset["index"]) return;
 
