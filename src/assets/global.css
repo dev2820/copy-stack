@@ -17,12 +17,15 @@
   word-wrap: break-word;
 
   --surface-color: #eee;
+  --filled-surface-color: #eee;
+  --boundary-color: #eee;
   --placeholder-color: #aaa;
   --primary-color: #54ccff;
   --alert-color: #ff5757;
   --screen-width: 360px;
   --screen-height: 500px;
   --card-radius: 12px;
+  --radius: 8px;
 }
 
 a {

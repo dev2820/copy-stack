@@ -1,5 +1,5 @@
 import { LitElement, css, html } from "lit";
-import { customElement, state } from "lit/decorators.js";
+import { customElement, state, property } from "lit/decorators.js";
 import Messenger from "@/modules/Messenger";
 import type Copy from "@/types/Copy";
 import type Entity from "@/types/Entity";
@@ -8,6 +8,7 @@ import { type ChannelAddress, Radio, Action } from "broadcasting";
 import EVENT from "@/constants/EVENT";
 import RUNTIME_MESSAGE from "@/constants/RUNTIME_MESSAGE";
 import COPY from "@/constants/stores/COPY";
+import type Filter from "@/types/Filter";
 
 import "@/components/FilledCard";
 import "@/components/CopiedItem";
@@ -21,6 +22,9 @@ export default class CopyList extends LitElement {
   @state()
   copyList: Entity<Copy>[] = [];
 
+  @property({type: Array})
+  filter: Filter = [];
+
   constructor() {
     super();
     this.#created();
@@ -30,7 +34,7 @@ export default class CopyList extends LitElement {
     ${
       this.copyList.length > 0 ?
       html`<ul class="copy-list" reversed>
-      ${this.copyList.map(
+      ${this.#filterCopy(this.copyList).map(
         (copy) =>
           html` <li>
             <filled-card class="card">
@@ -47,7 +51,17 @@ export default class CopyList extends LitElement {
 
   async #created() {
     this.#initEvents();
+    this.#initValues();
+  }
 
+  #initEvents() {
+    this.addEventListener(EVENT.DELETE_COPY,(evt:DeleteCopyEvent)=>{
+      if(!evt.detail) return;
+      this.#deleteCopy(evt.detail.index)
+    })
+  }
+
+  async #initValues() {
     const channelAddress = (await Messenger.sendMessage({
       type:RUNTIME_MESSAGE.GET_CHANNEL_ADDRESS
     })) as ChannelAddress;
@@ -61,19 +75,15 @@ export default class CopyList extends LitElement {
     this.copyRadio.$subscribe((newState: Record<string, any>) => {
       this.copyList = [...newState.copyList];
     });
-
-  }
-
-  #initEvents() {
-    this.addEventListener(EVENT.DELETE_COPY,(evt:DeleteCopyEvent)=>{
-      if(!evt.detail) return;
-      this.#deleteCopy(evt.detail.index)
-    })
   }
 
   #deleteCopy(index:number) {
     const addCopyAction = new Action(COPY.ACTION_TYPES.DELETE_COPY,index);
     this.copyRadio.broadcastAction(addCopyAction)
+  }
+
+  #filterCopy(copyList:Entity<Copy>[]):Entity<Copy>[] {
+    return copyList.filter(c=>this.filter.includes(c.type))
   }
 
   static styles = css`
@@ -84,13 +94,13 @@ export default class CopyList extends LitElement {
       overflow-x:hidden;
       box-sizing: border-box;
       margin: 0 auto;
-      padding: 2rem;
       text-align: center;
     }
 
     ul {
       list-style: none;
       padding: 0;
+      margin:0;
       width: 100%;
       display:flex;
       flex-direction:column-reverse;
