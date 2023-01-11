@@ -1,5 +1,5 @@
 import { Story, Meta } from "@storybook/web-components";
-import { html, TemplateResult } from "lit-html";
+import { html } from "lit-html";
 
 import "@/components/MaterialIcon";
 
