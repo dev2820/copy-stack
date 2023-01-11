@@ -36,6 +36,13 @@ export default class FilledChip extends LitElement {
 
   #changeHandler() {
     this.checked = !this.checked;
+    this.#emitChangeEvent();
+  }
+
+  #emitChangeEvent() {
+    const changeEvent = new Event("change", { bubbles: true });
+
+    this.dispatchEvent(changeEvent);
   }
   static styles = css`
     label {
