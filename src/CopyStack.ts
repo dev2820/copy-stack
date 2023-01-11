@@ -3,6 +3,8 @@ import { customElement, state } from "lit/decorators.js";
 import type FilterChangeEvent from "@/types/FilterChangeEvent";
 import type Filter from "@/types/Filter";
 import FILTER_OPTIONS from "@/constants/FILTER_OPTIONS";
+import EVENT from "@/constants/EVENT";
+
 import "@/components/CopyList";
 import "@/components/CopyFilter";
 
@@ -33,7 +35,7 @@ export default class CopyList extends LitElement {
   }
 
   #initEvents() {
-    this.addEventListener("filterchange", (evt: FilterChangeEvent) => {
+    this.addEventListener(EVENT.FILTER_CHANGE, (evt: FilterChangeEvent) => {
       if (!evt.detail) return;
       this.filter = evt.detail.filter;
     });
