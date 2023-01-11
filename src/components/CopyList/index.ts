@@ -88,10 +88,8 @@ export default class CopyList extends LitElement {
 
   static styles = css`
     :host {
-      width:var(--screen-width);
-      height:var(--screen-height);
-      overflow-y:scroll;
-      overflow-x:hidden;
+      width:100%;
+      height:100%;
       box-sizing: border-box;
       margin: 0 auto;
       text-align: center;

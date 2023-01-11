@@ -51,7 +51,8 @@ export default class CopyList extends LitElement {
     :host {
       display: flex;
       flex-direction: column;
-      height: 100%;
+      width: var(--screen-width);
+      height: var(--screen-height);
     }
     header {
       padding: 1rem 0.5rem;
@@ -65,7 +66,9 @@ export default class CopyList extends LitElement {
     }
     section {
       padding: 0.5rem;
-      overflow: scroll;
+      overflow-y: scroll;
+      overflox-x: hidden;
+      flex-grow: 1;
     }
   `;
 }
