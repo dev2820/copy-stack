@@ -1,5 +1,6 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
+import createFilterChangeEvent from "@/utils/event/createFilterChangeEvent";
 
 import "@/components/FilledCard";
 import "@/components/FilledButton";
@@ -38,12 +39,9 @@ export default class CopiedItem extends LitElement {
     this.options[index].checked = isChecked;
 
     this.dispatchEvent(
-      new CustomEvent("filterchange", {
-        detail: {
-          filters: this.options.filter((f) => f.checked).map((f) => f.name),
-        },
-        composed: true,
-      })
+      createFilterChangeEvent(
+        this.options.filter((f) => f.checked).map((f) => f.name)
+      )
     );
   }
 
