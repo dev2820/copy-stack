@@ -1,5 +1,6 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
+import checkIcon from "@/assets/images/check.png";
 
 @customElement("filled-chip")
 export default class FilledChip extends LitElement {
@@ -12,8 +13,13 @@ export default class FilledChip extends LitElement {
   }
   render() {
     return html`
-      <label>
-        <input type="checkbox" ?checked=${this.checked} />
+      <label class="${this.checked ? "checked" : ""}">
+        <input
+          type="checkbox"
+          ?checked=${this.checked}
+          @change="${this.#changeHandler}"
+        />
+        ${this.checked ? html`<img src="${checkIcon}" />` : ""}
         <slot></slot>
       </label>
     `;
@@ -25,6 +31,10 @@ export default class FilledChip extends LitElement {
 
   #initValues() {
     this.checked = false;
+  }
+
+  #changeHandler() {
+    this.checked = !this.checked;
   }
   static styles = css``;
 }
