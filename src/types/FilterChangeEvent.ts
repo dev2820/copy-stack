@@ -1,7 +1,7 @@
 import type Filter from "@/types/Filter";
 
 type FilterChangeDetail = {
-  filters: Filter;
+  filter: Filter;
 };
 
 type FilterChangeEvent = CustomEventInit<FilterChangeDetail>;

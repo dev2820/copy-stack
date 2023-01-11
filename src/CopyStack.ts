@@ -35,7 +35,7 @@ export default class CopyList extends LitElement {
   #initEvents() {
     this.addEventListener("filterchange", (evt: FilterChangeEvent) => {
       if (!evt.detail) return;
-      this.filter = evt.detail.filters;
+      this.filter = evt.detail.filter;
     });
   }
 
