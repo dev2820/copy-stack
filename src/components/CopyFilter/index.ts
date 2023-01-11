@@ -5,6 +5,7 @@ import createFilterChangeEvent from "@/utils/event/createFilterChangeEvent";
 import "@/components/FilledCard";
 import "@/components/FilledButton";
 import "@/components/TextButton";
+import "@/components/FilledChip";
 
 @customElement("copy-filter")
 export default class CopiedItem extends LitElement {
@@ -20,16 +21,14 @@ export default class CopiedItem extends LitElement {
       <menus @change=${this.#filterChangeHandler}>
         ${this.options.map((filter: any, index: number) => {
           return html`
-          <input 
-            type="checkbox" 
-            data-index="${index}"
-            checked="${filter.checked}"
-          >${filter.name}</input>`;
+            <filled-chip data-index="${index}" .checked="${filter.checked}">
+              ${filter.name}
+            </filled-chip>
+          `;
         })}
       </menus>
     `;
   }
-
   #filterChangeHandler(evt: Event) {
     const $filter = evt.target as HTMLInputElement;
     if (!$filter || !$filter.dataset["index"]) return;
