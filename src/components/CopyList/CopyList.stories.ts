@@ -1,7 +1,8 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
+import type Filter from "@/types/Filter";
 import copyList from "@mocks/copyList";
-
+import * as COPY_TYPE from "@/constants/COPY_TYPE";
 import "@/components/CopyList";
 
 export default {
@@ -9,13 +10,16 @@ export default {
 } as Meta;
 
 type Args = {
-  parameters: { design: Record<string, string>; store: Record<string, object> };
+  filter: Filter;
 };
 
-const Template: Story<Args> = () =>
-  html`<copy-list>Hello World!!!!</copy-list>`;
+const Template: Story<Args> = (args) =>
+  html`<copy-list .filter=${args.filter}>Hello World!!!!</copy-list>`;
 
 export const Default = Template.bind({});
+Default.args = {
+  filter: [COPY_TYPE.IMAGE, COPY_TYPE.TEXT],
+};
 Default.parameters = {
   design: {
     type: "figma",
