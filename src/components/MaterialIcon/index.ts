@@ -23,7 +23,10 @@ export default class FilledChip extends LitElement {
     .icon.none {
     }
     .icon.check {
-      background-position: -1rem -1rem;
+      background-position: -1rem 0rem;
+    }
+    .icon.arrow-back {
+      background-position: -2rem 0rem;
     }
   `;
 }

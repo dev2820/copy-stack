@@ -29,3 +29,8 @@ export const Check = Template.bind({});
 Check.args = {
   icon: "check",
 };
+
+export const ArrowBack = Template.bind({});
+ArrowBack.args = {
+  icon: "arrow-back",
+};
