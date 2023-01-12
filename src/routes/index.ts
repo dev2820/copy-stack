@@ -1,6 +1,7 @@
 import { html } from "lit-html";
 
 import "@/pages/MainPage";
+import "@/pages/DetailPage";
 
 export const mainPage = {
   path: "/",
