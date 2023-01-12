@@ -18,7 +18,6 @@ export default class MainPage extends LitElement {
     this.#created();
   }
   render() {
-    console.log(window.location);
     return html`
       <header>
         <h1 id="title">Copy Stack</h1>
