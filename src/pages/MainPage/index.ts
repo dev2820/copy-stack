@@ -8,8 +8,8 @@ import EVENT from "@/constants/EVENT";
 import "@/components/CopyList";
 import "@/components/CopyFilter";
 
-@customElement("copy-stack")
-export default class CopyList extends LitElement {
+@customElement("main-page")
+export default class MainPage extends LitElement {
   @state()
   filter: Filter = [];
 

@@ -2,10 +2,10 @@ import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
 import copyList from "@mocks/copyList";
 
-import "@/CopyStack";
+import "@/pages/DetailPage";
 
 export default {
-  title: "CopyStack",
+  title: "pages/DetailPage",
 } as Meta;
 
 type Args = {
@@ -14,7 +14,7 @@ type Args = {
 
 const Template: Story<Args> = () => html`
   <div style="width:360px; height:500px; overflow:hidden;">
-    <copy-stack></copy-stack>
+    <detail-page></detail-page>
   </div>
 `;
 
@@ -22,7 +22,7 @@ export const Default = Template.bind({});
 Default.parameters = {
   design: {
     type: "figma",
-    url: "https://www.figma.com/file/Llbx0pdb3UJZe8khrDHrEQ/Design?node-id=21%3A4996&t=okNG2IhYjbxo6hkR-1",
+    url: "https://www.figma.com/file/Llbx0pdb3UJZe8khrDHrEQ/Design?node-id=33%3A1462&t=0hxqEyxwnYwks4Mm-1",
   },
   store: {
     data: {
