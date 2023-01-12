@@ -15,8 +15,8 @@ const hash2path = (hash: string) => {
 
 const findRoute = (path: string) => {
   return routeInfos.routes.find((route) => {
-    const pathExp = new RegExp("^" + route.path + "$");
-    return pathExp.test(path);
+    const pathTestExp = new RegExp(`^${route.path}$`);
+    return pathTestExp.test(path);
   });
 };
 
