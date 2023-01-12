@@ -58,7 +58,7 @@ export default class CopiedItem extends LitElement {
   }
   #summary(str: string) {
     if (str.length > PREVIEW.MAX_TEXT_LENGTH) {
-      return str.slice(PREVIEW.MAX_TEXT_LENGTH) + "...";
+      return str.slice(0, PREVIEW.MAX_TEXT_LENGTH) + "...";
     }
     return str;
   }
