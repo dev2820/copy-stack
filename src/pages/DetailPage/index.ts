@@ -30,7 +30,12 @@ export default class DetailPage extends LitElement {
   render() {
     return html`
     <header>
-      <material-icon class="leading-navigation" size="${ICON_SIZE.MEDIUM}" icon="arrow-back"></material-icon>
+      <material-icon 
+        class="leading-navigation" 
+        size="${ICON_SIZE.MEDIUM}" 
+        icon="arrow-back"
+        @click="${this.goToMain}"
+      ></material-icon>
       <h2 class="title">details</h2>
     </header>
     <copy-detail .copy="${this.targetCopy}"></copy-detail>`;
@@ -61,6 +66,10 @@ export default class DetailPage extends LitElement {
     })
   }
 
+  goToMain() {
+    router.go("/")
+  }
+
   static styles = css`
     header {
       box-sizing:border-box;
@@ -79,6 +88,7 @@ export default class DetailPage extends LitElement {
       width:2rem;
       height:2rem;
       margin-right:1rem;
+      cursor:pointer;
     }
   `;
 }
