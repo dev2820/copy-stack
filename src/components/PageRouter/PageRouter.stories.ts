@@ -17,7 +17,16 @@ type Args = {
 
 const Template: Story<Args> = () => {
   router.init(routes);
-  return html` <page-router></page-router> `;
+  return html`
+    <button
+      @click="${() => {
+        router.go("/1");
+      }}"
+    >
+      go to 1
+    </button>
+    <page-router></page-router>
+  `;
 };
 
 export const Default = Template.bind({});
