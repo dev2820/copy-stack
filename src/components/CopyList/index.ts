@@ -1,6 +1,7 @@
 import { LitElement, css, html } from "lit";
 import { customElement, state, property } from "lit/decorators.js";
 import Messenger from "@/modules/Messenger";
+import router from '@/modules/router';
 import type Copy from "@/types/Copy";
 import type Entity from "@/types/Entity";
 import type DeleteCopyEvent from "@/types/DeleteCopyEvent";
@@ -38,7 +39,7 @@ export default class CopyList extends LitElement {
         (copy) =>
           html` <li>
             <filled-card class="card">
-              <copied-item .copy=${copy} data-id="${copy.id}"></copied-item>
+              <copied-item .copy=${copy} data-id="${copy.id}" @click="${()=>this.goToDetail(copy.id)}"></copied-item>
             </filled-card>
           </li>`
       )}
@@ -84,6 +85,10 @@ export default class CopyList extends LitElement {
 
   #filterCopy(copyList:Entity<Copy>[]):Entity<Copy>[] {
     return copyList.filter(c=>this.filter.includes(c.type))
+  }
+
+  goToDetail(id:number) {
+    router.go(`/${id}`)
   }
 
   static styles = css`
