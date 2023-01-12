@@ -10,6 +10,10 @@ export default class Radio {
   $subscribe() {
     // empty
   }
+
+  get $state() {
+    return {...data};
+  }
 }
 
 export function decorator(story, { parameters }) {
