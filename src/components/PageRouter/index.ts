@@ -12,9 +12,7 @@ export default class PageRouter extends LitElement {
     });
   }
   render() {
-    console.log(router);
     if (router.location.currentPage) {
-      console.log("?");
       return router.location.currentPage();
     }
 
