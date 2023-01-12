@@ -23,7 +23,14 @@ const Template: Story<Args> = () => {
         router.go("/1");
       }}"
     >
-      go to 1
+      text detail
+    </button>
+    <button
+      @click="${() => {
+        router.go("/3");
+      }}"
+    >
+      image detail
     </button>
     <page-router></page-router>
   `;
