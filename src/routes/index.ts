@@ -7,4 +7,9 @@ const mainPage = {
   page: () => html`<main-page></main-page>`,
 };
 
-export default [mainPage];
+const detailPage = {
+  path: "/:id",
+  page: () => html`<detail-page></detail-page>`,
+};
+
+export default [mainPage, detailPage];
