@@ -100,6 +100,7 @@ export default class DetailPage extends LitElement {
     }
     section {
       overflow-y:scroll;
+      flex-grow:1;
     }
   `;
 }
