@@ -2,12 +2,14 @@ import { html } from "lit-html";
 
 import "@/pages/MainPage";
 
-const mainPage = {
+export const mainPage = {
+  name: "main",
   path: "/",
   page: () => html`<main-page></main-page>`,
 };
 
-const detailPage = {
+export const detailPage = {
+  name: "detail",
   path: "/:id",
   page: () => html`<detail-page></detail-page>`,
 };
