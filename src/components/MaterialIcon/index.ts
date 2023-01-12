@@ -15,18 +15,21 @@ export default class FilledChip extends LitElement {
   }
 
   static styles = css`
+    :host {
+      --size: 3rem;
+    }
     .icon {
       display: inline-block;
-      width: 1rem;
-      height: 1rem;
+      width: var(--size);
+      height: var(--size);
     }
     .icon.none {
     }
     .icon.check {
-      background-position: -1rem 0rem;
+      background-position: calc(-1 * var(--size)) 0rem;
     }
     .icon.arrow-back {
-      background-position: -2rem 0rem;
+      background-position: calc(-2 * var(--size)) 0rem;
     }
   `;
 }
