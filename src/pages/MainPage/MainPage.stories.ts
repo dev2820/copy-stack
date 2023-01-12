@@ -2,10 +2,10 @@ import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
 import copyList from "@mocks/copyList";
 
-import "@/CopyStack";
+import "@/pages/MainPage";
 
 export default {
-  title: "CopyStack",
+  title: "pages/MainPage",
 } as Meta;
 
 type Args = {
@@ -14,7 +14,7 @@ type Args = {
 
 const Template: Story<Args> = () => html`
   <div style="width:360px; height:500px; overflow:hidden;">
-    <copy-stack></copy-stack>
+    <main-page></main-page>
   </div>
 `;
 

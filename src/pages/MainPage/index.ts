@@ -8,8 +8,8 @@ import EVENT from "@/constants/EVENT";
 import "@/components/CopyList";
 import "@/components/CopyFilter";
 
-@customElement("copy-stack")
-export default class CopyList extends LitElement {
+@customElement("main-page")
+export default class MainPage extends LitElement {
   @state()
   filter: Filter = [];
 
@@ -18,6 +18,7 @@ export default class CopyList extends LitElement {
     this.#created();
   }
   render() {
+    console.log(window.location);
     return html`
       <header>
         <h1 id="title">Copy Stack</h1>
