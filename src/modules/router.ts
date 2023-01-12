@@ -15,7 +15,7 @@ const hash2path = (hash: string) => {
 
 const findRoute = (path: string) => {
   return routeInfos.routes.find((route) => {
-    const pathExp = new RegExp(route.path);
+    const pathExp = new RegExp("^" + route.path + "$");
     return pathExp.test(path);
   });
 };
@@ -23,9 +23,8 @@ const findRoute = (path: string) => {
 const updateLocationInfos = (path: string) => {
   locationInfos.currentPath = path;
   const currentRoute = findRoute(path) ?? null;
-  if (currentRoute) {
-    locationInfos.currentPage = currentRoute.page;
-  }
+
+  locationInfos.currentPage = currentRoute ? currentRoute.page : null;
 };
 
 const routeInfos: {
