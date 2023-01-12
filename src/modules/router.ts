@@ -89,7 +89,7 @@ window.addEventListener("hashchange", () => {
 
 export default {
   location: locationInfos,
-  init(routes: RouteParam[]) {
+  init(routes: RouteParam[], startRoute: string = "/") {
     routeInfos.routes = routes.map((route) => {
       const params: string[] = [];
       const parsedFragment = route.path
@@ -106,7 +106,7 @@ export default {
       };
     });
 
-    window.location.hash = "/";
+    window.location.hash = startRoute;
   },
   go: (newPath: string) => {
     window.location.hash = newPath;
