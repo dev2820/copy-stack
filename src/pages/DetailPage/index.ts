@@ -38,7 +38,9 @@ export default class DetailPage extends LitElement {
       ></material-icon>
       <h2 class="title">details</h2>
     </header>
-    <copy-detail .copy="${this.targetCopy}"></copy-detail>`;
+    <section>
+      <copy-detail .copy="${this.targetCopy}"></copy-detail>
+    </section>`
   }
 
   async #initValues() {
@@ -71,6 +73,12 @@ export default class DetailPage extends LitElement {
   }
 
   static styles = css`
+    :host{
+      width: var(--screen-width);
+      height: var(--screen-height);
+      display:flex;
+      flex-direction:column;
+    }
     header {
       box-sizing:border-box;
       height: 3.5rem;
@@ -89,6 +97,9 @@ export default class DetailPage extends LitElement {
       height:2rem;
       margin-right:1rem;
       cursor:pointer;
+    }
+    section {
+      overflow-y:scroll;
     }
   `;
 }
