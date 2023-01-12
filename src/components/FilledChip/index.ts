@@ -22,8 +22,11 @@ export default class FilledChip extends LitElement {
           @change="${this.#changeHandler}"
         />
         ${this.checked
-          ? html`<material-icon class="icon" size="${ICON_SIZE.SMALL}
-            icon="check" />`
+          ? html`<material-icon
+              class="icon"
+              size="${ICON_SIZE.SMALL}"
+              icon="check"
+            />`
           : ""}
         <slot></slot>
       </label>
