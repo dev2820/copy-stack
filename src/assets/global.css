@@ -17,6 +17,7 @@
   word-wrap: break-word;
 
   --surface-color: #eee;
+  --background-color: #fff;
   --filled-surface-color: #eee;
   --boundary-color: #eee;
   --placeholder-color: #aaa;
@@ -41,6 +42,9 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
+  background-color: var(--background-color);
+  width: var(--screen-width);
+  height: var(--screen-height);
 }
 
 @media (prefers-color-scheme: light) {
