@@ -6,7 +6,9 @@ import type Entity from '@/types/Entity';
 import router from "@/modules/router";
 import Messenger from "@/modules/Messenger";
 import RUNTIME_MESSAGE from "@/constants/RUNTIME_MESSAGE";
+import * as ICON_SIZE from "@/constants/ICON_SIZE";
 
+import "@/components/MaterialIcon";
 import "@/components/CopyDetail";
 
 @customElement("detail-page")
@@ -22,16 +24,16 @@ export default class DetailPage extends LitElement {
 
   constructor() {
     super();
-    router.subscribe(()=>{
-      this.copyId = parseInt(router.location.params.id,10);
-      const copyList = this.copyRadio.$state.copyList
-      this.targetCopy = copyList.find((copy:Entity<Copy>)=>copy.id === this.copyId)
-    })
     this.#initValues();
   }
 
   render() {
-    return html`<copy-detail .copy="${this.targetCopy}"></copy-detail>`;
+    return html`
+    <header>
+      <material-icon class="" size="${ICON_SIZE.MEDIUM}" icon="arrow-back"></material-icon>
+      <h2 class="title">details</h2>
+    </header>
+    <copy-detail .copy="${this.targetCopy}"></copy-detail>`;
   }
 
   async #initValues() {
@@ -51,7 +53,32 @@ export default class DetailPage extends LitElement {
       const targetCopy = newState.copyList.find((copy:Entity<Copy>)=>copy.id === this.copyId)
       this.targetCopy = targetCopy;
     });
+
+    router.subscribe(()=>{
+      this.copyId = parseInt(router.location.params.id,10);
+      const copyList = this.copyRadio.$state.copyList
+      this.targetCopy = copyList.find((copy:Entity<Copy>)=>copy.id === this.copyId)
+    })
   }
 
-  static styles = css``;
+  static styles = css`
+    header {
+      box-sizing:border-box;
+      height: 3.5rem;
+      padding:0.5rem;
+      display:flex;
+      flex-direction:row;
+    }
+    header h2.title {
+      line-height:2.5rem;
+      margin:0;
+      user-select:none;
+    }
+    header material-icon {
+      margin:auto 0;
+      width:2rem;
+      height:2rem;
+      margin-right:1rem;
+    }
+  `;
 }
