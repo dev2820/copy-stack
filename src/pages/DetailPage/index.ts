@@ -30,7 +30,7 @@ export default class DetailPage extends LitElement {
   render() {
     return html`
     <header>
-      <material-icon class="" size="${ICON_SIZE.MEDIUM}" icon="arrow-back"></material-icon>
+      <material-icon class="leading-navigation" size="${ICON_SIZE.MEDIUM}" icon="arrow-back"></material-icon>
       <h2 class="title">details</h2>
     </header>
     <copy-detail .copy="${this.targetCopy}"></copy-detail>`;
@@ -74,7 +74,7 @@ export default class DetailPage extends LitElement {
       margin:0;
       user-select:none;
     }
-    header material-icon {
+    header .leading-navigation {
       margin:auto 0;
       width:2rem;
       height:2rem;
