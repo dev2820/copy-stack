@@ -1,5 +1,6 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
+import * as ICON_SIZE from "@/constants/ICON_SIZE";
 
 import "@/components/MaterialIcon";
 
@@ -20,7 +21,10 @@ export default class FilledChip extends LitElement {
           ?checked=${this.checked}
           @change="${this.#changeHandler}"
         />
-        ${this.checked ? html`<material-icon class="icon" icon="check" />` : ""}
+        ${this.checked
+          ? html`<material-icon class="icon" size="${ICON_SIZE.SMALL}
+            icon="check" />`
+          : ""}
         <slot></slot>
       </label>
     `;
