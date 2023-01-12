@@ -3,6 +3,7 @@ import { customElement, property } from "lit/decorators.js";
 import type Copy from "@/types/Copy";
 import clipboardSystem from "@/modules/clipboardSystem";
 import createDeleteCopyEvent from "@/utils/event/createDeleteCopyEvent";
+import blob2url from "@/utils/blob2url";
 import COPIED_ITEM from "@/constants/COPIED_ITEM";
 import PREVIEW from "@/constants/PREVIEW";
 import COPY_TYPE from "@/constants/COPY_TYPE";
@@ -32,7 +33,7 @@ export default class CopiedItem extends LitElement {
       <article>
         ${this.copy.type === COPY_TYPE.TEXT
           ? html`<p>${this.#summary(this.copy.content as string)}</p>`
-          : html`<img src="${this.#blob2url(this.copy.content as Blob)}" />`}
+          : html`<img src="${blob2url(this.copy.content as Blob)}" />`}
       </article>
       <menu type="list">
         <filled-button theme="primary" @click=${() => this.#handleCopy()}>
@@ -43,10 +44,6 @@ export default class CopiedItem extends LitElement {
         </text-button>
       </menu>
     `;
-  }
-
-  #blob2url(input: Blob) {
-    return URL.createObjectURL(input);
   }
   #handleCopy() {
     clipboardSystem.toClipboard(this.copy.content);
