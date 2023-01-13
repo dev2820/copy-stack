@@ -1,7 +1,9 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import type IconSize from "@/types/IconSize";
+import type IconName from "@/types/IconName";
 import * as ICON_SIZE from "@/constants/ICON_SIZE";
+import * as ICON_NAME from "@/constants/ICON_NAME";
 import iconSprite16 from "@/assets/images/icon-sprite-16.png";
 import iconSprite32 from "@/assets/images/icon-sprite-32.png";
 import iconSprite48 from "@/assets/images/icon-sprite-48.png";
@@ -9,7 +11,7 @@ import iconSprite48 from "@/assets/images/icon-sprite-48.png";
 @customElement("material-icon")
 export default class FilledChip extends LitElement {
   @property({ type: String })
-  icon: string = "none";
+  icon: IconName = ICON_NAME.NONE;
 
   @property({ type: String })
   size: IconSize = ICON_SIZE.SMALL;
