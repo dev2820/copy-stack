@@ -6,6 +6,7 @@ import type Entity from "@/types/Entity";
 import type Copy from "@/types/Copy";
 import PREVIEW from "@/constants/PREVIEW";
 import COPY_TYPE from "@/constants/COPY_TYPE";
+import router from "@/modules/router";
 
 import "@/components/FilledCard";
 import "@/components/FilledButton";
@@ -29,6 +30,9 @@ export default class CopiedItem extends LitElement {
         <small class="created">
           ${timeFormater(new Date(this.copy.created))}
         </small>
+        <a class="show-detail" @click="${() => this.#goToDetail(this.copy.id)}">
+          show detail
+        </a>
       </header>
       <article>
         ${this.copy.type === COPY_TYPE.TEXT
@@ -43,6 +47,10 @@ export default class CopiedItem extends LitElement {
       return str.slice(0, PREVIEW.MAX_TEXT_LENGTH) + "...";
     }
     return str;
+  }
+
+  #goToDetail(id: number) {
+    router.go(`/${id}`);
   }
 
   static styles = css`
@@ -63,7 +71,12 @@ export default class CopiedItem extends LitElement {
       margin: 0;
     }
     header > small.created {
+      display: block;
       color: var(--placeholder-color);
+    }
+    header > a.show-detail {
+      color: var(--primary-color);
+      cursor: pointer;
     }
     article {
       display: flex;
