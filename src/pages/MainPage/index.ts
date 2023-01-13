@@ -57,7 +57,6 @@ export default class MainPage extends LitElement {
     header {
       padding: 1rem 0.5rem;
       border-bottom: 2px solid var(--boundary-color);
-      z-index: 10;
     }
     header > #title {
       margin: 0;

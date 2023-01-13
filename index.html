@@ -5,9 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + Lit + TS</title>
     <link rel="stylesheet" href="@/assets/global.css" />
-    <script type="module" src="@/CopyStack"></script>
+    <script type="module" src="@/popup"></script>
+    <script type="module" src="@/components/PageTransition"></script>
+    <script type="module" src="@/pages/MainPage"></script>
+    <script type="module" src="@/pages/DetailPage"></script>
   </head>
   <body>
-    <copy-stack></copy-stack>
+    <page-transition>
+      <main-page slot="main"></main-page>
+      <detail-page slot="right"></detail-page>
+    </page-transition>
   </body>
 </html>

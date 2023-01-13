@@ -36,9 +36,9 @@ export default class CopyList extends LitElement {
       html`<ul class="copy-list" reversed>
       ${this.#filterCopy(this.copyList).map(
         (copy) =>
-          html` <li>
+          html` <li class="item">
             <filled-card class="card">
-              <copied-item .copy=${copy} data-id="${copy.id}"></copied-item>
+              <copied-item .copy=${copy}></copied-item>
             </filled-card>
           </li>`
       )}

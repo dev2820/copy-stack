@@ -4,10 +4,10 @@ import copyList from "@mocks/copyList";
 
 import router from "@/modules/router";
 import routes from "@/routes";
-import "@/components/PageRouter";
+import "@/components/PageTransition";
 
 export default {
-  title: "pages/PageRouter",
+  title: "PageTransition",
 } as Meta;
 
 type Args = {
@@ -23,9 +23,19 @@ const Template: Story<Args> = () => {
         router.go("/1");
       }}"
     >
-      go to 1
+      go next
     </button>
-    <page-router></page-router>
+    <button
+      @click="${() => {
+        router.back();
+      }}"
+    >
+      go back
+    </button>
+    <page-transition>
+      <div slot="main">main</div>
+      <div slot="right">right</div>
+    </page-transition>
   `;
 };
 

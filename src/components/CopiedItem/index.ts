@@ -1,20 +1,22 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
+import blob2url from "@/utils/blob2url";
+import timeFormater from "@/utils/timeFormater";
+import type Entity from "@/types/Entity";
 import type Copy from "@/types/Copy";
-import clipboardSystem from "@/modules/clipboardSystem";
-import createDeleteCopyEvent from "@/utils/event/createDeleteCopyEvent";
-import COPIED_ITEM from "@/constants/COPIED_ITEM";
 import PREVIEW from "@/constants/PREVIEW";
 import COPY_TYPE from "@/constants/COPY_TYPE";
+import router from "@/modules/router";
 
 import "@/components/FilledCard";
 import "@/components/FilledButton";
 import "@/components/TextButton";
+import "@/components/CopyMenu";
 
 @customElement("copied-item")
 export default class CopiedItem extends LitElement {
   @property({ type: Object, reflect: true })
-  copy!: Copy;
+  copy!: Entity<Copy>;
 
   constructor() {
     super();
@@ -26,53 +28,29 @@ export default class CopiedItem extends LitElement {
           ${this.copy.source}
         </h4>
         <small class="created">
-          ${this.#timeStringFormater(new Date(this.copy.created))}
+          ${timeFormater(new Date(this.copy.created))}
         </small>
+        <a class="show-detail" @click="${() => this.#goToDetail(this.copy.id)}">
+          show detail
+        </a>
       </header>
       <article>
         ${this.copy.type === COPY_TYPE.TEXT
           ? html`<p>${this.#summary(this.copy.content as string)}</p>`
-          : html`<img src="${this.#blob2url(this.copy.content as Blob)}" />`}
+          : html`<img src="${blob2url(this.copy.content as Blob)}" />`}
       </article>
-      <menu type="list">
-        <filled-button theme="primary" @click=${() => this.#handleCopy()}>
-          copy
-        </filled-button>
-        <text-button theme="alert" @click=${() => this.#deleteCopy()}>
-          delete
-        </text-button>
-      </menu>
+      <copy-menu .copy="${this.copy}"></copy-menu>
     `;
-  }
-
-  #blob2url(input: Blob) {
-    return URL.createObjectURL(input);
-  }
-  #handleCopy() {
-    clipboardSystem.toClipboard(this.copy.content);
-  }
-  #deleteCopy() {
-    const idStr = this.dataset[COPIED_ITEM.DATASET.ID];
-    if (!idStr) return;
-
-    const id = parseInt(idStr, 10);
-    const deleteCopyEvent = createDeleteCopyEvent(id);
-    this.dispatchEvent(deleteCopyEvent);
   }
   #summary(str: string) {
     if (str.length > PREVIEW.MAX_TEXT_LENGTH) {
-      return str.slice(PREVIEW.MAX_TEXT_LENGTH) + "...";
+      return str.slice(0, PREVIEW.MAX_TEXT_LENGTH) + "...";
     }
     return str;
   }
-  #timeStringFormater(date: Date) {
-    const language = window.navigator.language;
-    const format = new Intl.DateTimeFormat(language, {
-      dateStyle: "full",
-      timeStyle: "short",
-    }).format(date);
 
-    return format;
+  #goToDetail(id: number) {
+    router.go(`/${id}`);
   }
 
   static styles = css`
@@ -93,7 +71,12 @@ export default class CopiedItem extends LitElement {
       margin: 0;
     }
     header > small.created {
+      display: block;
       color: var(--placeholder-color);
+    }
+    header > a.show-detail {
+      color: var(--primary-color);
+      cursor: pointer;
     }
     article {
       display: flex;
@@ -110,12 +93,6 @@ export default class CopiedItem extends LitElement {
       width: auto;
       height: auto;
       border-radius: var(--card-radius);
-    }
-    menu[type="list"] {
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: row-reverse;
     }
   `;
 }

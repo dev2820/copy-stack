@@ -1,6 +1,7 @@
 import type Copy from "@/types/Copy";
-export declare const textCopyMock: Copy;
-export declare const textCopyMock2: Copy;
-export declare const imageCopyMock: Copy;
-declare const _default: Copy[];
+import type Entity from "@/types/Entity";
+export declare const textCopyMock: Entity<Copy>;
+export declare const textCopyMock2: Entity<Copy>;
+export declare const imageCopyMock: Entity<Copy>;
+declare const _default: Entity<Copy>[];
 export default _default;
