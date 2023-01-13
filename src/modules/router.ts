@@ -122,9 +122,9 @@ export default {
   },
   back: () => {
     routeInfos.lastOrder = "back";
-    routeInfos.history.pop();
 
     if (routeInfos.history.length > 0) {
+      routeInfos.history.pop();
       window.location.hash = routeInfos.history[routeInfos.history.length - 1];
     }
   },
