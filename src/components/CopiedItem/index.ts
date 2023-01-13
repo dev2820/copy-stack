@@ -35,7 +35,7 @@ export default class CopiedItem extends LitElement {
           ? html`<p>${this.#summary(this.copy.content as string)}</p>`
           : html`<img src="${blob2url(this.copy.content as Blob)}" />`}
       </article>
-      <copy-menu></copy-menu>
+      <copy-menu .copy="${this.copy}"></copy-menu>
     `;
   }
   #summary(str: string) {
