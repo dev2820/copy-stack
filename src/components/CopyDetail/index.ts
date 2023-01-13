@@ -124,6 +124,10 @@ export default class CopyDetail extends LitElement {
       display: block;
       flex-grow: 1;
     }
+    img {
+      width: 100%;
+      height: auto;
+    }
     small.unit {
       margin-left: 0.25rem;
     }
