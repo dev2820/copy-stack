@@ -4,6 +4,7 @@ import type Copy from "@/types/Copy";
 import clipboardSystem from "@/modules/clipboardSystem";
 import createDeleteCopyEvent from "@/utils/event/createDeleteCopyEvent";
 import blob2url from "@/utils/blob2url";
+import timeFormater from "@/utils/timeFormater";
 import COPIED_ITEM from "@/constants/COPIED_ITEM";
 import PREVIEW from "@/constants/PREVIEW";
 import COPY_TYPE from "@/constants/COPY_TYPE";
@@ -27,7 +28,7 @@ export default class CopiedItem extends LitElement {
           ${this.copy.source}
         </h4>
         <small class="created">
-          ${this.#timeStringFormater(new Date(this.copy.created))}
+          ${timeFormater(new Date(this.copy.created))}
         </small>
       </header>
       <article>
@@ -61,15 +62,6 @@ export default class CopiedItem extends LitElement {
       return str.slice(0, PREVIEW.MAX_TEXT_LENGTH) + "...";
     }
     return str;
-  }
-  #timeStringFormater(date: Date) {
-    const language = window.navigator.language;
-    const format = new Intl.DateTimeFormat(language, {
-      dateStyle: "full",
-      timeStyle: "short",
-    }).format(date);
-
-    return format;
   }
 
   static styles = css`
