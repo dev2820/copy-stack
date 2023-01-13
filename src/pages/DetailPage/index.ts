@@ -11,6 +11,7 @@ import * as ICON_NAME from "@/constants/ICON_NAME";
 
 import "@/components/MaterialIcon";
 import "@/components/CopyDetail";
+import "@/components/CopyMenu";
 
 @customElement("detail-page")
 export default class DetailPage extends LitElement {
@@ -43,7 +44,7 @@ export default class DetailPage extends LitElement {
       <copy-detail .copy="${this.targetCopy}"></copy-detail>
     </section>
     <footer>
-      bottom
+      <copy-menu .copy="${this.targetCopy}"></copy-menu>
     </footer>
     `
 
@@ -82,7 +83,6 @@ export default class DetailPage extends LitElement {
     :host{
       width:100%;
       height:100%;
-      position:absolute;
       display:flex;
       flex-direction:column;
     }
@@ -112,15 +112,22 @@ export default class DetailPage extends LitElement {
       overflow-y:scroll;
       flex-grow:1;
       padding: 0.5rem;
-      padding-bottom:2.5rem;
     }
     footer {
       width:100%;
-      height:2.5rem;
-      position:absolute;
+      height:3rem;
+      box-sizing:border-box;
+      padding:0 1rem;
+      position:relative;
       z-index:100;
       bottom:0;
+      flex-shrink:0;
+      display:flex;
+      flex-direction:column;
       background-color:var(--surface-color);
+    }
+    footer > copy-menu {
+      margin:auto 0;
     }
   `;
 }
