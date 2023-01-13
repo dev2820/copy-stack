@@ -1,6 +1,7 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
 import * as ICON_SIZE from "@/constants/ICON_SIZE";
+import * as ICON_NAME from "@/constants/ICON_NAME";
 import type IconSize from "@/types/IconSize";
 import "@/components/MaterialIcon";
 
@@ -36,12 +37,36 @@ Empty.args = {
 
 export const Check = Template.bind({});
 Check.args = {
-  icon: "check",
+  icon: ICON_NAME.CHECK,
   size: ICON_SIZE.SMALL,
 };
 
 export const ArrowBack = Template.bind({});
 ArrowBack.args = {
-  icon: "arrow-back",
+  icon: ICON_NAME.ARROW_BACK,
+  size: ICON_SIZE.SMALL,
+};
+
+export const Calender = Template.bind({});
+Calender.args = {
+  icon: ICON_NAME.CALENDER,
+  size: ICON_SIZE.SMALL,
+};
+
+export const Text = Template.bind({});
+Text.args = {
+  icon: ICON_NAME.TEXT,
+  size: ICON_SIZE.SMALL,
+};
+
+export const Image = Template.bind({});
+Image.args = {
+  icon: ICON_NAME.IMAGE,
+  size: ICON_SIZE.SMALL,
+};
+
+export const Globe = Template.bind({});
+Globe.args = {
+  icon: ICON_NAME.GLOBE,
   size: ICON_SIZE.SMALL,
 };
