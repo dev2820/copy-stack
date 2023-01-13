@@ -7,6 +7,7 @@ import router from "@/modules/router";
 import Messenger from "@/modules/Messenger";
 import RUNTIME_MESSAGE from "@/constants/RUNTIME_MESSAGE";
 import * as ICON_SIZE from "@/constants/ICON_SIZE";
+import * as ICON_NAME from "@/constants/ICON_NAME";
 
 import "@/components/MaterialIcon";
 import "@/components/CopyDetail";
@@ -33,7 +34,7 @@ export default class DetailPage extends LitElement {
       <material-icon 
         class="leading-navigation" 
         size="${ICON_SIZE.MEDIUM}" 
-        icon="arrow-back"
+        icon="${ICON_NAME.ARROW_BACK}"
         @click="${this.goBack}"
       ></material-icon>
       <h2 class="title">details</h2>
