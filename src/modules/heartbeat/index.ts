@@ -1,7 +1,7 @@
 let port2Background: chrome.runtime.Port | undefined = openPort2Background();
 
 function openPort2Background() {
-  const port = chrome.runtime.connect();
+  const port = chrome.runtime.connect("", { name: "COPY_STACK" });
   const timeout = setTimeout(() => {
     port2Background = openPort2Background();
     port.disconnect();
