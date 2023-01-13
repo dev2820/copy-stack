@@ -39,7 +39,7 @@ export default class CopyList extends LitElement {
         (copy) =>
           html` <li class="item">
             <filled-card class="card">
-              <copied-item .copy=${copy} data-id="${copy.id}" @click="${()=>this.goToDetail(copy.id)}"></copied-item>
+              <copied-item .copy=${copy} @click="${()=>this.goToDetail(copy.id)}"></copied-item>
             </filled-card>
           </li>`
       )}

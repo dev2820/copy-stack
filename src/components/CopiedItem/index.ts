@@ -1,10 +1,11 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import type Copy from "@/types/Copy";
 import clipboardSystem from "@/modules/clipboardSystem";
 import createDeleteCopyEvent from "@/utils/event/createDeleteCopyEvent";
 import blob2url from "@/utils/blob2url";
 import timeFormater from "@/utils/timeFormater";
+import type Entity from "@/types/Entity";
+import type Copy from "@/types/Copy";
 import COPIED_ITEM from "@/constants/COPIED_ITEM";
 import PREVIEW from "@/constants/PREVIEW";
 import COPY_TYPE from "@/constants/COPY_TYPE";
@@ -16,7 +17,7 @@ import "@/components/TextButton";
 @customElement("copied-item")
 export default class CopiedItem extends LitElement {
   @property({ type: Object, reflect: true })
-  copy!: Copy;
+  copy!: Entity<Copy>;
 
   constructor() {
     super();
@@ -50,11 +51,7 @@ export default class CopiedItem extends LitElement {
     clipboardSystem.toClipboard(this.copy.content);
   }
   #deleteCopy() {
-    const idStr = this.dataset[COPIED_ITEM.DATASET.ID];
-    if (!idStr) return;
-
-    const id = parseInt(idStr, 10);
-    const deleteCopyEvent = createDeleteCopyEvent(id);
+    const deleteCopyEvent = createDeleteCopyEvent(this.copy.id);
     this.dispatchEvent(deleteCopyEvent);
   }
   #summary(str: string) {
@@ -99,12 +96,6 @@ export default class CopiedItem extends LitElement {
       width: auto;
       height: auto;
       border-radius: var(--card-radius);
-    }
-    menu[type="list"] {
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: row-reverse;
     }
   `;
 }
