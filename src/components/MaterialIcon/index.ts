@@ -56,5 +56,17 @@ export default class FilledChip extends LitElement {
     .icon.arrow-back {
       background-position: calc(-2 * var(--unit)) 0rem;
     }
+    .icon.calender {
+      background-position: calc(-2 * var(--unit)) 0rem;
+    }
+    .icon.text {
+      background-position: calc(-2 * var(--unit)) 0rem;
+    }
+    .icon.image {
+      background-position: calc(-2 * var(--unit)) 0rem;
+    }
+    .icon.globe {
+      background-position: calc(-2 * var(--unit)) 0rem;
+    }
   `;
 }
