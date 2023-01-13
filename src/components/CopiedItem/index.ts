@@ -1,7 +1,5 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import clipboardSystem from "@/modules/clipboardSystem";
-import createDeleteCopyEvent from "@/utils/event/createDeleteCopyEvent";
 import blob2url from "@/utils/blob2url";
 import timeFormater from "@/utils/timeFormater";
 import type Entity from "@/types/Entity";
@@ -12,6 +10,7 @@ import COPY_TYPE from "@/constants/COPY_TYPE";
 import "@/components/FilledCard";
 import "@/components/FilledButton";
 import "@/components/TextButton";
+import "@/components/CopyMenu";
 
 @customElement("copied-item")
 export default class CopiedItem extends LitElement {
@@ -36,22 +35,8 @@ export default class CopiedItem extends LitElement {
           ? html`<p>${this.#summary(this.copy.content as string)}</p>`
           : html`<img src="${blob2url(this.copy.content as Blob)}" />`}
       </article>
-      <menu type="list">
-        <filled-button theme="primary" @click=${() => this.#handleCopy()}>
-          copy
-        </filled-button>
-        <text-button theme="alert" @click=${() => this.#deleteCopy()}>
-          delete
-        </text-button>
-      </menu>
+      <copy-menu></copy-menu>
     `;
-  }
-  #handleCopy() {
-    clipboardSystem.toClipboard(this.copy.content);
-  }
-  #deleteCopy() {
-    const deleteCopyEvent = createDeleteCopyEvent(this.copy.id);
-    this.dispatchEvent(deleteCopyEvent);
   }
   #summary(str: string) {
     if (str.length > PREVIEW.MAX_TEXT_LENGTH) {

@@ -41,7 +41,12 @@ export default class DetailPage extends LitElement {
     </header>
     <section>
       <copy-detail .copy="${this.targetCopy}"></copy-detail>
-    </section>`
+    </section>
+    <footer>
+      bottom
+    </footer>
+    `
+
   }
 
   async #initValues() {
@@ -75,8 +80,9 @@ export default class DetailPage extends LitElement {
 
   static styles = css`
     :host{
-      width: var(--screen-width);
-      height: var(--screen-height);
+      width:100%;
+      height:100%;
+      position:absolute;
       display:flex;
       flex-direction:column;
     }
@@ -106,6 +112,15 @@ export default class DetailPage extends LitElement {
       overflow-y:scroll;
       flex-grow:1;
       padding: 0.5rem;
+      padding-bottom:2.5rem;
+    }
+    footer {
+      width:100%;
+      height:2.5rem;
+      position:absolute;
+      z-index:100;
+      bottom:0;
+      background-color:var(--surface-color);
     }
   `;
 }
