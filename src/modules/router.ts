@@ -1,4 +1,5 @@
 import { TemplateResult } from "lit-html";
+import ROUTER from "@/constants/ROUTER";
 
 type RouteParam = {
   path: string;
@@ -114,14 +115,14 @@ export default {
     window.location.hash = startRoute;
   },
   go: (newPath: string) => {
-    routeInfos.lastOrder = "go";
+    routeInfos.lastOrder = ROUTER.LAST_ORDER.GO;
     if (routeInfos.history.at(-1) !== newPath) {
       routeInfos.history.push(newPath);
       window.location.hash = newPath;
     }
   },
   back: () => {
-    routeInfos.lastOrder = "back";
+    routeInfos.lastOrder = ROUTER.LAST_ORDER.BACK;
 
     if (routeInfos.history.length > 0) {
       routeInfos.history.pop();

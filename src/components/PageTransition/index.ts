@@ -1,6 +1,7 @@
 import { LitElement, css, html } from "lit";
 import { customElement, query } from "lit/decorators.js";
 import router from "@/modules/router";
+import ROUTER from "@/constants/ROUTER";
 
 @customElement("page-transition")
 export default class PageTransition extends LitElement {
@@ -13,14 +14,14 @@ export default class PageTransition extends LitElement {
       if (!this.$slider) return;
 
       if (
-        router.route.lastOrder === "go" &&
+        router.route.lastOrder === ROUTER.LAST_ORDER.GO &&
         !this.$slider.classList.contains("right")
       ) {
         this.$slider.classList.toggle("right");
       }
 
       if (
-        router.route.lastOrder === "back" &&
+        router.route.lastOrder === ROUTER.LAST_ORDER.BACK &&
         this.$slider.classList.contains("right")
       ) {
         this.$slider.classList.toggle("right");
