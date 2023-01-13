@@ -5,6 +5,8 @@ import type Entity from "@/types/Entity";
 import type Text from "@/types/Text";
 import COPY_TYPE from "@/constants/COPY_TYPE";
 import blob2url from "@/utils/blob2url";
+import * as ICON_NAME from "@/constants/ICON_NAME";
+import * as ICON_SIZE from "@/constants/ICON_SIZE";
 
 @customElement("copy-detail")
 export default class CopyDetail extends LitElement {
@@ -43,17 +45,45 @@ export default class CopyDetail extends LitElement {
   createMetaData(copy: Entity<Copy>) {
     return html`
       <ul class="meta">
-        <li>${copy.created}</li>
+        <li>
+          <material-icon
+            icon="${ICON_NAME.CALENDER}"
+            size="${ICON_SIZE.MEDIUM}"
+          ></material-icon>
+          ${copy.created}
+        </li>
         ${copy.type === COPY_TYPE.TEXT
-          ? html`<li>${(copy.content as Text).length}</li>`
+          ? html` <li>
+              <material-icon
+                icon="${ICON_NAME.TEXT}"
+                size="${ICON_SIZE.MEDIUM}"
+              ></material-icon>
+              ${(copy.content as Text).length}
+            </li>`
           : ""}
         ${copy.type === COPY_TYPE.IMAGE
-          ? html`<li>${(copy.content as Blob).size}</li>`
+          ? html` <li>
+              <material-icon
+                icon="${ICON_NAME.IMAGE}"
+                size="${ICON_SIZE.MEDIUM}"
+              ></material-icon>
+              ${(copy.content as Blob).size}
+            </li>`
           : ""}
-        <li>${copy.source}</li>
+        <li>
+          <material-icon
+            icon="${ICON_NAME.GLOBE}"
+            size="${ICON_SIZE.MEDIUM}"
+          ></material-icon>
+          ${copy.source}
+        </li>
       </ul>
     `;
   }
 
-  static styles = css``;
+  static styles = css`
+    ul {
+      list-style: none;
+    }
+  `;
 }
