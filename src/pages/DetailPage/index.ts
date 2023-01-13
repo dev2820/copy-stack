@@ -82,13 +82,16 @@ export default class DetailPage extends LitElement {
     header {
       box-sizing:border-box;
       height: 3.5rem;
-      padding:0.5rem;
+      padding:1rem 0.5rem;
       display:flex;
+      border-bottom: 2px solid var(--boundary-color);
       flex-direction:row;
     }
     header h2.title {
-      line-height:2.5rem;
+      line-height:2rem;
       margin:0;
+      font-size: 1.5rem;
+      font-weight: bold;
       user-select:none;
     }
     header .leading-navigation {
@@ -101,6 +104,7 @@ export default class DetailPage extends LitElement {
     section {
       overflow-y:scroll;
       flex-grow:1;
+      padding: 0.5rem;
     }
   `;
 }
