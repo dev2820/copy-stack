@@ -59,8 +59,12 @@ const extractUrlParams = (route: Route, path: string) => {
 
 const routeInfos: {
   routes: Route[];
+  history: string[];
+  lastOrder: string;
 } = {
   routes: [],
+  history: [],
+  lastOrder: "",
 };
 const locationInfos: {
   currentPath: string | undefined;
@@ -89,6 +93,7 @@ window.addEventListener("hashchange", () => {
 
 export default {
   location: locationInfos,
+  route: routeInfos,
   init(routes: RouteParam[], startRoute: string = "/") {
     routeInfos.routes = routes.map((route) => {
       const params: string[] = [];
@@ -105,11 +110,23 @@ export default {
         params,
       };
     });
-
+    routeInfos.history.push(startRoute);
     window.location.hash = startRoute;
   },
   go: (newPath: string) => {
-    window.location.hash = newPath;
+    routeInfos.lastOrder = "go";
+    if (routeInfos.history.at(-1) !== newPath) {
+      routeInfos.history.push(newPath);
+      window.location.hash = newPath;
+    }
+  },
+  back: () => {
+    routeInfos.lastOrder = "back";
+    routeInfos.history.pop();
+
+    if (routeInfos.history.length > 0) {
+      window.location.hash = routeInfos.history[routeInfos.history.length - 1];
+    }
   },
   subscribe: (listener: Function) => {
     _listeners.push(listener);
