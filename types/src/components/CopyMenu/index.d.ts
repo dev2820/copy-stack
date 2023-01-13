@@ -1,11 +1,9 @@
 import { LitElement } from "lit";
-import type Entity from "@/types/Entity";
 import type Copy from "@/types/Copy";
-import "@/components/FilledCard";
+import type Entity from "@/types/Entity";
 import "@/components/FilledButton";
 import "@/components/TextButton";
-import "@/components/CopyMenu";
-export default class CopiedItem extends LitElement {
+export default class CopyMenu extends LitElement {
     #private;
     copy: Entity<Copy>;
     constructor();
