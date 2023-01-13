@@ -3,7 +3,9 @@ import { html, TemplateResult } from "lit-html";
 import copyList from "@mocks/copyList";
 import router from "@/modules/router";
 import routes from "@/routes";
-import "@/components/PageRouter";
+import "@/components/PageTransition";
+import "@/pages/MainPage";
+import "@/pages/DetailPage";
 
 export default {
   title: "app/app",
@@ -20,7 +22,10 @@ const Template: Story<Args> = () => {
     <div
       style="width:var(--screen-width); height:var(--screen-height); overflow:hidden;"
     >
-      <page-router></page-router>
+      <page-transition>
+        <main-page slot="main"></main-page>
+        <detail-page slot="right"></detail-page>
+      </page-transition>
     </div>
   `;
 };
