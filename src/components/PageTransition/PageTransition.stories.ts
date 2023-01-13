@@ -7,7 +7,7 @@ import routes from "@/routes";
 import "@/components/PageTransition";
 
 export default {
-  title: "pages/PageTransition",
+  title: "PageTransition",
 } as Meta;
 
 type Args = {
