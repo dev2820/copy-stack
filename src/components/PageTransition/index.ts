@@ -54,7 +54,7 @@ export default class PageTransition extends LitElement {
       height: var(--screen-height);
       display: flex;
       flex-direction: row;
-      transition: 0.3s;
+      transition: 0.2s ease-out;
     }
     .slider.right {
       transform: translateX(calc(-1 * var(--screen-width)));
