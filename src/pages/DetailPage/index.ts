@@ -34,7 +34,7 @@ export default class DetailPage extends LitElement {
         class="leading-navigation" 
         size="${ICON_SIZE.MEDIUM}" 
         icon="arrow-back"
-        @click="${this.goToMain}"
+        @click="${this.goBack}"
       ></material-icon>
       <h2 class="title">details</h2>
     </header>
@@ -68,8 +68,8 @@ export default class DetailPage extends LitElement {
     })
   }
 
-  goToMain() {
-    router.go("/")
+  goBack() {
+    router.back()
   }
 
   static styles = css`
