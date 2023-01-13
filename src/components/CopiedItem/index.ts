@@ -6,7 +6,6 @@ import blob2url from "@/utils/blob2url";
 import timeFormater from "@/utils/timeFormater";
 import type Entity from "@/types/Entity";
 import type Copy from "@/types/Copy";
-import COPIED_ITEM from "@/constants/COPIED_ITEM";
 import PREVIEW from "@/constants/PREVIEW";
 import COPY_TYPE from "@/constants/COPY_TYPE";
 
