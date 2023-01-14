@@ -1,15 +1,23 @@
-let port2Background: chrome.runtime.Port | undefined = openPort2Background();
+/**
+ * reference
+ * https://stackoverflow.com/questions/72229032/how-to-detect-that-chrome-extension-with-manifest-v3-was-unloaded
+ */
 
-function openPort2Background() {
-  const port = chrome.runtime.connect("", { name: "COPY_STACK" });
+const cycle = 5 * 60 - 1; // 299sec
+let state = true;
+let portToBackground: chrome.runtime.Port = openPortToBackground();
+
+function openPortToBackground() {
+  const port = chrome.runtime.connect();
+
   const timeout = setTimeout(() => {
-    port2Background = openPort2Background();
+    portToBackground = openPortToBackground();
     port.disconnect();
-  }, 29 * 1000);
+  }, cycle * 1000);
 
   port.onDisconnect.addListener(() => {
     clearTimeout(timeout);
-    if (port !== port2Background) return;
+    state = port !== portToBackground;
   });
 
   return port;
@@ -17,6 +25,6 @@ function openPort2Background() {
 
 export default {
   isAlive() {
-    return !!port2Background;
+    return state;
   },
 };
