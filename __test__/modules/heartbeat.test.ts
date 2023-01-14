@@ -1,4 +1,4 @@
-import { jest, test, expect, beforeAll } from "@jest/globals";
+import { jest, test, expect } from "@jest/globals";
 
 jest.useFakeTimers();
 jest.spyOn(window, "setTimeout");
