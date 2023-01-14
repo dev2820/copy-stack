@@ -77,7 +77,7 @@ export default class CopyDetail extends LitElement {
               ></material-icon>
               <span class="text">
                 ${byte2kbyte((copy.content as Blob).size)}
-                <small class="unit">bytes</small>
+                <small class="unit">KB</small>
               </span>
             </li>`
           : ""}
