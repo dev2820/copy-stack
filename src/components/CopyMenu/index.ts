@@ -1,7 +1,7 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import clipboardSystem from "@/modules/clipboardSystem";
 import createDeleteCopyEvent from "@/utils/event/createDeleteCopyEvent";
+import createCopyEvent from "@/utils/event/createCopyEvent";
 import type Copy from "@/types/Copy";
 import type Entity from "@/types/Entity";
 import "@/components/FilledButton";
@@ -29,7 +29,8 @@ export default class CopyMenu extends LitElement {
     `;
   }
   #handleCopy() {
-    clipboardSystem.toClipboard(this.copy.content);
+    const copyEvent = createCopyEvent(this.copy);
+    this.dispatchEvent(copyEvent);
   }
   #deleteCopy() {
     const deleteCopyEvent = createDeleteCopyEvent(this.copy.id);
