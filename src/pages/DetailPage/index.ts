@@ -1,10 +1,15 @@
 import { LitElement, css, html } from "lit";
 import { customElement,state } from "lit/decorators.js";
-import { type ChannelAddress, Radio } from "broadcasting";
+import { type ChannelAddress, Radio, Action } from "broadcasting";
 import type Copy from '@/types/Copy';
 import type Entity from '@/types/Entity';
+import type CopyEvent from "@/types/CopyEvent";
+import type DeleteCopyEvent from "@/types/DeleteCopyEvent";
 import router from "@/modules/router";
 import Messenger from "@/modules/Messenger";
+import clipboardSystem from "@/modules/clipboardSystem";
+import EVENT from "@/constants/EVENT";
+import COPY from "@/constants/stores/COPY";
 import RUNTIME_MESSAGE from "@/constants/RUNTIME_MESSAGE";
 import * as ICON_SIZE from "@/constants/ICON_SIZE";
 import * as ICON_NAME from "@/constants/ICON_NAME";
@@ -26,6 +31,7 @@ export default class DetailPage extends LitElement {
 
   constructor() {
     super();
+    this.#initEvents();
     this.#initValues();
   }
 
@@ -77,6 +83,29 @@ export default class DetailPage extends LitElement {
 
   goBack() {
     router.back()
+  }
+
+  #initEvents() {
+    this.addEventListener(EVENT.CLICK_COPY,(evt:CopyEvent)=>{
+      if(!evt.detail) return;
+      this.#copy2Clipboard(evt.detail.copy)
+    })
+
+    this.addEventListener(EVENT.DELETE_COPY,(evt:DeleteCopyEvent)=>{
+      if(!evt.detail) return;
+      this.#deleteCopy(evt.detail.index)
+    })
+  }
+
+  #deleteCopy(index:number) {
+    this.goBack();
+    
+    const addCopyAction = new Action(COPY.ACTION_TYPES.DELETE_COPY,index);
+    this.copyRadio.broadcastAction(addCopyAction)
+  }
+
+  #copy2Clipboard(copy:Entity<Copy>) {
+    clipboardSystem.toClipboard(copy.content);
   }
 
   static styles = css`
