@@ -4,6 +4,8 @@ import Messenger from "@/modules/Messenger";
 import type Copy from "@/types/Copy";
 import type Entity from "@/types/Entity";
 import type DeleteCopyEvent from "@/types/DeleteCopyEvent";
+import type CopyEvent from "@/types/CopyEvent";
+import clipboardSystem from "@/modules/clipboardSystem";
 import { type ChannelAddress, Radio, Action } from "broadcasting";
 import EVENT from "@/constants/EVENT";
 import RUNTIME_MESSAGE from "@/constants/RUNTIME_MESSAGE";
@@ -55,6 +57,11 @@ export default class CopyList extends LitElement {
   }
 
   #initEvents() {
+    this.addEventListener(EVENT.CLICK_COPY,(evt:CopyEvent)=>{
+      if(!evt.detail) return;
+      this.#copy2Clipboard(evt.detail.copy)
+    })
+
     this.addEventListener(EVENT.DELETE_COPY,(evt:DeleteCopyEvent)=>{
       if(!evt.detail) return;
       this.#deleteCopy(evt.detail.index)
@@ -80,6 +87,10 @@ export default class CopyList extends LitElement {
   #deleteCopy(index:number) {
     const addCopyAction = new Action(COPY.ACTION_TYPES.DELETE_COPY,index);
     this.copyRadio.broadcastAction(addCopyAction)
+  }
+
+  #copy2Clipboard(copy:Entity<Copy>) {
+    clipboardSystem.toClipboard(copy.content);
   }
 
   #filterCopy(copyList:Entity<Copy>[]):Entity<Copy>[] {
