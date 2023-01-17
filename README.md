@@ -6,6 +6,8 @@
 
 배포) https://chrome.google.com/webstore/detail/copy-stack/hbankbfbknfophpnhcadjfkcbeppbmfl?hl=ko&authuser=0
 
+[EN-README](/docs/README.en.md)
+
 ## 주요 기능
 
 요약
