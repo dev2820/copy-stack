@@ -1,5 +1,6 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
+import FILTER_OPTIONS from "@/constants/FILTER_OPTIONS";
 
 import "@/components/CopyFilter";
 
@@ -13,6 +14,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story = () => html`<copy-filter></copy-filter>`;
+const Template: Story = () =>
+  html`<copy-filter .options=${FILTER_OPTIONS}></copy-filter>`;
 
 export const Default = Template.bind({});
