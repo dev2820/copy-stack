@@ -29,18 +29,22 @@ export default class CopiedItem extends LitElement {
   render() {
     return html`
       <header>
-        <div class="meta-info">
-          <favicon-img
-            domain="${this.copy.source}"
-            size="${this.size}"
-          ></favicon-img>
-          ${this.sourceInfoRender()}
-        </div>
+        ${this.metaInfoRender()}
         <a class="show-detail" @click="${this.#goToDetail}"> show detail </a>
       </header>
       <article>${this.summaryRender()}</article>
       <copy-menu .copy="${this.copy}"></copy-menu>
     `;
+  }
+
+  metaInfoRender() {
+    return html`<div class="meta-info">
+      <favicon-img
+        domain="${this.copy.source}"
+        size="${this.size}"
+      ></favicon-img>
+      ${this.sourceInfoRender()}
+    </div>`;
   }
 
   sourceInfoRender() {
