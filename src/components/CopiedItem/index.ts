@@ -13,6 +13,12 @@ import "@/components/FilledButton";
 import "@/components/TextButton";
 import "@/components/CopyMenu";
 
+/**
+ * CopiedItem은 header와 summary, 그리고 menu로 이루어진다.
+ * header는 도메인 favicon을 포함하고 글을 생성한 주소, 날짜가 출력된다. detail을 볼 수 있는 show detail 버튼도 있다.
+ * summary는 요약된 내용이 보인다. 글의 경우 요약된 텍스트가 나타나고 이미지의 경우 이미지가 작게 표시된다.
+ * menu의 경우 CopiedItem을 삭제하거나 복사할 수 있다.
+ */
 @customElement("copied-item")
 export default class CopiedItem extends LitElement {
   @property({ type: Object, reflect: true })
