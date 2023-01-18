@@ -17,11 +17,8 @@ export default class FilledButton extends LitElement {
   static styles = css`
     button.text {
       border: none;
-      padding: 0.5rem 1rem;
       border-radius: 9999px;
       cursor: pointer;
-
-      font-weight: bold;
       background: transparent;
     }
     button[theme="alert"] {
