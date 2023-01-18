@@ -2,6 +2,7 @@ import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import blob2url from "@/utils/blob2url";
 import timeFormater from "@/utils/timeFormater";
+import textSummary from "@/utils/textSummary";
 import type Entity from "@/types/Entity";
 import type Copy from "@/types/Copy";
 import PREVIEW from "@/constants/PREVIEW";
@@ -49,7 +50,12 @@ export default class CopiedItem extends LitElement {
       </header>
       <article>
         ${this.copy.type === COPY_TYPE.TEXT
-          ? html`<p>${this.#summary(this.copy.content as string)}</p>`
+          ? html`<p>
+              ${textSummary(
+                this.copy.content as string,
+                PREVIEW.MAX_TEXT_LENGTH
+              )}
+            </p>`
           : html`<img src="${blob2url(this.copy.content as Blob)}" />`}
       </article>
       <copy-menu .copy="${this.copy}"></copy-menu>
@@ -65,12 +71,6 @@ export default class CopiedItem extends LitElement {
         ${timeFormater(new Date(this.copy.created))}
       </small>
     </div>`;
-  }
-  #summary(str: string) {
-    if (str.length > PREVIEW.MAX_TEXT_LENGTH) {
-      return str.slice(0, PREVIEW.MAX_TEXT_LENGTH) + "...";
-    }
-    return str;
   }
 
   #goToDetail() {
