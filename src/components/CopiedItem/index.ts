@@ -39,7 +39,7 @@ export default class CopiedItem extends LitElement {
             class="domain"
             src="${getFaviconUrl(this.copy.source, this.size)}"
           />
-          <div>
+          <div class="source-info">
             <h4 class="title overflow-ellipsis" title="${this.copy.source}">
               ${this.copy.source}
             </h4>
@@ -84,8 +84,11 @@ export default class CopiedItem extends LitElement {
     }
     header {
       text-align: left;
+      width: 100%;
+      overflow: hidden;
     }
     .meta-info {
+      width: 100%;
       display: flex;
       flex-direciton: row;
       gap: 0.5rem;
@@ -96,6 +99,10 @@ export default class CopiedItem extends LitElement {
     img.domain {
       width: 2rem;
       height: 2rem;
+    }
+    .source-info {
+      flex-grow: 1;
+      overflow: hidden;
     }
     h4.title {
       margin: 0;
