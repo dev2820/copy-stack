@@ -48,16 +48,7 @@ export default class CopiedItem extends LitElement {
           show detail
         </a>
       </header>
-      <article>
-        ${this.copy.type === COPY_TYPE.TEXT
-          ? html`<p>
-              ${textSummary(
-                this.copy.content as string,
-                PREVIEW.MAX_TEXT_LENGTH
-              )}
-            </p>`
-          : html`<img src="${blob2url(this.copy.content as Blob)}" />`}
-      </article>
+      <article>${this.summaryRender()}</article>
       <copy-menu .copy="${this.copy}"></copy-menu>
     `;
   }
@@ -71,6 +62,22 @@ export default class CopiedItem extends LitElement {
         ${timeFormater(new Date(this.copy.created))}
       </small>
     </div>`;
+  }
+
+  summaryRender() {
+    if (this.copy.type === COPY_TYPE.TEXT) {
+      return html`
+        <p>
+          ${textSummary(this.copy.content as string, PREVIEW.MAX_TEXT_LENGTH)}
+        </p>
+      `;
+    }
+
+    if (this.copy.type === COPY_TYPE.IMAGE) {
+      return html`<img src="${blob2url(this.copy.content as Blob)}" />`;
+    }
+
+    return "";
   }
 
   #goToDetail() {
