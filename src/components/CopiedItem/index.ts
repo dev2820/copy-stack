@@ -2,6 +2,7 @@ import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import blob2url from "@/utils/blob2url";
 import timeFormater from "@/utils/timeFormater";
+import getFaviconUrl from "@/utils/getFaviconUrl";
 import type Entity from "@/types/Entity";
 import type Copy from "@/types/Copy";
 import PREVIEW from "@/constants/PREVIEW";
@@ -36,8 +37,7 @@ export default class CopiedItem extends LitElement {
         <div class="meta-info">
           <img
             class="domain"
-            src="https://www.google.com/s2/favicons?domain=${this.copy
-              .source}&sz=${this.size}"
+            src="${getFaviconUrl(this.copy.source, this.size)}"
           />
           <div>
             <h4 class="title overflow-ellipsis" title="${this.copy.source}">
