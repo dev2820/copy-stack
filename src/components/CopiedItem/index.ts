@@ -5,8 +5,8 @@ import timeFormater from "@/utils/timeFormater";
 import textSummary from "@/utils/textSummary";
 import type Entity from "@/types/Entity";
 import type Copy from "@/types/Copy";
-import PREVIEW from "@/constants/PREVIEW";
 import COPY_TYPE from "@/constants/COPY_TYPE";
+import COPIED_ITEM from "@/constants/COPIED_ITEM";
 import router from "@/modules/router";
 
 import "@/components/FilledCard";
@@ -30,7 +30,7 @@ export default class CopiedItem extends LitElement {
       <header>
         ${this.metaInfoRender()}
         <text-button theme="primary" @click="${this.#goToDetail}">
-          show detail
+          ${COPIED_ITEM.CONTENT.SHOW_DETAIL}
         </text-button>
       </header>
       <article>${this.summaryRender()}</article>
@@ -63,7 +63,10 @@ export default class CopiedItem extends LitElement {
     if (this.copy.type === COPY_TYPE.TEXT) {
       return html`
         <p>
-          ${textSummary(this.copy.content as string, PREVIEW.MAX_TEXT_LENGTH)}
+          ${textSummary(
+            this.copy.content as string,
+            COPIED_ITEM.SUMMARY.MAX_TEXT_LENGTH
+          )}
         </p>
       `;
     }
