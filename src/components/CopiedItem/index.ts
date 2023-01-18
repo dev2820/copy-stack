@@ -102,10 +102,6 @@ export default class CopiedItem extends LitElement {
     .meta-info > * {
       margin: auto 0;
     }
-    img.domain {
-      width: 2rem;
-      height: 2rem;
-    }
     .source-info {
       flex-grow: 1;
       overflow: hidden;
