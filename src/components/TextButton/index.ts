@@ -20,11 +20,15 @@ export default class FilledButton extends LitElement {
       padding: 0.5rem 1rem;
       border-radius: 9999px;
       cursor: pointer;
+
       font-weight: bold;
       background: transparent;
     }
     button[theme="alert"] {
       color: var(--alert-color);
+    }
+    button[theme="primary"] {
+      color: var(--primary-color);
     }
   `;
 }
