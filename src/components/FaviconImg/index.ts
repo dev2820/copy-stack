@@ -38,6 +38,7 @@ export default class FaviconImg extends LitElement {
   static styles = css`
     :host {
       display: inline-block;
+      line-height: 2rem;
     }
     img.favicon {
       object-fit: cover;
