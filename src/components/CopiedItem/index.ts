@@ -1,5 +1,5 @@
 import { LitElement, css, html } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, state } from "lit/decorators.js";
 import blob2url from "@/utils/blob2url";
 import timeFormater from "@/utils/timeFormater";
 import type Entity from "@/types/Entity";
@@ -24,18 +24,30 @@ export default class CopiedItem extends LitElement {
   @property({ type: Object, reflect: true })
   copy!: Entity<Copy>;
 
+  @state()
+  size: number = 32;
+
   constructor() {
     super();
   }
   render() {
     return html`
       <header>
-        <h4 class="title overflow-ellipsis" title="${this.copy.source}">
-          ${this.copy.source}
-        </h4>
-        <small class="created">
-          ${timeFormater(new Date(this.copy.created))}
-        </small>
+        <div class="meta-info">
+          <img
+            class="domain"
+            src="https://www.google.com/s2/favicons?domain=${this.copy
+              .source}&sz=${this.size}"
+          />
+          <div>
+            <h4 class="title overflow-ellipsis" title="${this.copy.source}">
+              ${this.copy.source}
+            </h4>
+            <small class="created">
+              ${timeFormater(new Date(this.copy.created))}
+            </small>
+          </div>
+        </div>
         <a class="show-detail" @click="${() => this.#goToDetail(this.copy.id)}">
           show detail
         </a>
@@ -73,14 +85,26 @@ export default class CopiedItem extends LitElement {
     header {
       text-align: left;
     }
-    header > h4.title {
+    .meta-info {
+      display: flex;
+      flex-direciton: row;
+      gap: 0.5rem;
+    }
+    .meta-info > * {
+      margin: auto 0;
+    }
+    img.domain {
+      width: 2rem;
+      height: 2rem;
+    }
+    h4.title {
       margin: 0;
     }
-    header > small.created {
+    small.created {
       display: block;
       color: var(--placeholder-color);
     }
-    header > a.show-detail {
+    a.show-detail {
       color: var(--primary-color);
       cursor: pointer;
     }
