@@ -10,7 +10,6 @@ import COPY_TYPE from "@/constants/COPY_TYPE";
 import router from "@/modules/router";
 
 import "@/components/FilledCard";
-import "@/components/FilledButton";
 import "@/components/TextButton";
 import "@/components/CopyMenu";
 import "@/components/FaviconImg";
