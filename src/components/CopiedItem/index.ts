@@ -36,9 +36,7 @@ export default class CopiedItem extends LitElement {
           ></favicon-img>
           ${this.sourceInfoRender()}
         </div>
-        <a class="show-detail" @click="${() => this.#goToDetail()}">
-          show detail
-        </a>
+        <a class="show-detail" @click="${this.#goToDetail}"> show detail </a>
       </header>
       <article>${this.summaryRender()}</article>
       <copy-menu .copy="${this.copy}"></copy-menu>
