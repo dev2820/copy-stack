@@ -2,7 +2,6 @@ import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import blob2url from "@/utils/blob2url";
 import timeFormater from "@/utils/timeFormater";
-import getFaviconUrl from "@/utils/getFaviconUrl";
 import type Entity from "@/types/Entity";
 import type Copy from "@/types/Copy";
 import PREVIEW from "@/constants/PREVIEW";
@@ -13,6 +12,7 @@ import "@/components/FilledCard";
 import "@/components/FilledButton";
 import "@/components/TextButton";
 import "@/components/CopyMenu";
+import "@/components/FaviconImg";
 
 /**
  * CopiedItem은 header와 summary, 그리고 menu로 이루어진다.
@@ -37,7 +37,11 @@ export default class CopiedItem extends LitElement {
     return html`
       <header>
         <div class="meta-info">
-          ${this.faviconRender()} ${this.sourceInfoRender()}
+          <favicon-img
+            domain="${this.copy.source}"
+            size="${this.size}"
+          ></favicon-img>
+          ${this.sourceInfoRender()}
         </div>
         <a class="show-detail" @click="${() => this.#goToDetail(this.copy.id)}">
           show detail
@@ -50,13 +54,6 @@ export default class CopiedItem extends LitElement {
       </article>
       <copy-menu .copy="${this.copy}"></copy-menu>
     `;
-  }
-
-  faviconRender() {
-    return html` <img
-      class="domain"
-      src="${getFaviconUrl(this.copy.source, this.size)}"
-    />`;
   }
 
   sourceInfoRender() {
