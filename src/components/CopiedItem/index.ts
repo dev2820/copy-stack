@@ -43,7 +43,7 @@ export default class CopiedItem extends LitElement {
           ></favicon-img>
           ${this.sourceInfoRender()}
         </div>
-        <a class="show-detail" @click="${() => this.#goToDetail(this.copy.id)}">
+        <a class="show-detail" @click="${() => this.#goToDetail()}">
           show detail
         </a>
       </header>
@@ -73,8 +73,8 @@ export default class CopiedItem extends LitElement {
     return str;
   }
 
-  #goToDetail(id: number) {
-    router.go(`/${id}`);
+  #goToDetail() {
+    router.go(`/${this.copy.id}`);
   }
 
   static styles = css`
