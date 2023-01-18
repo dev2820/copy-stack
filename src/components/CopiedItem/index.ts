@@ -29,7 +29,9 @@ export default class CopiedItem extends LitElement {
     return html`
       <header>
         ${this.metaInfoRender()}
-        <a class="show-detail" @click="${this.#goToDetail}"> show detail </a>
+        <text-button theme="primary" @click="${this.#goToDetail}">
+          show detail
+        </text-button>
       </header>
       <article>${this.summaryRender()}</article>
       <copy-menu .copy="${this.copy}"></copy-menu>
