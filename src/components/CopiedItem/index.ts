@@ -37,15 +37,7 @@ export default class CopiedItem extends LitElement {
     return html`
       <header>
         <div class="meta-info">
-          ${this.faviconRender()}
-          <div class="source-info">
-            <h4 class="title overflow-ellipsis" title="${this.copy.source}">
-              ${this.copy.source}
-            </h4>
-            <small class="created">
-              ${timeFormater(new Date(this.copy.created))}
-            </small>
-          </div>
+          ${this.faviconRender()} ${this.sourceInfoRender()}
         </div>
         <a class="show-detail" @click="${() => this.#goToDetail(this.copy.id)}">
           show detail
@@ -65,6 +57,17 @@ export default class CopiedItem extends LitElement {
       class="domain"
       src="${getFaviconUrl(this.copy.source, this.size)}"
     />`;
+  }
+
+  sourceInfoRender() {
+    return html`<div class="source-info">
+      <h4 class="title overflow-ellipsis" title="${this.copy.source}">
+        ${this.copy.source}
+      </h4>
+      <small class="created">
+        ${timeFormater(new Date(this.copy.created))}
+      </small>
+    </div>`;
   }
   #summary(str: string) {
     if (str.length > PREVIEW.MAX_TEXT_LENGTH) {
