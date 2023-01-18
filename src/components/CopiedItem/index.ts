@@ -35,10 +35,7 @@ export default class CopiedItem extends LitElement {
     return html`
       <header>
         <div class="meta-info">
-          <img
-            class="domain"
-            src="${getFaviconUrl(this.copy.source, this.size)}"
-          />
+          ${this.faviconRender()}
           <div class="source-info">
             <h4 class="title overflow-ellipsis" title="${this.copy.source}">
               ${this.copy.source}
@@ -59,6 +56,13 @@ export default class CopiedItem extends LitElement {
       </article>
       <copy-menu .copy="${this.copy}"></copy-menu>
     `;
+  }
+
+  faviconRender() {
+    return html` <img
+      class="domain"
+      src="${getFaviconUrl(this.copy.source, this.size)}"
+    />`;
   }
   #summary(str: string) {
     if (str.length > PREVIEW.MAX_TEXT_LENGTH) {
