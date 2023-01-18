@@ -8,7 +8,7 @@ import "@/components/TextButton";
 import "@/components/FilledChip";
 
 @customElement("copy-filter")
-export default class CopiedItem extends LitElement {
+export default class CopyFilter extends LitElement {
   @property({ type: Array })
   options!: Array<any>;
 
