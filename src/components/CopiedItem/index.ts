@@ -1,22 +1,26 @@
 import { LitElement, css, html } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, state } from "lit/decorators.js";
 import blob2url from "@/utils/blob2url";
 import timeFormater from "@/utils/timeFormater";
+import textSummary from "@/utils/textSummary";
 import type Entity from "@/types/Entity";
 import type Copy from "@/types/Copy";
-import PREVIEW from "@/constants/PREVIEW";
 import COPY_TYPE from "@/constants/COPY_TYPE";
+import COPIED_ITEM from "@/constants/COPIED_ITEM";
 import router from "@/modules/router";
 
 import "@/components/FilledCard";
-import "@/components/FilledButton";
 import "@/components/TextButton";
 import "@/components/CopyMenu";
+import "@/components/FaviconImg";
 
 @customElement("copied-item")
 export default class CopiedItem extends LitElement {
   @property({ type: Object, reflect: true })
   copy!: Entity<Copy>;
+
+  @state()
+  size: number = 32;
 
   constructor() {
     super();
@@ -24,33 +28,58 @@ export default class CopiedItem extends LitElement {
   render() {
     return html`
       <header>
-        <h4 class="title overflow-ellipsis" title="${this.copy.source}">
-          ${this.copy.source}
-        </h4>
-        <small class="created">
-          ${timeFormater(new Date(this.copy.created))}
-        </small>
-        <a class="show-detail" @click="${() => this.#goToDetail(this.copy.id)}">
-          show detail
-        </a>
+        ${this.metaInfoRender()}
+        <text-button theme="primary" @click="${this.#goToDetail}">
+          ${COPIED_ITEM.CONTENT.SHOW_DETAIL}
+        </text-button>
       </header>
-      <article>
-        ${this.copy.type === COPY_TYPE.TEXT
-          ? html`<p>${this.#summary(this.copy.content as string)}</p>`
-          : html`<img src="${blob2url(this.copy.content as Blob)}" />`}
-      </article>
+      <article>${this.summaryRender()}</article>
       <copy-menu .copy="${this.copy}"></copy-menu>
     `;
   }
-  #summary(str: string) {
-    if (str.length > PREVIEW.MAX_TEXT_LENGTH) {
-      return str.slice(0, PREVIEW.MAX_TEXT_LENGTH) + "...";
-    }
-    return str;
+
+  metaInfoRender() {
+    return html`<div class="meta-info">
+      <favicon-img
+        domain="${this.copy.source}"
+        size="${this.size}"
+      ></favicon-img>
+      ${this.sourceInfoRender()}
+    </div>`;
   }
 
-  #goToDetail(id: number) {
-    router.go(`/${id}`);
+  sourceInfoRender() {
+    return html`<div class="source-info">
+      <h4 class="title overflow-ellipsis" title="${this.copy.source}">
+        ${this.copy.source}
+      </h4>
+      <small class="created">
+        ${timeFormater(new Date(this.copy.created))}
+      </small>
+    </div>`;
+  }
+
+  summaryRender() {
+    if (this.copy.type === COPY_TYPE.TEXT) {
+      return html`
+        <p>
+          ${textSummary(
+            this.copy.content as string,
+            COPIED_ITEM.SUMMARY.MAX_TEXT_LENGTH
+          )}
+        </p>
+      `;
+    }
+
+    if (this.copy.type === COPY_TYPE.IMAGE) {
+      return html`<img src="${blob2url(this.copy.content as Blob)}" />`;
+    }
+
+    return "";
+  }
+
+  #goToDetail() {
+    router.go(`/${this.copy.id}`);
   }
 
   static styles = css`
@@ -66,15 +95,30 @@ export default class CopiedItem extends LitElement {
     }
     header {
       text-align: left;
+      width: 100%;
+      overflow: hidden;
     }
-    header > h4.title {
+    .meta-info {
+      width: 100%;
+      display: flex;
+      flex-direciton: row;
+      gap: 0.5rem;
+    }
+    .meta-info > * {
+      margin: auto 0;
+    }
+    .source-info {
+      flex-grow: 1;
+      overflow: hidden;
+    }
+    h4.title {
       margin: 0;
     }
-    header > small.created {
+    small.created {
       display: block;
       color: var(--placeholder-color);
     }
-    header > a.show-detail {
+    a.show-detail {
       color: var(--primary-color);
       cursor: pointer;
     }

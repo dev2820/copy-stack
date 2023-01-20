@@ -43,6 +43,10 @@ export default class CopyMenu extends LitElement {
       margin: 0;
       display: flex;
       flex-direction: row-reverse;
+      gap: 0.75rem;
+    }
+    menu[type="list"] > * {
+      margin: auto 0;
     }
   `;
 }
