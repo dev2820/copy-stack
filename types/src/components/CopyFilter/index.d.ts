@@ -3,7 +3,7 @@ import "@/components/FilledCard";
 import "@/components/FilledButton";
 import "@/components/TextButton";
 import "@/components/FilledChip";
-export default class CopiedItem extends LitElement {
+export default class CopyFilter extends LitElement {
     #private;
     options: Array<any>;
     constructor();
