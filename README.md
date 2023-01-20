@@ -4,7 +4,8 @@
 
 복사한 내용을 기록하고 다시 불러올 수 있게 도와줍니다. 만약 한번에 1개의 복사 내용만 저장할 수 있어 불편했다면 이 extension이 도움이 될 것입니다.
 
-배포) https://chrome.google.com/webstore/detail/copy-stack/hbankbfbknfophpnhcadjfkcbeppbmfl?hl=ko&authuser=0
+크롬 브라우저 배포) https://chrome.google.com/webstore/detail/copy-stack/hbankbfbknfophpnhcadjfkcbeppbmfl?hl=ko&authuser=0
+웨일 브라우저 배포) https://store.whale.naver.com/detail/pinkglbbkjkdcmcagonkaofijjpmohdi?hl=ko
 
 [EN-README](/docs/README.en.md)
 
