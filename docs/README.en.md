@@ -21,3 +21,7 @@ You can change the filter at the top so that only copies of the type you want ar
 You can go to the detail page by pressing the 'show detail' button on the copy. You can view the date of creation, and the link that generated the copy.
 
 The Detail Page about the copied text also tells you how many characters the text is in total for a text copy, and the Detail Page about the copied image tells you how big the image is for an image copy.
+
+## Version
+#### 1.1.0
+Add a favicon before Copy's source info
