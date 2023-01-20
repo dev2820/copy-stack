@@ -7,4 +7,5 @@ type Args = {
     theme?: string;
 };
 export declare const Default: Story<Args>;
+export declare const Primary: Story<Args>;
 export declare const Alert: Story<Args>;

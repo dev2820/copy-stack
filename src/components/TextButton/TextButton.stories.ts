@@ -25,6 +25,12 @@ Default.args = {
   content: "copy",
 };
 
+export const Primary = Template.bind({});
+Primary.args = {
+  content: "copy",
+  theme: "primary",
+};
+
 export const Alert = Template.bind({});
 Alert.args = {
   content: "copy",
