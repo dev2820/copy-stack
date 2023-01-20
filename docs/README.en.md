@@ -1,6 +1,9 @@
 # Copy Stack
 It helps you record and recall your copy. This extension would be helpful if it was inconvenient to save only one copy at a time.
 
+Chrome Browser Publish) https://chrome.google.com/webstore/detail/copy-stack/hbankbfbknfophpnhcadjfkcbeppbmfl?hl=ko&authuser=0
+Whale Browser Publish) https://store.whale.naver.com/detail/pinkglbbkjkdcmcagonkaofijjpmohdi?hl=ko
+
 
 ## 🔧Features
 
