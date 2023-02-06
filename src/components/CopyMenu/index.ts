@@ -4,6 +4,8 @@ import createDeleteCopyEvent from "@/utils/event/createDeleteCopyEvent";
 import createCopyEvent from "@/utils/event/createCopyEvent";
 import type Copy from "@/types/Copy";
 import type Entity from "@/types/Entity";
+import COPY_MENU from "@/constants/COPY_MENU";
+
 import "@/components/FilledButton";
 import "@/components/TextButton";
 
@@ -20,10 +22,10 @@ export default class CopyMenu extends LitElement {
     return html`
       <menu type="list">
         <filled-button theme="primary" @click=${this.#handleCopy}>
-          copy
+          ${COPY_MENU.CONTENT.COPY}
         </filled-button>
         <text-button theme="alert" @click=${this.#deleteCopy}>
-          delete
+          ${COPY_MENU.CONTENT.DELETE}
         </text-button>
       </menu>
     `;
