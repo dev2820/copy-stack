@@ -25,5 +25,8 @@ export default class FilledButton extends LitElement {
     button[theme="primary"] {
       background: var(--primary-color);
     }
+    button[theme="primary"]:hover {
+      background: var(--primary-color-light);
+    }
   `;
 }
