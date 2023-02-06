@@ -1,5 +1,5 @@
 export default {
   CONTENT: {
-    TITLE: "details",
+    TITLE: "Details",
   },
 };
