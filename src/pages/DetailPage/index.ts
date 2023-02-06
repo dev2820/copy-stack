@@ -11,6 +11,7 @@ import clipboardSystem from "@/modules/clipboardSystem";
 import EVENT from "@/constants/EVENT";
 import COPY from "@/constants/stores/COPY";
 import RUNTIME_MESSAGE from "@/constants/RUNTIME_MESSAGE";
+import DETAIL_PAGE from "@/constants/DETAIL_PAGE";
 import * as ICON_SIZE from "@/constants/ICON_SIZE";
 import * as ICON_NAME from "@/constants/ICON_NAME";
 
@@ -44,7 +45,7 @@ export default class DetailPage extends LitElement {
         icon="${ICON_NAME.ARROW_BACK}"
         @click="${this.goBack}"
       ></material-icon>
-      <h2 class="title">details</h2>
+      <h2 class="title">${DETAIL_PAGE.CONTENT.TITLE}</h2>
     </header>
     <section>
       <copy-detail .copy="${this.targetCopy}"></copy-detail>
