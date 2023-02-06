@@ -49,6 +49,7 @@ export default class MainPage extends LitElement {
 
   static styles = css`
     :host {
+      position: absolute;
       display: flex;
       flex-direction: column;
       width: var(--screen-width);

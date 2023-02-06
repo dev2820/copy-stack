@@ -3,9 +3,8 @@ import { html, TemplateResult } from "lit-html";
 import copyList from "@mocks/copyList";
 import router from "@/modules/router";
 import routes from "@/routes";
-import "@/components/PageTransition";
-import "@/pages/MainPage";
-import "@/pages/DetailPage";
+
+import "@/App";
 
 export default {
   title: "app/app",
@@ -18,16 +17,7 @@ type Args = {
 
 const Template: Story<Args> = () => {
   router.init(routes);
-  return html`
-    <div
-      style="width:var(--screen-width); height:var(--screen-height); overflow:hidden;"
-    >
-      <page-transition>
-        <main-page slot="main"></main-page>
-        <detail-page slot="right"></detail-page>
-      </page-transition>
-    </div>
-  `;
+  return html` <copy-stack></copy-stack> `;
 };
 
 export const Default = Template.bind({});

@@ -30,13 +30,15 @@ async function convert2Png(blob: Blob): Promise<Blob | null> {
 
 async function toClipboardImage(data: Blob) {
   const pngBlob = await convert2Png(data);
-  if (!pngBlob) return;
+  if (!pngBlob) return false;
 
   window.navigator.clipboard.write([
     new ClipboardItem({
       [pngBlob.type]: pngBlob,
     }),
   ]);
+
+  return true;
 }
 
 async function toClipboardText(data: Text) {
@@ -47,10 +49,16 @@ async function toClipboardText(data: Text) {
   }
 }
 
-export default async function toClipboard(data: Text | Blob) {
-  if (data instanceof Blob) {
-    toClipboardImage(data);
-    return;
+export default async function toClipboard(data: Text | Blob): Promise<Boolean> {
+  try {
+    if (data instanceof Blob) {
+      await toClipboardImage(data);
+    } else {
+      await toClipboardText(data);
+    }
+
+    return true;
+  } catch (err) {
+    return false;
   }
-  toClipboardText(data);
 }

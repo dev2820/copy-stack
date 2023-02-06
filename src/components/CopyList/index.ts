@@ -1,6 +1,7 @@
 import { LitElement, css, html } from "lit";
 import { customElement, state, property } from "lit/decorators.js";
 import Messenger from "@/modules/Messenger";
+import createCopyCompleteEvent from "@/utils/event/createCopyCompleteEvent"
 import type Copy from "@/types/Copy";
 import type Entity from "@/types/Entity";
 import type DeleteCopyEvent from "@/types/DeleteCopyEvent";
@@ -89,8 +90,10 @@ export default class CopyList extends LitElement {
     this.copyRadio.broadcastAction(addCopyAction)
   }
 
-  #copy2Clipboard(copy:Entity<Copy>) {
-    clipboardSystem.toClipboard(copy.content);
+  async #copy2Clipboard(copy:Entity<Copy>) {
+    const isSuccess = await clipboardSystem.toClipboard(copy.content);
+    if(isSuccess) this.dispatchEvent(createCopyCompleteEvent(true))
+    else this.dispatchEvent(createCopyCompleteEvent(false))
   }
 
   #filterCopy(copyList:Entity<Copy>[]):Entity<Copy>[] {

@@ -5,6 +5,7 @@ import type Copy from '@/types/Copy';
 import type Entity from '@/types/Entity';
 import type CopyEvent from "@/types/CopyEvent";
 import type DeleteCopyEvent from "@/types/DeleteCopyEvent";
+import createCopyCompleteEvent from "@/utils/event/createCopyCompleteEvent"
 import router from "@/modules/router";
 import Messenger from "@/modules/Messenger";
 import clipboardSystem from "@/modules/clipboardSystem";
@@ -90,6 +91,7 @@ export default class DetailPage extends LitElement {
     this.addEventListener(EVENT.CLICK_COPY,(evt:CopyEvent)=>{
       if(!evt.detail) return;
       this.#copy2Clipboard(evt.detail.copy)
+
     })
 
     this.addEventListener(EVENT.DELETE_COPY,(evt:DeleteCopyEvent)=>{
@@ -105,8 +107,11 @@ export default class DetailPage extends LitElement {
     this.copyRadio.broadcastAction(addCopyAction)
   }
 
-  #copy2Clipboard(copy:Entity<Copy>) {
-    clipboardSystem.toClipboard(copy.content);
+  async #copy2Clipboard(copy:Entity<Copy>) {
+    const isSuccess = await clipboardSystem.toClipboard(copy.content);
+
+    if(isSuccess) this.dispatchEvent(createCopyCompleteEvent(true))
+    else this.dispatchEvent(createCopyCompleteEvent(false))
   }
 
   static styles = css`
