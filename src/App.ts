@@ -80,7 +80,7 @@ export default class CopyStack extends LitElement {
       position: absolute;
       width: 160px;
       height: 2rem;
-      bottom: 1rem;
+      bottom: 2rem;
       left: 50%;
       text-align: center;
       background: var(--info-bg-color);
