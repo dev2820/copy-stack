@@ -3,11 +3,6 @@ import { customElement, property, query } from "lit/decorators.js";
 import getFaviconUrl from "@/utils/getFaviconUrl";
 import noImage from "@/assets/images/no-image.jpg";
 
-import "@/components/FilledCard";
-import "@/components/FilledButton";
-import "@/components/TextButton";
-import "@/components/CopyMenu";
-
 @customElement("favicon-img")
 export default class FaviconImg extends LitElement {
   @property({ type: String })
