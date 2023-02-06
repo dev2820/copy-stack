@@ -26,10 +26,13 @@
   --primary-color-light: #a5e1fa;
   --alert-color: #ff5757;
   --alert-color-light: #faa7a7;
+  --info-bg-color: #000000e3;
+  --on-placeholder: #fff;
 
   --screen-width: 360px;
   --screen-height: 500px;
   --card-radius: 12px;
+  --card-boxshadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   --radius: 8px;
 }
 

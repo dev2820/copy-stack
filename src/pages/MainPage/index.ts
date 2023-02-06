@@ -18,7 +18,7 @@ export default class MainPage extends LitElement {
   @state()
   copyStateMessage = COPY_STATE.MESSAGE.SUCCESS;
 
-  @query("span.alert")
+  @query("span.info")
   $alert!: HTMLElement | null;
 
   constructor() {
@@ -34,7 +34,7 @@ export default class MainPage extends LitElement {
       <section>
         <copy-list .filter=${this.filter}></copy-list>
       </section>
-      <span class="alert">${this.copyStateMessage}</span>
+      <span class="info card">${this.copyStateMessage}</span>
     `;
   }
 
@@ -75,7 +75,7 @@ export default class MainPage extends LitElement {
       if (!this.$alert) return;
 
       this.$alert.classList.remove("action");
-    }, 2000);
+    }, 1500);
   }
   #handleCopyFailed() {
     this.copyStateMessage = COPY_STATE.MESSAGE.FAILED;
@@ -109,20 +109,26 @@ export default class MainPage extends LitElement {
       flex-grow: 1;
     }
 
-    .alert {
+    .info {
       position: absolute;
       width: 160px;
       height: 2rem;
       bottom: 1rem;
       left: 50%;
       text-align: center;
-      background: black;
+      background: var(--info-bg-color);
+      line-height: 1.8rem;
       will-change: true;
+      border-radius: 999px;
+      color: var(--on-placeholder);
       transform: translateX(-50%) translateY(400%);
       transition: transform 0.2s ease-in;
     }
-    .alert.action {
+    .info.action {
       transform: translateX(-50%) translateY(0);
+    }
+    .card {
+      box-shadow: var(--card-boxshadow);
     }
   `;
 }
