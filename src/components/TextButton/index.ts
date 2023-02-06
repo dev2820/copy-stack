@@ -25,8 +25,14 @@ export default class FilledButton extends LitElement {
     button[theme="alert"] {
       color: var(--alert-color);
     }
+    button[theme="alert"]:hover {
+      color: var(--alert-color-light);
+    }
     button[theme="primary"] {
       color: var(--primary-color);
+    }
+    button[theme="primary"]:hover {
+      color: var(--primary-color-light);
     }
   `;
 }

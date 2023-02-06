@@ -20,9 +20,13 @@
   --background-color: #fff;
   --filled-surface-color: #eee;
   --boundary-color: #eee;
+
   --placeholder-color: #aaa;
   --primary-color: #54ccff;
+  --primary-color-light: #a5e1fa;
   --alert-color: #ff5757;
+  --alert-color-light: #faa7a7;
+
   --screen-width: 360px;
   --screen-height: 500px;
   --card-radius: 12px;
