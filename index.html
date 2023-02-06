@@ -6,14 +6,9 @@
     <title>Vite + Lit + TS</title>
     <link rel="stylesheet" href="@/assets/global.css" />
     <script type="module" src="@/popup"></script>
-    <script type="module" src="@/components/PageTransition"></script>
-    <script type="module" src="@/pages/MainPage"></script>
-    <script type="module" src="@/pages/DetailPage"></script>
+    <script type="module" src="@/App"></script>
   </head>
   <body>
-    <page-transition>
-      <main-page slot="main"></main-page>
-      <detail-page slot="right"></detail-page>
-    </page-transition>
+    <copy-stack></copy-stack>
   </body>
 </html>
